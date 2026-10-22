@@ -1,0 +1,56 @@
+---
+import type { Product } from '../data/products';
+
+interface Props {
+  product: Product;
+  index?: number;
+  reveal?: boolean;
+}
+
+const { product, index = 0, reveal = true } = Astro.props as Props;
+const primary = product.colors[0];
+---
+
+<article
+  class:list={['product-card', { reveal }]}
+  data-category={product.category}
+  data-name={product.name.toLowerCase()}
+>
+  <a class="product-card__link" href={`/products/${product.slug}/`} aria-label={`View ${product.name}`}>
+    <div class="product-card__stage" style={`--stage:${product.stage}; --accent:${primary.hex};`}>
+      <span class="product-card__index">{String(index + 1).padStart(2, '0')}</span>
+      {product.badge && <span class="product-card__badge">{product.badge}</span>}
+      <div class="product-card__vessel">
+        <img
+          class="product-card__photo"
+          src={product.image}
+          alt={product.imageAlt}
+          width="1200"
+          height="1200"
+          loading={index < 4 ? 'eager' : 'lazy'}
+          fetchpriority={index === 0 ? 'high' : undefined}
+          decoding="async"
+        />
+      </div>
+      <div class="product-card__swatches" aria-hidden="true">
+        {product.colors.map((color) => (
+          <span style={`--swatch:${color.hex}`}></span>
+        ))}
+      </div>
+      <span class="product-card__view" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M8 5h11v11" stroke="currentColor" stroke-width="1.4"/></svg>
+      </span>
+    </div>
+    <div class="product-card__meta">
+      <div>
+        <p class="product-card__line">{product.line}</p>
+        <h3>{product.shortName}</h3>
+        <p class="product-card__capacity">{product.capacity}</p>
+      </div>
+      <div class="product-card__price">
+        <span class="product-card__quote">Quote on request</span>
+        <span class="product-card__rating">OEM / ODM</span>
+      </div>
+    </div>
+  </a>
+</article>

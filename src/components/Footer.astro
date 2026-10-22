@@ -1,0 +1,82 @@
+---
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__top">
+    <div class="site-footer__brand">
+      <a class="brand brand--light" href="/" aria-label="ZCZR home">
+        <Logo light />
+      </a>
+      <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. is a manufacturing and trading company focused on insulated stainless-steel drinkware for global buyers.</p>
+      <div class="site-footer__locations">
+        <span>Wuxi office</span>
+        <span>Yixing factory</span>
+        <span>Jiangsu, China</span>
+      </div>
+      <div class="site-footer__socials" aria-label="Company links">
+        <a href="/about/" aria-label="Company profile">CO</a>
+        <a href="/technology/" aria-label="Capabilities">CA</a>
+        <a href="/contact/" aria-label="Contact">CT</a>
+      </div>
+    </div>
+
+    <div class="site-footer__cols">
+      <div>
+        <h4>Drinkware</h4>
+        <a href="/collections/">All models</a>
+        <a href="/collections/?filter=tumblers">Tumblers</a>
+        <a href="/collections/?filter=bottles">Bottles</a>
+        <a href="/collections/?filter=jugs">Jugs &amp; buckets</a>
+        <a href="/collections/?filter=kettles">Kettles</a>
+        <a href="/collections/?filter=coffee">Coffee cups</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/about/">About ZCZR</a>
+        <a href="/technology/">Capabilities</a>
+        <a href="/technology/#quality">Quality control</a>
+        <a href="/resources/">Buyer resources</a>
+      </div>
+      <div>
+        <h4>Working with us</h4>
+        <a href="/contact/">Request a quote</a>
+        <a href="/technology/#process">Sampling process</a>
+        <a href="/contact/#faq">Payment &amp; packaging</a>
+        <a href="/contact/#faq">FAQ</a>
+      </div>
+      <div class="site-footer__newsletter">
+        <h4>Buyer briefing</h4>
+        <p>New models, finish options, and factory notes for sourcing teams. No consumer noise.</p>
+        <form class="newsletter-form" data-newsletter-form>
+          <label class="sr-only" for="footer-email">Work email address</label>
+          <input id="footer-email" type="email" name="email" placeholder="Work email" required />
+          <button type="submit" aria-label="Subscribe">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
+        </form>
+        <p class="form-note" data-newsletter-note aria-live="polite"></p>
+        <div class="site-footer__contact">
+          <span>Inquiries</span>
+          <a href="mailto:sales@zczr.example">sales@zczr.example</a>
+          <span>Trade terms</span>
+          <p>T/T · Alibaba Trade Assurance</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-footer__wordmark" aria-hidden="true">ZCZR</div>
+
+  <div class="site-footer__bottom">
+    <span>© {year} Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. — concept demo.</span>
+    <span>Product models, specifications, and contact details are illustrative and subject to confirmation. Company information supplied by ZCZR.</span>
+    <div class="site-footer__legal">
+      <a href="/contact/">Privacy</a>
+      <a href="/contact/">Terms</a>
+      <a href="/contact/">Accessibility</a>
+    </div>
+  </div>
+</footer>

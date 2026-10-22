@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { products } from '../data/products';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact ZCZR about OEM and ODM insulated drinkware, samples, specifications, packaging, or an existing order. Wuxi, Jiangsu, China."
+  current="contact"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Contact / Start a conversation</span>
+        <span class="page-hero__meta">Wuxi, Jiangsu · China</span>
+      </div>
+      <h1>Tell us about <em>your program.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Share the model, capacity, finish, logo, target quantity and market. We will confirm the specification, sample path and next steps. Every inquiry is read by our trade team.</p>
+        <div class="page-hero__meta"><span>OEM / ODM</span><span>Response within 2 business days</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container contact-grid">
+      <div class="contact-intro">
+        <span class="eyebrow">Reach us</span>
+        <h2>A direct line to <em>the team.</em></h2>
+        <p>No ticket maze. Tell us what you are sourcing and we will point you to the right reference model, sample plan or packing option.</p>
+
+        <div class="contact-details">
+          <div class="contact-detail"><span>Email</span><a href="mailto:sales@zczr.example">sales@zczr.example</a></div>
+          <div class="contact-detail"><span>Head office</span><span>Wuxi, Jiangsu, China</span></div>
+          <div class="contact-detail"><span>Production</span><span>Yixing factory, Jiangsu</span></div>
+          <div class="contact-detail"><span>Trade terms</span><span>T/T · Alibaba Trade Assurance</span></div>
+          <div class="contact-detail"><span>Samples</span><span>Available; cost and freight confirmed</span></div>
+          <div class="contact-detail"><span>Hours</span><span>Monday–Friday, 9am–5pm China Standard Time</span></div>
+        </div>
+      </div>
+
+      <form class="contact-form" data-contact-form>
+        <span class="eyebrow">Send a brief</span>
+        <div class="form-row" style="margin-top: 22px;">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization" placeholder="Company name" required />
+          </div>
+          <div class="field">
+            <label for="country">Country</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" placeholder="United States" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option>OEM / ODM project</option>
+              <option>Sample request</option>
+              <option>Specification question</option>
+              <option>Packaging</option>
+              <option>Existing order</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="product">Reference model</label>
+            <select id="product" name="product">
+              <option>Not sure yet</option>
+              {products.map((product) => <option>{product.name}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="quantity">Target quantity</label>
+          <input id="quantity" name="quantity" type="text" placeholder="e.g. 1,000 pcs" />
+        </div>
+        <div class="field">
+          <label for="message">Brief</label>
+          <textarea id="message" name="message" placeholder="Model or reference, capacity, finish, logo, packaging, target market and timeline." required></textarea>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" name="consent" required />
+          <span>I agree to the privacy policy and to being contacted about this request.</span>
+        </label>
+        <button class="btn btn--solid" type="submit">Send inquiry <span aria-hidden="true">↗</span></button>
+        <p class="form-note" data-contact-note aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">FAQ</span>
+          <h2>Before you <em>write.</em></h2>
+        </div>
+        <p>A few answers we give most often. If your question is not here, the form above is the fastest way to reach us.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Are you a factory or a trading company?</summary>
+          <p>We are a manufacturing and trading company that integrates production, sales and export. Our trade office is in Wuxi, and our factory is in Yixing, Jiangsu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you send samples before an order?</summary>
+          <p>Yes. Samples can be used for material and quality review. Sample costs and freight are confirmed before dispatch.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you produce our own design?</summary>
+          <p>Yes. We accept OEM customization. Share your design, logo, reference sample or idea, and we will confirm what can be developed and sampled.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What payment methods do you accept?</summary>
+          <p>T/T and Alibaba Trade Assurance. Payment terms, documents and shipping responsibilities are confirmed in the quotation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How are export goods packed?</summary>
+          <p>Small items use shock-resistant inner packing and cardboard cartons. Larger or heavier programs may use wooden crates or pallets. Packing is confirmed against your program requirements.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the MOQ and lead time?</summary>
+          <p>MOQ and production timing depend on the model, customization and order quantity. Both are confirmed in the quotation after the specification is agreed.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What material is the drinkware made from?</summary>
+          <p>Our insulated drinkware range uses 304 stainless steel interiors, with 201 stainless outer shells on many models. Exact material, grade and finish specifications are confirmed per model.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { articles, type Article } from '../../data/resources';
+
+export function getStaticPaths() {
+  return articles.map((article, index) => ({
+    params: { slug: article.slug },
+    props: { article, next: articles[(index + 1) % articles.length] },
+  }));
+}
+
+interface Props {
+  article: Article;
+  next: Article;
+}
+
+const { article, next } = Astro.props as Props;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.title,
+  description: article.excerpt,
+  datePublished: '2026-10-01',
+  author: { '@type': 'Organization', name: 'ZCZR — Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.' },
+  image: [new URL(article.image, Astro.site)],
+};
+---
+
+<BaseLayout title={article.title} description={article.excerpt} current="resources" image={article.image}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
+  </Fragment>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>/</span>
+      <a href="/resources/">Resources</a><span>/</span>
+      <span aria-current="page">{article.category}</span>
+    </nav>
+
+    <article class="article">
+      <div class="article__meta">
+        <span>{article.category}</span>
+        <span>{article.date}</span>
+        <span>{article.readTime}</span>
+      </div>
+      <h1>{article.title}</h1>
+      <p class="article__lead">{article.excerpt}</p>
+      <div class="article__hero">
+        <img src={article.image} alt={article.imageAlt} width="1600" height="1067" fetchpriority="high" />
+      </div>
+      <div class="article__body">
+        {article.body.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <div class="article__foot">
+        <a class="text-link" href="/resources/">← All resources</a>
+        <a class="text-link" href={`/resources/${next.slug}/`}>Next: {next.title} <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+  </div>
+
+  <Newsletter />
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  light?: boolean;
+  class?: string;
+}
+
+const { light = false, class: className = '' } = Astro.props;
+---
+
+<img
+  class:list={['brand__logo', className]}
+  src={light ? '/images/zczr-logo-white.png' : '/images/zczr-logo.png'}
+  alt="ZCZR — Wuxi Zhenchuang Zhuorui International Trade Co., Ltd."
+  width="848"
+  height="220"
+  decoding="async"
+/>

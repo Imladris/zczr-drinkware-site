@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { categories, products } from '../data/products';
+
+const modelCount = String(products.length).padStart(2, '0');
+const categoryCount = String(categories.length - 1).padStart(2, '0');
+---
+
+<BaseLayout
+  title="Insulated drinkware range"
+  description="Explore ZCZR reference models for OEM and ODM insulated drinkware: tumblers, bottles, jugs, kettles and coffee cups in stainless steel."
+  current="shop"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Drinkware / 2026 reference range</span>
+        <span class="page-hero__meta">OEM / ODM · Wuxi, Jiangsu</span>
+      </div>
+      <h1>A focused <em>range.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Twenty-five reference models across tumblers, bottles, jugs, kettles and coffee cups. Use them as a starting point; colors, logos, finishes, capacities and packaging are developed for your program.</p>
+        <div class="page-hero__meta">
+          <span>{modelCount} models</span>
+          <span>{categoryCount} categories</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="collection-toolbar">
+    <div class="collection-toolbar__inner">
+      <div class="filter-group" role="group" aria-label="Filter by category">
+        {categories.map((category) => (
+          <button
+            class:list={['filter-button', { 'is-active': category.value === 'all' }]}
+            type="button"
+            data-filter={category.value}
+            aria-pressed={category.value === 'all' ? 'true' : 'false'}
+          >
+            {category.label}
+          </button>
+        ))}
+      </div>
+      <span class="collection-count" data-collection-count>{modelCount} models</span>
+    </div>
+  </div>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="collection-grid">
+        {products.map((product, index) => (
+          <ProductCard product={product} index={index} />
+        ))}
+        <div class="collection-empty" data-collection-empty hidden>
+          <h3>No models in this category.</h3>
+          <p>Try another category, or view the full reference range.</p>
+        </div>
+      </div>
+
+      <div class="collection-feature reveal">
+        <div class="collection-feature__media">
+          <img src="/images/company.webp" alt="ZCZR company reception and brand wall" width="1800" height="1013" loading="lazy" />
+        </div>
+        <div class="collection-feature__copy">
+          <span class="eyebrow eyebrow--light">Need a starting point?</span>
+          <h2>Send the brief. We will shape the range.</h2>
+          <p>Tell us the capacity, finish, logo, target quantity and market. We will recommend a reference model and confirm the sample path.</p>
+          <a class="btn btn--outline-light" href="/contact/">Talk to our team <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</BaseLayout>

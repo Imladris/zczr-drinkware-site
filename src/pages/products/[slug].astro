@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { products, type Product } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props as Props;
+const related = products.filter((item) => item.slug !== product.slug).slice(0, 3);
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  description: product.description,
+  image: [new URL(product.image, Astro.site)],
+  brand: { '@type': 'Brand', name: 'ZCZR' },
+  category: product.categoryLabel,
+  manufacturer: {
+    '@type': 'Organization',
+    name: 'Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.',
+  },
+};
+---
+
+<BaseLayout
+  title={product.name}
+  description={`${product.description} OEM / ODM insulated drinkware from ZCZR in Wuxi, Jiangsu.`}
+  current="shop"
+  image={product.image}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema)}></script>
+  </Fragment>
+
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>/</span>
+      <a href="/collections/">Drinkware</a><span>/</span>
+      <span aria-current="page">{product.shortName}</span>
+    </nav>
+
+    <div class="product-layout">
+      <div class="product-gallery">
+        <div class="product-stage product-stage--photo" style={`--stage:${product.stage}`}>
+          <span class="product-stage__tag">{product.line} / {product.capacity}</span>
+          {product.badge && <span class="product-stage__badge">{product.badge}</span>}
+          <img
+            class="product-stage__photo"
+            src={product.image}
+            alt={product.imageAlt}
+            width="1200"
+            height="1200"
+            fetchpriority="high"
+          />
+        </div>
+        <p class="product-image-note">Product photo supplied in the ZCZR catalogue. Colors shown in the photo may represent the reference range; final color is confirmed on the approved sample.</p>
+      </div>
+
+      <div class="product-info">
+        <span class="product-info__line">{product.line} · {product.categoryLabel}</span>
+        <h1>{product.name}</h1>
+        <p class="product-info__desc">{product.longDescription}</p>
+
+        <div class="option-block">
+          <div class="option-block__head">
+            <span>Reference colors</span>
+            <small>{product.colors.length} shown in catalogue</small>
+          </div>
+          <div class="color-options" aria-label="Reference colors">
+            {product.colors.map((color) => (
+              <span class="color-option is-static" style={`--swatch:${color.hex}`} title={color.name}></span>
+            ))}
+          </div>
+          <p class="color-list">{product.colors.map((color) => color.name).join(' · ')}</p>
+        </div>
+
+        <div class="company-facts" style="grid-template-columns: 1fr 1fr; margin-top: 26px;">
+          <div class="company-fact"><span>Reference capacity</span><strong>{product.capacity}</strong></div>
+          <div class="company-fact"><span>Customization</span><strong>OEM / ODM</strong></div>
+          <div class="company-fact"><span>Material</span><strong>{product.specs.find((spec) => spec.label === 'Material')?.value}</strong></div>
+          <div class="company-fact"><span>MOQ</span><strong>On request</strong></div>
+        </div>
+
+        <div class="option-block">
+          <div class="option-block__head">
+            <span>Customization</span>
+            <small>Developed per program</small>
+          </div>
+          <div class="custom-tags">
+            <span>Body color</span><span>Logo</span><span>Finish</span><span>Lid</span><span>Packaging</span><span>User manual</span>
+          </div>
+        </div>
+
+        <div class="product-actions">
+          <a class="btn btn--solid" href="/contact/">Request a quote <span aria-hidden="true">↗</span></a>
+          <a class="wishlist-button" href="/contact/" aria-label="Ask for a sample">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.3"/></svg>
+          </a>
+        </div>
+        <p class="product-note">MOQ, lead time, sample cost and final specification are confirmed per project.</p>
+
+        <div class="accordion-list">
+          <details class="accordion" open>
+            <summary>Model notes</summary>
+            <div class="accordion__body">
+              <p>{product.story}</p>
+              <p>This is a reference model from the current catalogue, not a fixed retail SKU. Capacity, color, lid, logo and packing can be discussed against your target market and order quantity.</p>
+            </div>
+          </details>
+          <details class="accordion">
+            <summary>Specifications</summary>
+            <div class="accordion__body">
+              <table class="spec-table">
+                <tbody>
+                  {product.specs.map((spec) => (
+                    <tr><th scope="row">{spec.label}</th><td>{spec.value}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+              <p style="margin-top: 12px; font-size: 10.5px; opacity: .7;">Reference specifications from the catalogue. Final dimensions, finish and performance are confirmed on the approved sample.</p>
+            </div>
+          </details>
+          <details class="accordion">
+            <summary>Sampling &amp; production</summary>
+            <div class="accordion__body">
+              <p>Pre-production samples are available for material, color and quality review. Sample and freight costs are confirmed before dispatch. Production timing is confirmed after the specification and order quantity are agreed.</p>
+            </div>
+          </details>
+          <details class="accordion">
+            <summary>Packing &amp; shipping</summary>
+            <div class="accordion__body">
+              <p>Packing is confirmed per model. Small items use shock-resistant inner packing and cartons; larger or heavier programs may use wooden crates or pallets. Payment terms include T/T and Alibaba Trade Assurance.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-story">
+      <div class="product-story__media">
+        <img src="/images/company.webp" alt="ZCZR company reception and brand wall" width="1800" height="1013" loading="lazy" />
+      </div>
+      <div>
+        <span class="eyebrow">A platform for your program</span>
+        <h2>Change the details. <em>Keep the construction.</em></h2>
+        <p>Use the {product.shortName} as a starting point, then adapt the finish, logo, lid, capacity and packaging to your market. Our team supports the transition from reference sample to production-ready specification.</p>
+        <a class="text-link" href="/technology/" style="margin-top: 24px;">See how we work <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="product-features">
+      {product.features.map((feature, index) => (
+        <div class="product-feature reveal">
+          <span>0{index + 1}</span>
+          <h3>{feature.title}</h3>
+          <p>{feature.copy}</p>
+        </div>
+      ))}
+    </div>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Related models</span>
+          <h2>More <em>reference models.</em></h2>
+        </div>
+        <a class="text-link" href="/collections/">All drinkware <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="product-grid">
+        {related.map((item, index) => (
+          <ProductCard product={item} index={index} />
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <Newsletter />
+</BaseLayout>
+
+<style>
+  .product-stage--photo {
+    display: grid;
+    place-items: center;
+  }
+
+  .product-stage__photo {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 5%;
+    mix-blend-mode: multiply;
+  }
+
+  .product-stage--photo:hover .product-stage__photo {
+    transform: none;
+  }
+
+  .product-image-note {
+    margin-top: 10px;
+    font-size: 9px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    opacity: 0.65;
+  }
+
+  .color-option.is-static {
+    cursor: default;
+  }
+
+  .color-option.is-static:hover {
+    transform: none;
+  }
+
+  .color-list {
+    margin-top: 10px;
+    font-size: 9px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    opacity: 0.65;
+  }
+
+  @media (max-width: 760px) {
+    .product-stage__photo {
+      padding: 3%;
+    }
+  }
+</style>

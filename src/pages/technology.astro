@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Newsletter from '../components/Newsletter.astro';
+---
+
+<BaseLayout
+  title="Capabilities & quality"
+  description="ZCZR supports OEM and ODM insulated drinkware from brief and sampling through production, quality control and export packing."
+  current="technology"
+>
+  <section class="tech-hero container">
+    <div class="tech-hero__copy">
+      <span class="eyebrow">Capabilities / 01</span>
+      <h1>From brief to <em>container.</em></h1>
+      <p>One focused category, supported by the practical work behind a private-label order: specification, sampling, production, quality control and export packing.</p>
+      <div class="tech-hero__stats">
+        <div><strong>OEM</strong><span>Custom development</span></div>
+        <div><strong>QC</strong><span>Every stage</span></div>
+        <div><strong>1</strong><span>Yixing factory</span></div>
+      </div>
+    </div>
+    <div class="tech-hero__visual">
+      <img class="tech-hero__photo" src="/products/coffee-cup-830.webp" alt="ZCZR 830 ml coffee cup reference model" width="1200" height="1200" loading="lazy" />
+      <span class="page-hero__meta" style="position:absolute;bottom:20px;left:22px;z-index:2;">Reference model / Trail 32</span>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Product construction</span>
+          <h2>Four layers.<br /><em>One direction.</em></h2>
+        </div>
+        <p>Heat wants to move from hot to cold. Every layer in an insulated vessel exists to make that journey slower. The final specification is confirmed on the approved sample.</p>
+      </div>
+
+      <div class="tech-steps">
+        <article class="tech-step reveal">
+          <span class="tech-step__num">01 / Shell</span>
+          <div class="tech-step__diagram" aria-hidden="true">
+            <svg viewBox="0 0 240 130" fill="none">
+              <path d="M34 26h172M34 42h172M34 58h172M34 74h172" stroke="#315143" stroke-width="1.2"/>
+              <path d="M34 26c50 0 50 16 0 16M206 26c-50 0-50 16 0 16" stroke="#B85C3E" stroke-width="1.2"/>
+              <text x="34" y="106" fill="#35443c" font-family="Manrope" font-size="7" letter-spacing="2">304 STAINLESS STEEL</text>
+            </svg>
+          </div>
+          <h3>The shell</h3>
+          <p>A food-grade stainless body with a finish selected for your program: powder coat, matte, gloss or a custom color development.</p>
+        </article>
+        <article class="tech-step reveal reveal-delay-1">
+          <span class="tech-step__num">02 / Void</span>
+          <div class="tech-step__diagram" aria-hidden="true">
+            <svg viewBox="0 0 240 130" fill="none">
+              <circle cx="120" cy="62" r="46" stroke="#315143" stroke-width="1.2"/>
+              <circle cx="120" cy="62" r="36" stroke="#B85C3E" stroke-width="1.2" stroke-dasharray="3 4"/>
+              <circle cx="120" cy="62" r="24" stroke="#315143" stroke-width="1.2"/>
+              <text x="120" y="120" text-anchor="middle" fill="#35443c" font-family="Manrope" font-size="7" letter-spacing="2">VACUUM + LINING</text>
+            </svg>
+          </div>
+          <h3>The vacuum</h3>
+          <p>A sealed gap removes the air that heat needs to travel through. A reflective lining can further reduce radiant heat transfer, depending on the model.</p>
+        </article>
+        <article class="tech-step reveal reveal-delay-2">
+          <span class="tech-step__num">03 / Seal</span>
+          <div class="tech-step__diagram" aria-hidden="true">
+            <svg viewBox="0 0 240 130" fill="none">
+              <path d="M56 34h128v38H56z" stroke="#315143" stroke-width="1.2"/>
+              <path d="M56 56c26 0 26 16 52 16s26-16 52-16 26 16 52 16" stroke="#B85C3E" stroke-width="1.6"/>
+              <path d="M56 96h128" stroke="#315143" stroke-width="1.2" opacity=".35"/>
+              <text x="120" y="120" text-anchor="middle" fill="#35443c" font-family="Manrope" font-size="7" letter-spacing="2">SILICONE GASKET</text>
+            </svg>
+          </div>
+          <h3>The seal</h3>
+          <p>A silicone gasket compresses evenly and comes apart for cleaning. Leak performance is checked on the approved sample and during pre-shipment inspection.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Working process</span>
+          <h2>Five steps. <em>Clear hand-offs.</em></h2>
+        </div>
+        <p>Each step has a defined output: a brief, an approved sample, a confirmed order, an inspection record and a packing list.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="process-step__num">01</span>
+          <h3>Brief</h3>
+          <p>Model, capacity, finish, logo, packaging, quantity and market.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">02</span>
+          <h3>Sample</h3>
+          <p>Material, color and quality review against the brief.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step__num">03</span>
+          <h3>Order</h3>
+          <p>Specification, price, payment terms and schedule confirmed.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">04</span>
+          <h3>Produce &amp; inspect</h3>
+          <p>In-process checks and a final pre-shipment inspection.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">05</span>
+          <h3>Pack &amp; ship</h3>
+          <p>Export packing, documents and handover to the forwarder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quality-band" id="quality">
+    <div class="container">
+      <div class="quality-band__grid">
+        <div>
+          <span class="eyebrow">Quality control</span>
+          <h2>Inspection is a <em>process,</em> not a promise.</h2>
+          <p class="quality-band__lead">Our team conducts quality inspections at every stage of the supply chain, so only goods that meet the agreed specification move forward.</p>
+          <a class="btn btn--solid" href="/contact/" style="margin-top: 26px;">Ask about our QC process <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="quality-list">
+          <div class="quality-item">
+            <span>01</span>
+            <div><h3>Incoming materials</h3><p>Steel, lids, seals and coatings checked before production begins.</p></div>
+          </div>
+          <div class="quality-item">
+            <span>02</span>
+            <div><h3>In-process inspection</h3><p>Dimensions, finish and assembly checked during the run.</p></div>
+          </div>
+          <div class="quality-item">
+            <span>03</span>
+            <div><h3>Pre-shipment review</h3><p>Final inspection against the approved sample and packing list.</p></div>
+          </div>
+          <div class="quality-item">
+            <span>04</span>
+            <div><h3>Export packing</h3><p>Cartons, crates or pallets checked against the packing specification.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">The honest comparison</span>
+          <h2>What a buyer should <em>compare.</em></h2>
+        </div>
+        <p>Construction, lid, finish and packing all affect the delivered program. Here is the difference between a vacuum vessel and simpler alternatives.</p>
+      </div>
+      <div class="compare-wrap reveal">
+        <table class="compare">
+          <thead>
+            <tr><th scope="col">Specification</th><th scope="col">ZCZR vacuum range</th><th scope="col">Single-wall steel</th><th scope="col">Foam-insulated</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Thermal construction</th><td class="yes">Double-wall vacuum</td><td class="no">Single wall</td><td>Foam layer</td></tr>
+            <tr><th scope="row">Custom colors &amp; logo</th><td class="yes">OEM / ODM</td><td>Limited</td><td>Limited</td></tr>
+            <tr><th scope="row">Sample evaluation</th><td class="yes">Available</td><td>Varies</td><td>Varies</td></tr>
+            <tr><th scope="row">Pre-shipment inspection</th><td class="yes">Included in process</td><td class="no">Varies</td><td class="no">Varies</td></tr>
+            <tr><th scope="row">Export packing options</th><td class="yes">Carton / crate / pallet</td><td>Carton</td><td>Carton</td></tr>
+            <tr><th scope="row">Recyclable steel body</th><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">Mixed materials</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="split-editorial">
+        <div class="split-editorial__media reveal">
+          <img src="/images/company.webp" alt="ZCZR company reception and brand wall" width="1800" height="1013" loading="lazy" />
+          <span class="split-editorial__caption">Wuxi office · company image supplied by ZCZR</span>
+        </div>
+        <div class="split-editorial__copy reveal reveal-delay-1">
+          <span class="eyebrow">Tested against the sample</span>
+          <h2>Agree the spec. <em>Then hold it.</em></h2>
+          <div class="split-editorial__body">
+            <p>The approved sample is the reference for mass production. Before the order, we confirm the model, capacity, material, finish, logo, lid and packing in writing.</p>
+            <p>During production, the same details are checked in process and again before shipment. If your market requires specific test records or documents, include that in the brief so we can confirm what is available for the program.</p>
+          </div>
+          <a class="btn btn--solid" href="/contact/">Discuss your specification <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Questions, answered</span>
+          <h2>The fine <em>print.</em></h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Does the vacuum ever need recharging?</summary>
+          <p>No. The vacuum is sealed during manufacturing and does not require maintenance. If the seal is damaged by a drop or improper cleaning, insulation performance can drop, which is why care instructions are confirmed with the sample.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why hand wash instead of dishwasher?</summary>
+          <p>High heat and detergent can degrade the silicone gasket and the finish over time. Hand washing with warm water and mild soap helps keep the seal and coating working longer.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the lid leakproof?</summary>
+          <p>Leak performance depends on the lid design and the approved sample. We confirm the lid, gasket and test method with you before production, and check the agreed specification during inspection.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you provide test reports or compliance documents?</summary>
+          <p>Tell us the destination market and the documents your customer requires. We will confirm what is available for the selected model and material before the order.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</BaseLayout>

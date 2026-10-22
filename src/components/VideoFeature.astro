@@ -1,0 +1,55 @@
+---
+interface Props {
+  poster: string;
+  posterAlt: string;
+  videoId: string;
+  title: string;
+  eyebrow?: string;
+  caption?: string;
+  index?: string;
+  tall?: boolean;
+}
+
+const {
+  poster,
+  posterAlt,
+  videoId,
+  title,
+  eyebrow = 'Field film',
+  caption = 'A short film from the edge of the map.',
+  index = '01',
+  tall = false,
+} = Astro.props;
+---
+
+<section class:list={['film-section', { 'film-section--tall': tall }]} id="film">
+  <div class="film-section__media">
+    <img src={poster} alt={posterAlt} loading="lazy" width="1600" height="1067" />
+    <div class="film-section__shade"></div>
+  </div>
+  <div class="film-section__inner">
+    <div class="film-section__top">
+      <span class="eyebrow eyebrow--light">{eyebrow} / {index}</span>
+      <span class="film-section__meta">Sound on · 4K</span>
+    </div>
+    <div class="film-section__bottom">
+      <div>
+        <h2>{title}</h2>
+        <p>{caption}</p>
+      </div>
+      <button
+        class="play-button"
+        type="button"
+        data-video-open
+        data-video-id={videoId}
+        data-video-title={title}
+        aria-label={`Play ${title}`}
+      >
+        <span class="play-button__ring">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z" fill="currentColor"/></svg>
+        </span>
+        <span class="play-button__label">Watch the film</span>
+      </button>
+    </div>
+  </div>
+</section>

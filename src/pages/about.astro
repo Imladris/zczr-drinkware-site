@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Newsletter from '../components/Newsletter.astro';
+---
+
+<BaseLayout
+  title="Company"
+  description="Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. is a manufacturing and trading company in Wuxi, Jiangsu, focused on OEM and ODM insulated stainless-steel drinkware."
+  current="about"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Company / Wuxi Zhenchuang Zhuorui</span>
+        <span class="page-hero__meta">Wuxi HQ · Yixing factory</span>
+      </div>
+      <h1>Focused on drinkware. <em>Connected to the factory.</em></h1>
+      <div class="page-hero__bottom">
+        <p>A manufacturing and trading company built around one category: insulated stainless-steel drinkware for brands, distributors and promotional programs.</p>
+        <div class="page-hero__meta"><span>Manufacturing &amp; trading</span><span>OEM / ODM</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="about-image reveal" style="margin-top: 0; margin-bottom: clamp(40px, 6vw, 72px);">
+        <img src="/images/company.webp" alt="ZCZR company reception and brand wall" width="1800" height="1013" fetchpriority="high" />
+      </div>
+      <div class="about-intro">
+        <div class="reveal">
+          <span class="eyebrow">Who we are</span>
+          <h2>One category. <em>One accountable team.</em></h2>
+        </div>
+        <div class="about-intro__body reveal reveal-delay-1">
+          <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. is a manufacturing and trading company based in Wuxi, Jiangsu, with production in Yixing. We integrate production, sales and export for insulated drinkware.</p>
+          <p>Our focus is deliberately narrow: tumblers, bottles, jugs, kettles and coffee cups. That focus lets us spend our time on the details that matter to a buyer — the construction, the finish, the logo, the sample, the packing and the shipment.</p>
+          <p>Our team combines international trade experience with factory access. We support buyers through specification, sampling, order follow-up and export documentation, with one point of contact from first brief to shipment.</p>
+          <a class="text-link" href="/collections/">See the reference range <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">How we work</span>
+          <h2>Built around <em>the buyer's day.</em></h2>
+        </div>
+        <p>We keep the process practical: confirm the specification, approve the sample, protect the quality, and make the shipment predictable.</p>
+      </div>
+      <div class="values-grid">
+        <article class="value-card reveal">
+          <span>01</span>
+          <h3>Focus over breadth</h3>
+          <p>One category means our team, samples and quality checks are concentrated on insulated drinkware, not spread across unrelated products.</p>
+        </article>
+        <article class="value-card reveal reveal-delay-1">
+          <span>02</span>
+          <h3>Factory access</h3>
+          <p>Our Wuxi trade office works with production in Yixing, giving buyers a direct line between the commercial brief and the factory floor.</p>
+        </article>
+        <article class="value-card reveal reveal-delay-2">
+          <span>03</span>
+          <h3>Quality at every stage</h3>
+          <p>Incoming materials, in-process production and pre-shipment checks are part of the order, not an afterthought.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Company facts</span>
+          <h2>The details, <em>in one place.</em></h2>
+        </div>
+      </div>
+      <div class="company-facts" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="company-fact"><span>Legal name</span><strong>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</strong></div>
+        <div class="company-fact"><span>Chinese name</span><strong>无锡臻创卓锐国际贸易有限公司</strong></div>
+        <div class="company-fact"><span>Head office</span><strong>Wuxi, Jiangsu, China</strong></div>
+        <div class="company-fact"><span>Production</span><strong>Yixing factory, Jiangsu</strong></div>
+        <div class="company-fact"><span>Business model</span><strong>Manufacturing &amp; trading</strong></div>
+        <div class="company-fact"><span>Product focus</span><strong>Insulated drinkware</strong></div>
+        <div class="company-fact"><span>Customization</span><strong>OEM / ODM</strong></div>
+        <div class="company-fact"><span>Payments</span><strong>T/T · Alibaba Trade Assurance</strong></div>
+        <div class="company-fact"><span>Samples</span><strong>Available; freight confirmed</strong></div>
+        <div class="company-fact"><span>Packing</span><strong>Cartons; crates or pallets</strong></div>
+      </div>
+
+      <div class="quote-block reveal">
+        <blockquote>“Integrity, innovation and <em>win-win cooperation.</em>”</blockquote>
+        <cite>ZCZR operating philosophy</cite>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { articles } from '../../data/resources';
+
+const [feature, ...rest] = articles;
+---
+
+<BaseLayout
+  title="Buyer resources"
+  description="Practical guides for sourcing insulated drinkware: briefing a custom program, evaluating vacuum insulation, and planning export packing."
+  current="resources"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Resources / Buyer guides</span>
+        <span class="page-hero__meta">For sourcing &amp; product teams</span>
+      </div>
+      <h1>Notes for <em>better briefs.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Practical notes on specifying, sampling and shipping insulated drinkware. Written for buyers who need fewer revisions and a clearer production conversation.</p>
+        <div class="page-hero__meta"><span>03 guides</span><span>Updated 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <article class="journal-feature">
+        <a class="journal-feature__media reveal" href={`/resources/${feature.slug}/`} aria-label={`Read ${feature.title}`}>
+          <img src={feature.image} alt={feature.imageAlt} width="1600" height="1067" fetchpriority="high" />
+        </a>
+        <div class="journal-feature__copy reveal reveal-delay-1">
+          <div class="journal-card__meta">
+            <span>{feature.category}</span>
+            <span>{feature.date} · {feature.readTime}</span>
+          </div>
+          <h2>{feature.title}</h2>
+          <p>{feature.excerpt}</p>
+          <a class="text-link" href={`/resources/${feature.slug}/`}>Read the guide <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <div class="journal-grid journal-grid--two">
+        {rest.map((article, index) => (
+          <article class:list={['journal-card', 'reveal', `reveal-delay-${index}`]}>
+            <a href={`/resources/${article.slug}/`} aria-label={`Read ${article.title}`}>
+              <div class="journal-card__media">
+                <img src={article.image} alt={article.imageAlt} width="1600" height="1067" loading="lazy" />
+              </div>
+              <div class="journal-card__meta">
+                <span>{article.category}</span>
+                <span>{article.date} · {article.readTime}</span>
+              </div>
+              <h3>{article.title}</h3>
+              <p>{article.excerpt}</p>
+              <span class="journal-card__link">Read the guide</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</BaseLayout>

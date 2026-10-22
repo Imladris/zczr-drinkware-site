@@ -1,0 +1,356 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+
+const featured = products.filter((product) => product.featured);
+const tumbler = products.find((product) => product.slug === '40oz-handled-tumbler')!;
+const bottle = products.find((product) => product.slug === 'sport-bottle-32')!;
+const jug = products.find((product) => product.slug === 'jug-64oz')!;
+const spotlight = tumbler;
+---
+
+<BaseLayout
+  title="OEM & ODM insulated drinkware"
+  description="ZCZR is a manufacturing and trading company in Wuxi, Jiangsu, focused on OEM and ODM insulated stainless-steel drinkware: tumblers, bottles, jugs, kettles and coffee cups."
+  current="home"
+>
+  <section class="hero-b2b">
+    <div class="hero-b2b__inner">
+      <div class="hero-b2b__copy">
+        <div class="hero-b2b__kicker">
+          <i></i>
+          <span>OEM &amp; ODM · Insulated drinkware</span>
+        </div>
+        <h1>Insulated drinkware, <em>built for your brand.</em></h1>
+        <p class="hero-b2b__lead">
+          A manufacturing and trading partner for tumblers, bottles, jugs, kettles and coffee cups. We support international buyers from reference sample to production, quality inspection and export packing.
+        </p>
+        <div class="hero-b2b__company">
+          <span>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</span>
+          <i></i>
+          <span>Wuxi HQ · Yixing factory</span>
+        </div>
+        <div class="hero-b2b__actions">
+          <a class="btn btn--solid" href="/contact/">Request a quote <span aria-hidden="true">↗</span></a>
+          <a class="btn btn--outline" href="/collections/">Explore drinkware</a>
+        </div>
+        <div class="hero-b2b__facts">
+          <div class="hero-b2b__fact"><strong>OEM / ODM</strong><span>Custom programs</span></div>
+          <div class="hero-b2b__fact"><strong>Samples</strong><span>Available for review</span></div>
+          <div class="hero-b2b__fact"><strong>T/T</strong><span>Trade Assurance</span></div>
+        </div>
+      </div>
+
+      <div class="hero-b2b__visual">
+        <div class="hero-b2b__visual-top">
+          <span>Reference range / 2026</span>
+          <span>Wuxi · Jiangsu · China</span>
+        </div>
+        <div class="hero-b2b__products" aria-label="Reference drinkware models">
+          <div class="hero-b2b__product hero-b2b__product--tumbler">
+            <img class="hero-b2b__photo" src={tumbler.image} alt={tumbler.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{tumbler.shortName} · Tumbler</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--bottle">
+            <img class="hero-b2b__photo" src={bottle.image} alt={bottle.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{bottle.shortName} · Bottle</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--jug">
+            <img class="hero-b2b__photo" src={jug.image} alt={jug.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{jug.shortName} · Jug</span>
+          </div>
+        </div>
+        <div class="hero-b2b__visual-foot">
+          <span>304 / 201 stainless steel</span>
+          <span>Custom finishes</span>
+          <span>Export ready</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="credential-bar">
+    <div class="credential-bar__inner">
+      <div class="credential">
+        <span class="credential__index">01</span>
+        <div><strong>Manufacturing &amp; trading</strong><p>Production, sales and export under one team.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">02</span>
+        <div><strong>Yixing factory</strong><p>Factory access with a Wuxi-based trade office.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">03</span>
+        <div><strong>OEM customization</strong><p>Your design, logo, finish and packaging.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">04</span>
+        <div><strong>Export support</strong><p>T/T, Trade Assurance and shipping documentation.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="company-intro">
+        <div class="company-intro__media reveal">
+          <img src="/images/company.webp" alt="ZCZR company reception and brand wall in Wuxi" width="1800" height="1013" loading="lazy" />
+          <div class="company-intro__badge"><img src="/images/zczr-logo.png" alt="ZCZR" width="848" height="220" /></div>
+          <span class="company-intro__caption">Company image supplied by ZCZR</span>
+        </div>
+        <div class="company-intro__copy reveal reveal-delay-1">
+          <span class="eyebrow">Company profile</span>
+          <h2>A drinkware partner with <em>factory roots.</em></h2>
+          <div class="company-intro__body">
+            <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. is a manufacturing and trading company based in Wuxi, Jiangsu, with production in Yixing. We focus on one category: insulated stainless-steel drinkware for brands, distributors and promotional programs.</p>
+            <p>Our team combines international trade experience with factory access, so you can move from a reference sample to a production-ready program with one point of contact. We work on the principles of integrity, innovation and win-win cooperation.</p>
+          </div>
+          <div class="company-facts">
+            <div class="company-fact"><span>Head office</span><strong>Wuxi, Jiangsu</strong></div>
+            <div class="company-fact"><span>Production</span><strong>Yixing factory</strong></div>
+            <div class="company-fact"><span>Focus</span><strong>Insulated drinkware</strong></div>
+            <div class="company-fact"><span>Trade terms</span><strong>T/T · Trade Assurance</strong></div>
+          </div>
+          <a class="text-link" href="/about/">More about ZCZR <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">The drinkware range</span>
+          <h2>One category.<br /><em>Built to be customized.</em></h2>
+          <p>Tumblers, bottles, jugs, kettles and coffee cups. Use these reference models as a starting point; colors, logos, finishes and packaging can be developed for your program.</p>
+        </div>
+        <a class="text-link" href="/collections/">View all models <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="product-grid">
+        {featured.map((product, index) => (
+          <ProductCard product={product} index={index} />
+        ))}
+      </div>
+      <p class="range-note">Reference models shown. Specifications, MOQ, lead time and customization are confirmed per project.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">What we support</span>
+          <h2>From your brief to a <em>production-ready</em> program.</h2>
+        </div>
+        <p>One focused category, supported by the practical work behind a private-label order: sampling, customization, quality control and export packing.</p>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">01</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="1.2"/><path d="m16 15 4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>OEM &amp; ODM development</h3>
+          <p>Share a drawing, reference sample or market brief. We support color, logo, finish and packaging development around your program.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">02</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8 7.5 9.5 4.3-1.5 7.5-4.9 7.5-9.5V6L12 3Z" stroke="currentColor" stroke-width="1.2"/><path d="m9 11.5 2 2 4-4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Quality at every stage</h3>
+          <p>Incoming material checks, in-process inspection and a final pre-shipment review against the approved sample.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">03</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21c4-3.5 7-7 7-11a7 7 0 1 0-14 0c0 4 3 7.5 7 11Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 10.5 11 13l4-5" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Sample evaluation</h3>
+          <p>Pre-production samples for material, color and quality review. Sample and freight costs are confirmed before dispatch.</p>
+        </article>
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">04</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16v12H4zM4 8l4-4h8l4 4M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Export packaging</h3>
+          <p>Shock-resistant inner packing and cartons, with wooden crates or pallets for larger or heavier programs.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">05</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14v10H5zM8 7V5h8v2M8 17v2h8v-2" stroke="currentColor" stroke-width="1.2"/><path d="M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Trade terms</h3>
+          <p>T/T and Alibaba Trade Assurance. We confirm payment terms, documents and shipping responsibilities in the quotation.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">06</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18 9.5 6l4 8 2.5-4L20 18H4Z" stroke="currentColor" stroke-width="1.2"/><circle cx="18.5" cy="5.5" r="1.4" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <h3>One point of contact</h3>
+          <p>A single trade team for specification, sampling, order follow-up and shipment, so you are not coordinating several suppliers.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">How we work</span>
+          <h2>Five steps. <em>One point of contact.</em></h2>
+        </div>
+        <p>Every program starts with the specification. We confirm the details before sampling, then keep quality and packing aligned with the approved sample.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="process-step__num">01</span>
+          <h3>Share your brief</h3>
+          <p>Model, capacity, finish, logo, packaging, target quantity and market.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">02</span>
+          <h3>Review a sample</h3>
+          <p>Sample and freight terms confirmed; material and quality checked against your brief.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step__num">03</span>
+          <h3>Place the order</h3>
+          <p>Specification, payment terms and production schedule confirmed in writing.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">04</span>
+          <h3>Produce &amp; inspect</h3>
+          <p>In-process checks and a final pre-shipment inspection against the approved sample.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">05</span>
+          <h3>Pack &amp; ship</h3>
+          <p>Export packing, shipping documents and handover to your forwarder or ours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quality-band" id="quality">
+    <div class="container quality-band__grid">
+      <div>
+        <span class="eyebrow eyebrow--light">Quality control</span>
+        <h2>Quality is checked at <em>every stage.</em></h2>
+        <p class="quality-band__lead">Our team conducts quality inspections at every stage of the supply chain, so only goods that meet the agreed specification move forward. The earlier a problem is found, the cheaper it is to fix.</p>
+        <a class="btn btn--outline-light" href="/contact/" style="margin-top: 28px;">Ask about our QC process <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="quality-list">
+        <div class="quality-item">
+          <span>01</span>
+          <div><h3>Incoming materials</h3><p>Steel, lids, seals and coatings checked before production begins.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>02</span>
+          <div><h3>In-process inspection</h3><p>Dimensions, finish and assembly checked during the production run.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>03</span>
+          <div><h3>Pre-shipment review</h3><p>Final inspection against the approved sample, specification and packing list.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>04</span>
+          <div><h3>Export packing</h3><p>Shock-resistant packing and cartons; crates or pallets where the program requires them.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spotlight">
+    <div class="spotlight__visual">
+      <span class="spotlight__number">Reference model / 01</span>
+      <img class="spotlight__photo" src={spotlight.image} alt={spotlight.imageAlt} width="1200" height="1200" loading="lazy" />
+    </div>
+    <div class="spotlight__copy">
+      <span class="eyebrow eyebrow--light">Core model</span>
+      <h2>{spotlight.shortName}.<br /><em>Start here.</em></h2>
+      <p>A 40 oz handled tumbler with a straw lid and a broad color range. A practical starting point for private-label drinkware programs; size, color, logo and packaging can be adapted to your brief.</p>
+      <div class="company-facts" style="border-color: rgba(251,248,241,.22); background: rgba(251,248,241,.18); margin-top: 26px;">
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Capacity</span><strong style="color: var(--paper);">{spotlight.capacity}</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Body</span><strong style="color: var(--paper);">304 stainless inner</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Customization</span><strong style="color: var(--paper);">OEM / ODM</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">MOQ</span><strong style="color: var(--paper);">On request</strong></div>
+      </div>
+      <div class="quote-band__actions" style="padding-top: 26px;">
+        <a class="btn btn--light" href="/contact/">Request a sample <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href={`/products/${spotlight.slug}/`}>View model</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Buyer questions</span>
+          <h2>The details buyers <em>ask about.</em></h2>
+        </div>
+        <a class="text-link" href="/contact/#faq">All FAQ <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Are you a factory or a trading company?</summary>
+          <p>We are a manufacturing and trading company that integrates production, sales and export. Our trade office is in Wuxi, and our factory is in Yixing, Jiangsu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you send samples before an order?</summary>
+          <p>Yes. Samples can be used for material and quality review. Sample costs and freight are confirmed before dispatch.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can you produce our own design?</summary>
+          <p>Yes. We accept OEM customization. Share your design, logo, reference sample or idea, and we will confirm what can be developed and sampled.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What payment methods do you accept?</summary>
+          <p>T/T and Alibaba Trade Assurance. Payment terms, documents and shipping responsibilities are confirmed in the quotation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How are export goods packed?</summary>
+          <p>Small items use shock-resistant inner packing and cardboard cartons. Larger or heavier programs may use wooden crates or pallets. Packing is confirmed against your program requirements.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What material is the drinkware made from?</summary>
+          <p>Our insulated drinkware range uses 304 stainless steel interiors, with 201 stainless outer shells on many models. Exact material, grade and finish specifications are confirmed per model.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-band">
+    <div class="container quote-band__inner">
+      <div>
+        <span class="eyebrow eyebrow--light">Start a project</span>
+        <h2>Have a model in mind? <em>Let's build it.</em></h2>
+        <p>Send your reference, target quantity and market. We will come back with the specification, sample plan and next steps.</p>
+      </div>
+      <div class="quote-band__actions">
+        <a class="btn btn--light" href="/contact/">Request a quote <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href="mailto:sales@zczr.example">Email our team</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
