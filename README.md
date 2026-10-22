@@ -88,6 +88,42 @@ The supplied `详情页素材/（必填）公司资料.docx` contains an Alibaba
 
 A `.gitignore` entry excludes the entire `公司资料/` folder from Git. Check any backup or file-sharing tool as well.
 
+## Free hosting: Cloudflare Pages
+
+This repository is configured for **Cloudflare Pages** at the site root. No `base` path changes are needed.
+
+### Option A — Git integration (recommended)
+
+1. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git.
+2. Select `Imladris/zczr-drinkware-site`.
+3. Build settings:
+   - Framework preset: **Astro**
+   - Build command: **`npm run build`**
+   - Build output directory: **`dist`**
+   - Node version: **22** (also pinned in `.nvmrc`)
+4. Deploy. The project name in `wrangler.toml` is `zczr-drinkware-site`.
+
+The expected URL is:
+
+```text
+https://zczr-drinkware-site.pages.dev
+```
+
+### Option B — Direct upload from this machine
+
+```bash
+npx wrangler login
+npm run deploy:cloudflare
+```
+
+`public/_headers` is copied into `dist/_headers` at build time and controls caching and baseline security headers on Cloudflare Pages.
+
+### Custom domain
+
+In Cloudflare Pages → project → Custom domains, add your domain and follow the DNS instructions. HTTPS is issued automatically.
+
+---
+
 ## Deployment (Plan B: VPS + Nginx)
 
 ### 1. Server baseline

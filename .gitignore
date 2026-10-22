@@ -11,3 +11,7 @@ dist/
 产品目录esp.pptx
 # Local LAN QR
 /docs/lan-qr.png
+
+# Cloudflare local state
+.wrangler/
+.dev.vars
