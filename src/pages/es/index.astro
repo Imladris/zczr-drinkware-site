@@ -1,0 +1,358 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products } from '../../data/products';
+import { localizeProduct } from '../../i18n/products.es';
+
+const featured = products.filter((product) => product.featured);
+const tumbler = localizeProduct(products.find((product) => product.slug === '40oz-handled-tumbler')!, 'es');
+const bottle = localizeProduct(products.find((product) => product.slug === 'sport-bottle-32')!, 'es');
+const jug = localizeProduct(products.find((product) => product.slug === 'jug-64oz')!, 'es');
+const spotlight = tumbler;
+---
+
+<BaseLayout
+  title="Menaje isotérmico OEM y ODM"
+  description="ZCZR es una empresa manufacturera y comercial de Wuxi, Jiangsu, especializada en menaje isotérmico de acero inoxidable OEM y ODM: vasos, botellas, jarras, teteras y tazas de café."
+  current="home"
+  lang="es"
+>
+  <section class="hero-b2b">
+    <div class="hero-b2b__inner">
+      <div class="hero-b2b__copy">
+        <div class="hero-b2b__kicker">
+          <i></i>
+          <span>OEM y ODM · Menaje isotérmico</span>
+        </div>
+        <h1>Menaje isotérmico, <em>fabricado para tu marca.</em></h1>
+        <p class="hero-b2b__lead">
+          Un socio de fabricación y comercio para vasos, botellas, jarras, teteras y tazas de café. Acompañamos a compradores internacionales desde la muestra de referencia hasta la producción, la inspección de calidad y el embalaje de exportación.
+        </p>
+        <div class="hero-b2b__company">
+          <span>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</span>
+          <i></i>
+          <span>Sede en Wuxi · Fábrica en Yixing</span>
+        </div>
+        <div class="hero-b2b__actions">
+          <a class="btn btn--solid" href="/es/contact/">Solicitar cotización <span aria-hidden="true">↗</span></a>
+          <a class="btn btn--outline" href="/es/collections/">Ver productos</a>
+        </div>
+        <div class="hero-b2b__facts">
+          <div class="hero-b2b__fact"><strong>OEM / ODM</strong><span>Programas personalizados</span></div>
+          <div class="hero-b2b__fact"><strong>Muestras</strong><span>Disponibles para revisión</span></div>
+          <div class="hero-b2b__fact"><strong>T/T</strong><span>Trade Assurance</span></div>
+        </div>
+      </div>
+
+      <div class="hero-b2b__visual">
+        <div class="hero-b2b__visual-top">
+          <span>Gama de referencia / 2026</span>
+          <span>Wuxi · Jiangsu · China</span>
+        </div>
+        <div class="hero-b2b__products" aria-label="Modelos de menaje de referencia">
+          <div class="hero-b2b__product hero-b2b__product--tumbler">
+            <img class="hero-b2b__photo" src={tumbler.image} alt={tumbler.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{tumbler.shortName}</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--bottle">
+            <img class="hero-b2b__photo" src={bottle.image} alt={bottle.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{bottle.shortName}</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--jug">
+            <img class="hero-b2b__photo" src={jug.image} alt={jug.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{jug.shortName}</span>
+          </div>
+        </div>
+        <div class="hero-b2b__visual-foot">
+          <span>Acero inoxidable 304 / 201</span>
+          <span>Acabados personalizados</span>
+          <span>Listo para exportar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="credential-bar">
+    <div class="credential-bar__inner">
+      <div class="credential">
+        <span class="credential__index">01</span>
+        <div><strong>Fabricación y comercio</strong><p>Producción, ventas y exportación con un solo equipo.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">02</span>
+        <div><strong>Fábrica en Yixing</strong><p>Acceso a fábrica con oficina comercial en Wuxi.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">03</span>
+        <div><strong>Personalización OEM</strong><p>Tu diseño, logotipo, acabado y embalaje.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">04</span>
+        <div><strong>Apoyo a la exportación</strong><p>T/T, Trade Assurance y documentación de envío.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="company-intro">
+        <div class="company-intro__media reveal">
+          <img src="/images/company.webp" alt="ZCZR company reception and brand wall in Wuxi" width="1800" height="1013" loading="lazy" />
+          <div class="company-intro__badge"><img src="/images/zczr-logo.png" alt="ZCZR" width="848" height="220" /></div>
+          <span class="company-intro__caption">Imagen de empresa facilitada por ZCZR</span>
+        </div>
+        <div class="company-intro__copy reveal reveal-delay-1">
+          <span class="eyebrow">Perfil de empresa</span>
+          <h2>Un socio de menaje con <em>raíces de fábrica.</em></h2>
+          <div class="company-intro__body">
+            <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. es una empresa manufacturera y comercial con sede en Wuxi, Jiangsu, y producción en Yixing. Nos centramos en una sola categoría: menaje isotérmico de acero inoxidable para marcas, distribuidores y programas promocionales.</p>
+            <p>Nuestro equipo combina experiencia en comercio internacional con acceso directo a fábrica, para que puedas pasar de una muestra de referencia a un programa listo para producir con un único interlocutor. Trabajamos con los principios de integridad, innovación y cooperación beneficiosa para ambas partes.</p>
+          </div>
+          <div class="company-facts">
+            <div class="company-fact"><span>Oficina central</span><strong>Wuxi, Jiangsu</strong></div>
+            <div class="company-fact"><span>Producción</span><strong>Fábrica en Yixing</strong></div>
+            <div class="company-fact"><span>Enfoque</span><strong>Menaje isotérmico</strong></div>
+            <div class="company-fact"><span>Condiciones comerciales</span><strong>T/T · Trade Assurance</strong></div>
+          </div>
+          <a class="text-link" href="/es/about/">Conocer ZCZR <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">La gama de menaje</span>
+          <h2>Una categoría.<br /><em>Diseñada para personalizar.</em></h2>
+          <p>Vasos, botellas, jarras, teteras y tazas de café. Usa estos modelos de referencia como punto de partida; colores, logotipos, acabados y embalaje se desarrollan para tu programa.</p>
+        </div>
+        <a class="text-link" href="/es/collections/">Ver todos los modelos <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="product-grid">
+        {featured.map((product, index) => (
+          <ProductCard product={product} index={index} lang="es" />
+        ))}
+      </div>
+      <p class="range-note">Modelos de referencia. Las especificaciones, el MOQ, el plazo y la personalización se confirman por proyecto.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Qué ofrecemos</span>
+          <h2>De tu brief a un programa <em>listo para producir.</em></h2>
+        </div>
+        <p>Una categoría especializada, respaldada por el trabajo real de un pedido de marca privada: muestras, personalización, control de calidad y embalaje de exportación.</p>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">01</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="1.2"/><path d="m16 15 4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Desarrollo OEM y ODM</h3>
+          <p>Comparte un plano, una muestra de referencia o un brief de mercado. Apoyamos el desarrollo de color, logotipo, acabado y embalaje para tu programa.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">02</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8 7.5 9.5 4.3-1.5 7.5-4.9 7.5-9.5V6L12 3Z" stroke="currentColor" stroke-width="1.2"/><path d="m9 11.5 2 2 4-4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Calidad en cada etapa</h3>
+          <p>Controles de material entrante, inspección durante el proceso y revisión final previa al embarque contra la muestra aprobada.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">03</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21c4-3.5 7-7 7-11a7 7 0 1 0-14 0c0 4 3 7.5 7 11Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 10.5 11 13l4-5" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Evaluación de muestras</h3>
+          <p>Muestras de preproducción para revisar material, color y calidad. Los costes de muestra y transporte se confirman antes del envío.</p>
+        </article>
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">04</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16v12H4zM4 8l4-4h8l4 4M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Embalaje de exportación</h3>
+          <p>Protección interior resistente a impactos y cajas, con cajas de madera o palés para programas grandes o pesados.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">05</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14v10H5zM8 7V5h8v2M8 17v2h8v-2" stroke="currentColor" stroke-width="1.2"/><path d="M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Condiciones comerciales</h3>
+          <p>T/T y Alibaba Trade Assurance. Confirmamos condiciones de pago, documentos y responsabilidades de envío en la cotización.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">06</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18 9.5 6l4 8 2.5-4L20 18H4Z" stroke="currentColor" stroke-width="1.2"/><circle cx="18.5" cy="5.5" r="1.4" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <h3>Un único interlocutor</h3>
+          <p>Un solo equipo comercial para especificación, muestras, seguimiento del pedido y embarque, sin coordinar varios proveedores.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Cómo trabajamos</span>
+          <h2>Cinco pasos. <em>Un único interlocutor.</em></h2>
+        </div>
+        <p>Cada programa empieza con la especificación. Confirmamos los detalles antes de muestrear y mantenemos calidad y embalaje alineados con la muestra aprobada.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="process-step__num">01</span>
+          <h3>Comparte tu brief</h3>
+          <p>Modelo, capacidad, acabado, logotipo, embalaje, cantidad objetivo y mercado.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">02</span>
+          <h3>Revisa una muestra</h3>
+          <p>Se confirman muestra y transporte; se revisan material y calidad según tu brief.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step__num">03</span>
+          <h3>Realiza el pedido</h3>
+          <p>Especificación, condiciones de pago y calendario de producción confirmados por escrito.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">04</span>
+          <h3>Producción e inspección</h3>
+          <p>Controles durante el proceso e inspección final previa al embarque contra la muestra aprobada.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">05</span>
+          <h3>Embalaje y envío</h3>
+          <p>Embalaje de exportación, documentos de envío y entrega a tu transitario o al nuestro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quality-band" id="quality">
+    <div class="container quality-band__grid">
+      <div>
+        <span class="eyebrow eyebrow--light">Control de calidad</span>
+        <h2>La calidad se controla en <em>cada etapa.</em></h2>
+        <p class="quality-band__lead">Nuestro equipo realiza inspecciones de calidad en cada etapa de la cadena de suministro, para que solo avance el producto que cumple la especificación acordada. Cuanto antes se detecta un problema, más barato es corregirlo.</p>
+        <a class="btn btn--outline-light" href="/es/contact/" style="margin-top: 28px;">Consultar nuestro proceso de calidad <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="quality-list">
+        <div class="quality-item">
+          <span>01</span>
+          <div><h3>Materiales entrantes</h3><p>Acero, tapas, juntas y recubrimientos revisados antes de producir.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>02</span>
+          <div><h3>Inspección en proceso</h3><p>Dimensiones, acabado y montaje revisados durante la producción.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>03</span>
+          <div><h3>Revisión previa al embarque</h3><p>Inspección final contra la muestra aprobada, la especificación y la lista de embalaje.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>04</span>
+          <div><h3>Embalaje de exportación</h3><p>Embalaje y cajas resistentes a impactos; cajas de madera o palés cuando el programa lo requiere.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spotlight">
+    <div class="spotlight__visual">
+      <span class="spotlight__number">Modelo de referencia / 01</span>
+      <img class="spotlight__photo" src={spotlight.image} alt={spotlight.imageAlt} width="1200" height="1200" loading="lazy" />
+    </div>
+    <div class="spotlight__copy">
+      <span class="eyebrow eyebrow--light">Modelo principal</span>
+      <h2>{spotlight.shortName}.<br /><em>Empieza aquí.</em></h2>
+      <p>Un vaso de 40 oz con asa, tapa de pajita y una amplia gama de colores. Un punto de partida práctico para programas de menaje de marca privada; tamaño, color, logotipo y embalaje se adaptan a tu brief.</p>
+      <div class="company-facts" style="border-color: rgba(251,248,241,.22); background: rgba(251,248,241,.18); margin-top: 26px;">
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Capacidad</span><strong style="color: var(--paper);">{spotlight.capacity}</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Cuerpo</span><strong style="color: var(--paper);">Acero inoxidable 304 interior</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Personalización</span><strong style="color: var(--paper);">OEM / ODM</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">MOQ</span><strong style="color: var(--paper);">Bajo consulta</strong></div>
+      </div>
+      <div class="quote-band__actions" style="padding-top: 26px;">
+        <a class="btn btn--light" href="/es/contact/">Solicitar muestra <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href={`/es/products/${spotlight.slug}/`}>Ver modelo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Preguntas de compradores</span>
+          <h2>Los detalles que preguntan <em>los compradores.</em></h2>
+        </div>
+        <a class="text-link" href="/es/contact/#faq">Todas las preguntas <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>¿Son fábrica o empresa comercial?</summary>
+          <p>Somos una empresa manufacturera y comercial que integra producción, ventas y exportación. Nuestra oficina comercial está en Wuxi y nuestra fábrica en Yixing, Jiangsu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Pueden enviar muestras antes de un pedido?</summary>
+          <p>Sí. Las muestras sirven para revisar material y calidad. Los costes de muestra y transporte se confirman antes del envío.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Pueden producir nuestro propio diseño?</summary>
+          <p>Sí. Aceptamos personalización OEM. Comparte tu diseño, logotipo, muestra de referencia o idea y confirmaremos qué se puede desarrollar y muestrear.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué métodos de pago aceptan?</summary>
+          <p>T/T y Alibaba Trade Assurance. Las condiciones de pago, los documentos y las responsabilidades de envío se confirman en la cotización.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cómo se embalan los productos de exportación?</summary>
+          <p>Los artículos pequeños usan protección interior resistente a impactos y cajas de cartón. Los programas grandes o pesados pueden usar cajas de madera o palés. El embalaje se confirma según los requisitos de tu programa.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿De qué material está hecho el menaje?</summary>
+          <p>Nuestra gama de menaje isotérmico utiliza interiores de acero inoxidable 304 y carcasas exteriores de acero 201 en muchos modelos. El material, grado y acabado exactos se confirman por modelo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-band">
+    <div class="container quote-band__inner">
+      <div>
+        <span class="eyebrow eyebrow--light">Iniciar un proyecto</span>
+        <h2>¿Tienes un modelo en mente? <em>Vamos a crearlo.</em></h2>
+        <p>Envíanos tu referencia, cantidad objetivo y mercado. Te responderemos con la especificación, el plan de muestras y los siguientes pasos.</p>
+      </div>
+      <div class="quote-band__actions">
+        <a class="btn btn--light" href="/es/contact/">Solicitar cotización <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href="mailto:sales@zczr.example">Escribir al equipo</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

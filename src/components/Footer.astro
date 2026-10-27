@@ -1,67 +1,72 @@
 ---
 import Logo from './Logo.astro';
+import { localePath, ui, type Lang } from '../i18n/ui';
 
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props as Props;
+const t = ui[lang].footer;
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="site-footer__top">
     <div class="site-footer__brand">
-      <a class="brand brand--light" href="/" aria-label="ZCZR home">
+      <a class="brand brand--light" href={localePath(lang, '/')} aria-label="ZCZR home">
         <Logo light />
       </a>
-      <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. is a manufacturing and trading company focused on insulated stainless-steel drinkware for global buyers.</p>
+      <p>{t.description}</p>
       <div class="site-footer__locations">
-        <span>Wuxi office</span>
-        <span>Yixing factory</span>
-        <span>Jiangsu, China</span>
+        {t.locations.map((location) => <span>{location}</span>)}
       </div>
-      <div class="site-footer__socials" aria-label="Company links">
-        <a href="/about/" aria-label="Company profile">CO</a>
-        <a href="/technology/" aria-label="Capabilities">CA</a>
-        <a href="/contact/" aria-label="Contact">CT</a>
+      <div class="site-footer__socials" aria-label={lang === 'es' ? 'Enlaces de empresa' : 'Company links'}>
+        <a href={localePath(lang, '/about/')} aria-label={t.about}>CO</a>
+        <a href={localePath(lang, '/technology/')} aria-label={t.capabilities}>CA</a>
+        <a href={localePath(lang, '/contact/')} aria-label={lang === 'es' ? 'Contacto' : 'Contact'}>CT</a>
       </div>
     </div>
 
     <div class="site-footer__cols">
       <div>
-        <h4>Drinkware</h4>
-        <a href="/collections/">All models</a>
-        <a href="/collections/?filter=tumblers">Tumblers</a>
-        <a href="/collections/?filter=bottles">Bottles</a>
-        <a href="/collections/?filter=jugs">Jugs &amp; buckets</a>
-        <a href="/collections/?filter=kettles">Kettles</a>
-        <a href="/collections/?filter=coffee">Coffee cups</a>
+        <h4>{t.drinkware}</h4>
+        <a href={localePath(lang, '/collections/')}>{t.allModels}</a>
+        <a href={localePath(lang, '/collections/?filter=tumblers')}>{t.tumblers}</a>
+        <a href={localePath(lang, '/collections/?filter=bottles')}>{t.bottles}</a>
+        <a href={localePath(lang, '/collections/?filter=jugs')}>{t.jugs}</a>
+        <a href={localePath(lang, '/collections/?filter=kettles')}>{t.kettles}</a>
+        <a href={localePath(lang, '/collections/?filter=coffee')}>{t.coffee}</a>
       </div>
       <div>
-        <h4>Company</h4>
-        <a href="/about/">About ZCZR</a>
-        <a href="/technology/">Capabilities</a>
-        <a href="/technology/#quality">Quality control</a>
-        <a href="/resources/">Buyer resources</a>
+        <h4>{t.company}</h4>
+        <a href={localePath(lang, '/about/')}>{t.about}</a>
+        <a href={localePath(lang, '/technology/')}>{t.capabilities}</a>
+        <a href={localePath(lang, '/technology/#quality')}>{t.quality}</a>
+        <a href={localePath(lang, '/resources/')}>{t.resources}</a>
       </div>
       <div>
-        <h4>Working with us</h4>
-        <a href="/contact/">Request a quote</a>
-        <a href="/technology/#process">Sampling process</a>
-        <a href="/contact/#faq">Payment &amp; packaging</a>
-        <a href="/contact/#faq">FAQ</a>
+        <h4>{t.working}</h4>
+        <a href={localePath(lang, '/contact/')}>{t.quote}</a>
+        <a href={localePath(lang, '/technology/#process')}>{t.sampling}</a>
+        <a href={localePath(lang, '/contact/#faq')}>{t.payment}</a>
+        <a href={localePath(lang, '/contact/#faq')}>{t.faq}</a>
       </div>
       <div class="site-footer__newsletter">
-        <h4>Buyer briefing</h4>
-        <p>New models, finish options, and factory notes for sourcing teams. No consumer noise.</p>
+        <h4>{t.briefing}</h4>
+        <p>{t.briefingBody}</p>
         <form class="newsletter-form" data-newsletter-form>
-          <label class="sr-only" for="footer-email">Work email address</label>
-          <input id="footer-email" type="email" name="email" placeholder="Work email" required />
-          <button type="submit" aria-label="Subscribe">
+          <label class="sr-only" for="footer-email">{t.workEmail}</label>
+          <input id="footer-email" type="email" name="email" placeholder={t.workEmail} required />
+          <button type="submit" aria-label={lang === 'es' ? 'Suscribirse' : 'Subscribe'}>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.4"/></svg>
           </button>
         </form>
         <p class="form-note" data-newsletter-note aria-live="polite"></p>
         <div class="site-footer__contact">
-          <span>Inquiries</span>
+          <span>{t.inquiries}</span>
           <a href="mailto:sales@zczr.example">sales@zczr.example</a>
-          <span>Trade terms</span>
+          <span>{t.tradeTerms}</span>
           <p>T/T · Alibaba Trade Assurance</p>
         </div>
       </div>
@@ -71,12 +76,12 @@ const year = new Date().getFullYear();
   <div class="site-footer__wordmark" aria-hidden="true">ZCZR</div>
 
   <div class="site-footer__bottom">
-    <span>© {year} Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. — concept demo.</span>
-    <span>Product models, specifications, and contact details are illustrative and subject to confirmation. Company information supplied by ZCZR.</span>
+    <span>© {year} Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. {lang === 'es' ? '— demostración conceptual.' : '— concept demo.'}</span>
+    <span>{t.demoTail}</span>
     <div class="site-footer__legal">
-      <a href="/contact/">Privacy</a>
-      <a href="/contact/">Terms</a>
-      <a href="/contact/">Accessibility</a>
+      <a href={localePath(lang, '/contact/')}>{t.privacy}</a>
+      <a href={localePath(lang, '/contact/')}>{t.terms}</a>
+      <a href={localePath(lang, '/contact/')}>{t.accessibility}</a>
     </div>
   </div>
 </footer>

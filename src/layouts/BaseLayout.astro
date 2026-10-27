@@ -1,8 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import VideoModal from '../components/VideoModal.astro';
 import '../styles/global.css';
+import { localePath, stripLocale, type Lang } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -10,6 +10,7 @@ interface Props {
   current?: string;
   image?: string;
   noIndex?: boolean;
+  lang?: Lang;
 }
 
 const {
@@ -18,11 +19,16 @@ const {
   current = '',
   image = '/images/company.webp',
   noIndex = false,
+  lang = 'en',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const enPath = stripLocale(Astro.url.pathname);
+const esPath = localePath('es', enPath);
+const enUrl = new URL(enPath, Astro.site);
+const esUrl = new URL(esPath, Astro.site);
 const ogImage = new URL(image, Astro.site);
-const siteName = 'ZCZR Insulated Drinkware';
+const siteName = lang === 'es' ? 'ZCZR Menaje Isotérmico' : 'ZCZR Insulated Drinkware';
 const legalName = 'Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.';
 
 const organizationSchema = {
@@ -44,18 +50,22 @@ const organizationSchema = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} — {siteName}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     {noIndex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#F3EFE6" />
     <meta name="color-scheme" content="light" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={`${title} — ${siteName}`} />
     <meta property="og:description" content={description} />
@@ -73,13 +83,12 @@ const organizationSchema = {
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Header current={current} />
+    <a class="skip-link" href="#main">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+    <Header current={current} lang={lang} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
-    <VideoModal />
+    <Footer lang={lang} />
     <script>
       import '../scripts/site.js';
     </script>

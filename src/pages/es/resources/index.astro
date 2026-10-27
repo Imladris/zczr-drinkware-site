@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Newsletter from '../../../components/Newsletter.astro';
+import { articlesEs as articles } from '../../../i18n/resources.es';
+
+const [feature, ...rest] = articles;
+---
+
+<BaseLayout
+  title="Recursos para compradores"
+  description="Guías prácticas para comprar menaje isotérmico: preparar un programa personalizado, evaluar el aislamiento al vacío y planificar el embalaje de exportación."
+  current="resources"
+  lang="es"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Recursos / Guías para compradores</span>
+        <span class="page-hero__meta">Para equipos de compras y producto</span>
+      </div>
+      <h1>Notas para <em>mejores briefs.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Notas prácticas sobre especificación, muestras y envío de menaje isotérmico. Escritas para compradores que necesitan menos revisiones y una conversación de producción más clara.</p>
+        <div class="page-hero__meta"><span>03 guías</span><span>Actualizado 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <article class="journal-feature">
+        <a class="journal-feature__media reveal" href={`/es/resources/${feature.slug}/`} aria-label={`Leer ${feature.title}`}>
+          <img src={feature.image} alt={feature.imageAlt} width="1600" height="1067" fetchpriority="high" />
+        </a>
+        <div class="journal-feature__copy reveal reveal-delay-1">
+          <div class="journal-card__meta">
+            <span>{feature.category}</span>
+            <span>{feature.date} · {feature.readTime}</span>
+          </div>
+          <h2>{feature.title}</h2>
+          <p>{feature.excerpt}</p>
+          <a class="text-link" href={`/es/resources/${feature.slug}/`}>Leer la guía <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <div class="journal-grid journal-grid--two">
+        {rest.map((article, index) => (
+          <article class:list={['journal-card', 'reveal', `reveal-delay-${index}`]}>
+            <a href={`/es/resources/${article.slug}/`} aria-label={`Leer ${article.title}`}>
+              <div class="journal-card__media">
+                <img src={article.image} alt={article.imageAlt} width="1600" height="1067" loading="lazy" />
+              </div>
+              <div class="journal-card__meta">
+                <span>{article.category}</span>
+                <span>{article.date} · {article.readTime}</span>
+              </div>
+              <h3>{article.title}</h3>
+              <p>{article.excerpt}</p>
+              <span class="journal-card__link">Leer la guía</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang="es" />
+</BaseLayout>

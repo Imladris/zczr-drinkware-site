@@ -1,26 +1,30 @@
 ---
+import { ui, type Lang } from '../i18n/ui';
+
 interface Props {
   compact?: boolean;
+  lang?: Lang;
 }
-const { compact = false } = Astro.props;
+const { compact = false, lang = 'en' } = Astro.props as Props;
+const t = ui[lang].newsletter;
 ---
 
 <section class:list={['newsletter', { 'section--tight': compact }]} aria-labelledby="newsletter-title">
   <div class="newsletter__inner container">
     <div>
-      <span class="eyebrow eyebrow--light">Buyer briefing</span>
-      <h2 id="newsletter-title">New models.<br /><em>Factory notes.</em></h2>
+      <span class="eyebrow eyebrow--light">{t.eyebrow}</span>
+      <h2 id="newsletter-title">{t.titleOne}<br /><em>{t.titleTwo}</em></h2>
     </div>
     <div class="newsletter__copy">
-      <p>Occasional updates for sourcing teams: new drinkware models, finish options, packaging notes and production windows. No consumer noise.</p>
+      <p>{t.body}</p>
       <form class="newsletter-form" data-newsletter-form>
-        <label class="sr-only" for="newsletter-email">Work email address</label>
-        <input id="newsletter-email" type="email" name="email" placeholder="Work email" required />
-        <button type="submit" aria-label="Subscribe">
+        <label class="sr-only" for="newsletter-email">{t.placeholder}</label>
+        <input id="newsletter-email" type="email" name="email" placeholder={t.placeholder} required />
+        <button type="submit" aria-label={lang === 'es' ? 'Suscribirse' : 'Subscribe'}>
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.4"/></svg>
         </button>
       </form>
-      <p class="newsletter__note">For B2B buyers and sourcing teams. Unsubscribe anytime.</p>
+      <p class="newsletter__note">{t.note}</p>
       <p class="form-note" data-newsletter-note aria-live="polite"></p>
     </div>
   </div>

@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+---
+
+<BaseLayout
+  title="Empresa"
+  description="Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. es una empresa manufacturera y comercial de Wuxi, Jiangsu, especializada en menaje isotérmico de acero inoxidable OEM y ODM."
+  current="about"
+  lang="es"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Empresa / Wuxi Zhenchuang Zhuorui</span>
+        <span class="page-hero__meta">Sede en Wuxi · Fábrica en Yixing</span>
+      </div>
+      <h1>Enfocados en el menaje. <em>Conectados a la fábrica.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Una empresa manufacturera y comercial construida alrededor de una categoría: menaje isotérmico de acero inoxidable para marcas, distribuidores y programas promocionales.</p>
+        <div class="page-hero__meta"><span>Fabricación y comercio</span><span>OEM / ODM</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="about-image reveal" style="margin-top: 0; margin-bottom: clamp(40px, 6vw, 72px);">
+        <img src="/images/company.webp" alt="Recepción e imagen de marca de ZCZR" width="1800" height="1013" fetchpriority="high" />
+      </div>
+      <div class="about-intro">
+        <div class="reveal">
+          <span class="eyebrow">Quiénes somos</span>
+          <h2>Una categoría. <em>Un equipo responsable.</em></h2>
+        </div>
+        <div class="about-intro__body reveal reveal-delay-1">
+          <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. es una empresa manufacturera y comercial con sede en Wuxi, Jiangsu, y producción en Yixing. Integramos producción, ventas y exportación de menaje isotérmico.</p>
+          <p>Nuestro enfoque es deliberadamente estrecho: vasos, botellas, jarras, teteras y tazas de café. Esa especialización nos permite dedicar tiempo a los detalles que importan al comprador: la construcción, el acabado, el logotipo, la muestra, el embalaje y el envío.</p>
+          <p>Nuestro equipo combina experiencia en comercio internacional con acceso a fábrica. Acompañamos al comprador en especificación, muestras, seguimiento del pedido y documentación de exportación, con un único interlocutor desde el primer brief hasta el embarque.</p>
+          <a class="text-link" href="/es/collections/">Ver la gama de referencia <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Cómo trabajamos</span>
+          <h2>Pensado para <em>el día del comprador.</em></h2>
+        </div>
+        <p>Mantenemos el proceso práctico: confirmar la especificación, aprobar la muestra, proteger la calidad y hacer previsible el embarque.</p>
+      </div>
+      <div class="values-grid">
+        <article class="value-card reveal">
+          <span>01</span>
+          <h3>Especialización frente a dispersión</h3>
+          <p>Una sola categoría significa que nuestro equipo, muestras y controles de calidad se concentran en menaje isotérmico, no en productos no relacionados.</p>
+        </article>
+        <article class="value-card reveal reveal-delay-1">
+          <span>02</span>
+          <h3>Acceso a fábrica</h3>
+          <p>Nuestra oficina comercial de Wuxi trabaja con la producción de Yixing, dando al comprador una línea directa entre el brief comercial y la fábrica.</p>
+        </article>
+        <article class="value-card reveal reveal-delay-2">
+          <span>03</span>
+          <h3>Calidad en cada etapa</h3>
+          <p>Los materiales entrantes, la producción en proceso y las comprobaciones previas al embarque forman parte del pedido, no son un añadido posterior.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Datos de la empresa</span>
+          <h2>Los detalles, <em>en un solo lugar.</em></h2>
+        </div>
+      </div>
+      <div class="company-facts" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="company-fact"><span>Razón social</span><strong>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</strong></div>
+        <div class="company-fact"><span>Nombre en chino</span><strong>无锡臻创卓锐国际贸易有限公司</strong></div>
+        <div class="company-fact"><span>Oficina central</span><strong>Wuxi, Jiangsu, China</strong></div>
+        <div class="company-fact"><span>Producción</span><strong>Fábrica de Yixing, Jiangsu</strong></div>
+        <div class="company-fact"><span>Modelo de negocio</span><strong>Fabricación y comercio</strong></div>
+        <div class="company-fact"><span>Producto principal</span><strong>Menaje isotérmico</strong></div>
+        <div class="company-fact"><span>Personalización</span><strong>OEM / ODM</strong></div>
+        <div class="company-fact"><span>Pagos</span><strong>T/T · Alibaba Trade Assurance</strong></div>
+        <div class="company-fact"><span>Muestras</span><strong>Disponibles; transporte a confirmar</strong></div>
+        <div class="company-fact"><span>Embalaje</span><strong>Cajas; cajas de madera o palés</strong></div>
+      </div>
+
+      <div class="quote-block reveal">
+        <blockquote>“Integridad, innovación y <em>cooperación beneficiosa.</em>”</blockquote>
+        <cite>Filosofía operativa de ZCZR</cite>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang="es" />
+</BaseLayout>

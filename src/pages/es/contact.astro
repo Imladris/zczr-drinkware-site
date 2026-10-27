@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { products } from '../../data/products';
+import { localizeProduct } from '../../i18n/products.es';
+
+const localizedProducts = products.map((product) => localizeProduct(product, 'es'));
+---
+
+<BaseLayout
+  title="Contacto"
+  description="Contacta con ZCZR para menaje isotérmico OEM y ODM, muestras, especificaciones, embalaje o un pedido existente. Wuxi, Jiangsu, China."
+  current="contact"
+  lang="es"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Contacto / Iniciar una conversación</span>
+        <span class="page-hero__meta">Wuxi, Jiangsu · China</span>
+      </div>
+      <h1>Cuéntanos sobre <em>tu programa.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Comparte el modelo, la capacidad, el acabado, el logotipo, la cantidad objetivo y el mercado. Confirmaremos la especificación, el proceso de muestras y los siguientes pasos. Nuestro equipo comercial lee cada consulta.</p>
+        <div class="page-hero__meta"><span>OEM / ODM</span><span>Respuesta en 2 días laborables</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container contact-grid">
+      <div class="contact-intro">
+        <span class="eyebrow">Contacto</span>
+        <h2>Una línea directa <em>con el equipo.</em></h2>
+        <p>Sin laberintos de tickets. Cuéntanos qué estás buscando y te orientaremos hacia el modelo de referencia, el plan de muestras o la opción de embalaje adecuados.</p>
+
+        <div class="contact-details">
+          <div class="contact-detail"><span>Correo</span><a href="mailto:sales@zczr.example">sales@zczr.example</a></div>
+          <div class="contact-detail"><span>Oficina central</span><span>Wuxi, Jiangsu, China</span></div>
+          <div class="contact-detail"><span>Producción</span><span>Fábrica de Yixing, Jiangsu</span></div>
+          <div class="contact-detail"><span>Condiciones</span><span>T/T · Alibaba Trade Assurance</span></div>
+          <div class="contact-detail"><span>Muestras</span><span>Disponibles; coste y transporte a confirmar</span></div>
+          <div class="contact-detail"><span>Horario</span><span>Lunes a viernes, 9:00–17:00 (hora de China)</span></div>
+        </div>
+      </div>
+
+      <form class="contact-form" data-contact-form>
+        <span class="eyebrow">Enviar un brief</span>
+        <div class="form-row" style="margin-top: 22px;">
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
+          </div>
+          <div class="field">
+            <label for="email">Correo corporativo</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@empresa.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="company">Empresa</label>
+            <input id="company" name="company" type="text" autocomplete="organization" placeholder="Nombre de la empresa" required />
+          </div>
+          <div class="field">
+            <label for="country">País</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" placeholder="España" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="topic">Tema</label>
+            <select id="topic" name="topic">
+              <option>Proyecto OEM / ODM</option>
+              <option>Solicitud de muestra</option>
+              <option>Consulta de especificación</option>
+              <option>Embalaje</option>
+              <option>Pedido existente</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="product">Modelo de referencia</label>
+            <select id="product" name="product">
+              <option>Aún no lo sé</option>
+              {localizedProducts.map((product) => <option>{product.name}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="quantity">Cantidad objetivo</label>
+          <input id="quantity" name="quantity" type="text" placeholder="p. ej. 1.000 uds." />
+        </div>
+        <div class="field">
+          <label for="message">Brief</label>
+          <textarea id="message" name="message" placeholder="Modelo o referencia, capacidad, acabado, logotipo, embalaje, mercado objetivo y plazo." required></textarea>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" name="consent" required />
+          <span>Acepto la política de privacidad y ser contactado sobre esta consulta.</span>
+        </label>
+        <button class="btn btn--solid" type="submit">Enviar consulta <span aria-hidden="true">↗</span></button>
+        <p class="form-note" data-contact-note aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2>Antes de <em>escribir.</em></h2>
+        </div>
+        <p>Algunas respuestas habituales. Si tu pregunta no está aquí, el formulario es la vía más rápida para contactarnos.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>¿Son fábrica o empresa comercial?</summary>
+          <p>Somos una empresa manufacturera y comercial que integra producción, ventas y exportación. Nuestra oficina comercial está en Wuxi y nuestra fábrica en Yixing, Jiangsu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Pueden enviar muestras antes de un pedido?</summary>
+          <p>Sí. Las muestras sirven para revisar material y calidad. Los costes de muestra y transporte se confirman antes del envío.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Pueden producir nuestro propio diseño?</summary>
+          <p>Sí. Aceptamos personalización OEM. Comparte tu diseño, logotipo, muestra de referencia o idea y confirmaremos qué se puede desarrollar y muestrear.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué métodos de pago aceptan?</summary>
+          <p>T/T y Alibaba Trade Assurance. Las condiciones de pago, los documentos y las responsabilidades de envío se confirman en la cotización.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cómo se embalan los productos de exportación?</summary>
+          <p>Los artículos pequeños usan protección interior resistente a impactos y cajas de cartón. Los programas grandes o pesados pueden usar cajas de madera o palés. El embalaje se confirma según los requisitos de tu programa.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cuál es el MOQ y el plazo de entrega?</summary>
+          <p>El MOQ y el plazo dependen del modelo, la personalización y la cantidad. Ambos se confirman en la cotización tras acordar la especificación.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿De qué material está hecho el menaje?</summary>
+          <p>Nuestra gama de menaje isotérmico utiliza interiores de acero inoxidable 304 y carcasas exteriores de acero 201 en muchos modelos. El material, grado y acabado exactos se confirman por modelo.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

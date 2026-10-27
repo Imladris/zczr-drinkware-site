@@ -46,6 +46,24 @@ The generated static site is in `dist/`.
 | `/contact/` | B2B inquiry form, company details and FAQ |
 | `/404.html` | Not-found page |
 
+## Spanish version
+
+The site is bilingual:
+
+- English: `/`
+- Spanish: `/es/`
+
+A language switch in the header links to the equivalent page in the other language. Product pages, category filters, buyer resources, contact form labels, FAQ, navigation, footer and meta tags are localized.
+
+Translation files:
+
+- UI and navigation strings: `src/i18n/ui.ts`
+- Spanish product names and descriptions: `src/i18n/products.es.ts`
+- Spanish buyer guides: `src/i18n/resources.es.ts`
+- Spanish routes: `src/pages/es/`
+
+`hreflang` alternates and localized canonical URLs are emitted by `src/layouts/BaseLayout.astro`. The build produces 70 static pages (35 English + 35 Spanish).
+
 ## Content editing
 
 - Products, capacities, colors and specifications: `src/data/products.ts`

@@ -1,5 +1,7 @@
 const qs = (selector, scope = document) => scope.querySelector(selector);
 const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+const isEs = document.documentElement.lang === 'es';
+const tr = (en, es) => (isEs ? es : en);
 
 /* ---------------------------------------------------------
    Header + reveal
@@ -42,7 +44,7 @@ const setMenu = (open) => {
   menu.classList.toggle('is-open', open);
   menu.setAttribute('aria-hidden', String(!open));
   menuToggle.setAttribute('aria-expanded', String(open));
-  menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  menuToggle.setAttribute('aria-label', open ? tr('Close menu', 'Cerrar menú') : tr('Open menu', 'Abrir menú'));
   document.body.classList.toggle('is-locked', open);
   if (open) menuClose?.focus();
 };
@@ -108,7 +110,7 @@ const closeVideo = () => {
 const openVideo = (trigger) => {
   if (!videoModal || !videoFrame) return;
   const id = trigger.dataset.videoId;
-  const title = trigger.dataset.videoTitle || 'Field film';
+  const title = trigger.dataset.videoTitle || tr('Field film', 'Película de campo');
   if (!id) return;
   videoTrigger = trigger;
   videoLabel.textContent = title;
@@ -145,11 +147,11 @@ qsa('[data-newsletter-form]').forEach((form) => {
     const input = qs('input[type="email"]', form);
     const note = form.parentElement?.querySelector('[data-newsletter-note]');
     if (!input?.value || !input.checkValidity()) {
-      if (note) note.textContent = 'Please enter a valid email address.';
+      if (note) note.textContent = tr('Please enter a valid email address.', 'Introduce un correo electrónico válido.');
       input?.focus();
       return;
     }
-    if (note) note.textContent = 'You are on the list. (Demo — no email was sent.)';
+    if (note) note.textContent = tr('You are on the list. (Demo — no email was sent.)', 'Estás en la lista. (Demo: no se ha enviado ningún correo.)');
     form.reset();
   });
 });
@@ -166,7 +168,7 @@ if (contactForm) {
       contactForm.reportValidity();
       return;
     }
-    if (note) note.textContent = 'Thanks — this demo form is not connected to an inbox yet.';
+    if (note) note.textContent = tr('Thanks — this demo form is not connected to an inbox yet.', 'Gracias: este formulario de demo aún no está conectado a un buzón.');
     contactForm.reset();
   });
 }
@@ -192,7 +194,7 @@ const applyFilter = (filter) => {
     button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
   });
   if (collectionCount) {
-    collectionCount.textContent = `${String(visible).padStart(2, '0')} models`;
+    collectionCount.textContent = `${String(visible).padStart(2, '0')} ${tr('models', 'modelos')}`;
   }
   if (collectionEmpty) collectionEmpty.hidden = visible > 0;
 };

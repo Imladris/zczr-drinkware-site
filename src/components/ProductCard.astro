@@ -1,14 +1,19 @@
 ---
 import type { Product } from '../data/products';
+import { localizeProduct } from '../i18n/products.es';
+import { localePath, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   product: Product;
   index?: number;
   reveal?: boolean;
+  lang?: Lang;
 }
 
-const { product, index = 0, reveal = true } = Astro.props as Props;
+const { product: source, index = 0, reveal = true, lang = 'en' } = Astro.props as Props;
+const product = localizeProduct(source, lang);
 const primary = product.colors[0];
+const t = ui[lang].card;
 ---
 
 <article
@@ -16,7 +21,7 @@ const primary = product.colors[0];
   data-category={product.category}
   data-name={product.name.toLowerCase()}
 >
-  <a class="product-card__link" href={`/products/${product.slug}/`} aria-label={`View ${product.name}`}>
+  <a class="product-card__link" href={localePath(lang, `/products/${product.slug}/`)} aria-label={`${t.view} ${product.name}`}>
     <div class="product-card__stage" style={`--stage:${product.stage}; --accent:${primary.hex};`}>
       <span class="product-card__index">{String(index + 1).padStart(2, '0')}</span>
       {product.badge && <span class="product-card__badge">{product.badge}</span>}
@@ -48,8 +53,8 @@ const primary = product.colors[0];
         <p class="product-card__capacity">{product.capacity}</p>
       </div>
       <div class="product-card__price">
-        <span class="product-card__quote">Quote on request</span>
-        <span class="product-card__rating">OEM / ODM</span>
+        <span class="product-card__quote">{t.quote}</span>
+        <span class="product-card__rating">{t.oem}</span>
       </div>
     </div>
   </a>
