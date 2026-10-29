@@ -11,7 +11,7 @@ The homepage leads with the company profile, factory access and OEM/ODM capabili
 - **Astro 7** — static HTML output, no runtime server
 - **Custom CSS** with design tokens and local WOFF2 fonts
 - **Inline SVG product renders** — replace with real product photography when available
-- **Vanilla JS** for filters, color/capacity switching, search, menu and demo forms
+- **Vanilla JS** for filters, product image gallery, search, menu and demo forms
 - **Nginx** config and an rsync deploy script in `deploy/`
 - No database. No CMS. No video storage on the server.
 
@@ -124,6 +124,13 @@ The following facts come from the supplied company text/FAQ and are used in the 
 
 Product images and model names are taken from the current 1688 factory listing. They are visual references and must be confirmed on the approved sample. The demo imports 34 products from the listing.
 
+## Company contacts
+
+The contact data lives in `src/data/contacts.ts` and is used by the contact page, footer, homepage email buttons and Organization schema.
+
+- **Primary contact / default email:** `chaozhengzong7@gmail.com` · `+86 133 7362 3030`
+- **Secondary contact:** `zongsuyun@gmail.com` · `+52 667 821 4311`
+
 ## Important security note
 
 The supplied `详情页素材/（必填）公司资料.docx` contains an Alibaba International Station account name and a plain-text password. It should be removed from shared folders, excluded from any repository, and the password should be rotated. No credentials from that document were copied into this project.
@@ -205,7 +212,7 @@ The script runs `npm ci`, `npm run build`, rsyncs `dist/` to `/var/www/zczr/curr
 
 ## Before a real launch
 
-- Replace the placeholder email `sales@zczr.example` and confirm the inquiry routing.
+- Confirm inquiry routing with the primary contact in `src/data/contacts.ts`.
 - Replace the demo SVG product renders with real product photography.
 - Confirm every specification and performance claim against an approved sample.
 - Add real privacy, terms, accessibility, warranty and shipping pages as required.

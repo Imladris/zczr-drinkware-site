@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { products } from '../data/products';
+import { companyContacts } from '../data/contacts';
 ---
 
 <BaseLayout
@@ -30,7 +31,18 @@ import { products } from '../data/products';
         <p>No ticket maze. Tell us what you are sourcing and we will point you to the right reference model, sample plan or packing option.</p>
 
         <div class="contact-details">
-          <div class="contact-detail"><span>Email</span><a href="mailto:sales@zczr.example">sales@zczr.example</a></div>
+          {companyContacts.map((contact, index) => (
+            <Fragment>
+              <div class="contact-detail">
+                <span>{index === 0 ? 'Primary email' : 'Secondary email'}</span>
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              </div>
+              <div class="contact-detail">
+                <span>{index === 0 ? 'Primary phone' : 'Secondary phone'}</span>
+                <a href={`tel:${contact.tel}`}>{contact.phone}</a>
+              </div>
+            </Fragment>
+          ))}
           <div class="contact-detail"><span>Head office</span><span>Wuxi, Jiangsu, China</span></div>
           <div class="contact-detail"><span>Production</span><span>Yixing factory, Jiangsu</span></div>
           <div class="contact-detail"><span>Trade terms</span><span>T/T · Alibaba Trade Assurance</span></div>

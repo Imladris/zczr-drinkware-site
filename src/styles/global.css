@@ -3217,7 +3217,7 @@ ul {
 
 .contact-detail {
   display: grid;
-  grid-template-columns: 100px 1fr;
+  grid-template-columns: 120px 1fr;
   gap: 20px;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
@@ -5189,4 +5189,9 @@ ul {
 
 .product-info h1 {
   text-wrap: balance;
+}
+
+.contact-detail a,
+.site-footer__contact a {
+  overflow-wrap: anywhere;
 }

@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import { companyContacts, primaryContact } from '../data/contacts';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import { localePath, stripLocale, type Lang } from '../i18n/ui';
@@ -37,6 +38,8 @@ const organizationSchema = {
   name: legalName,
   alternateName: 'ZCZR',
   url: Astro.site,
+  email: primaryContact.email,
+  telephone: primaryContact.tel,
   logo: new URL('/images/zczr-logo.png', Astro.site),
   description,
   address: {
@@ -45,6 +48,14 @@ const organizationSchema = {
     addressRegion: 'Jiangsu',
     addressCountry: 'CN',
   },
+  contactPoint: companyContacts.map((contact) => ({
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: contact.email,
+    telephone: contact.tel,
+    areaServed: contact.regionEn,
+    availableLanguage: ['English', 'Spanish', 'Chinese'],
+  })),
   sameAs: [],
 };
 ---
