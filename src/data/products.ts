@@ -12,7 +12,6 @@ export type Product = {
   gallery: string[];
   imageAlt: string;
   stage: string;
-  sourceUrl: string;
   featured?: boolean;
 };
 
@@ -34,7 +33,6 @@ export const products: Product[] = [
     ],
     imageAlt: '316 Coffee Cup product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/795858462577.html',
     featured: true,
   },
   {
@@ -55,7 +53,6 @@ export const products: Product[] = [
     ],
     imageAlt: '30 oz Car Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/799990229526.html',
     featured: true,
   },
   {
@@ -76,7 +73,6 @@ export const products: Product[] = [
     ],
     imageAlt: '20 oz Straw Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/794653748654.html',
   },
   {
     slug: '1688-872583398991',
@@ -96,7 +92,6 @@ export const products: Product[] = [
     ],
     imageAlt: '30 oz Car Tumbler II product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/872583398991.html',
   },
   {
     slug: '1688-943081557361',
@@ -109,14 +104,10 @@ export const products: Product[] = [
     image: '/products-1688/1688-943081557361-4.webp',
     gallery: [
       '/products-1688/1688-943081557361-4.webp',
-      '/products-1688/1688-943081557361-1.webp',
-      '/products-1688/1688-943081557361-2.webp',
-      '/products-1688/1688-943081557361-3.webp',
       '/products-1688/1688-943081557361-5.webp',
     ],
     imageAlt: 'Large Space Kettle product image',
     stage: '#E9DFC7',
-    sourceUrl: 'https://detail.1688.com/offer/943081557361.html',
     featured: true,
   },
   {
@@ -137,7 +128,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Beer Mug with Opener product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/796185191193.html',
   },
   {
     slug: '1688-854829570591',
@@ -157,7 +147,6 @@ export const products: Product[] = [
     ],
     imageAlt: '12 oz Coffee Cup product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/854829570591.html',
   },
   {
     slug: '1688-797152773942',
@@ -177,7 +166,6 @@ export const products: Product[] = [
     ],
     imageAlt: '20 oz Sublimation Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/797152773942.html',
   },
   {
     slug: '1688-794630617489',
@@ -197,7 +185,6 @@ export const products: Product[] = [
     ],
     imageAlt: '30 oz Gradient Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/794630617489.html',
     featured: true,
   },
   {
@@ -208,17 +195,13 @@ export const products: Product[] = [
     category: 'coffee',
     categoryLabel: 'Coffee cup',
     capacity: 'Large capacity',
-    image: '/products-1688/1688-1081888425500-4.webp',
+    image: '/products-1688/1688-1081888425500-1.webp',
     gallery: [
-      '/products-1688/1688-1081888425500-4.webp',
       '/products-1688/1688-1081888425500-1.webp',
-      '/products-1688/1688-1081888425500-2.webp',
-      '/products-1688/1688-1081888425500-3.webp',
-      '/products-1688/1688-1081888425500-5.webp',
+      '/products-1688/1688-1081888425500-4.webp',
     ],
     imageAlt: '316 Handled Coffee Cup product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/1081888425500.html',
   },
   {
     slug: '1688-851825626253',
@@ -228,17 +211,13 @@ export const products: Product[] = [
     category: 'coffee',
     categoryLabel: 'Coffee cup',
     capacity: 'Large capacity',
-    image: '/products-1688/1688-851825626253-4.webp',
+    image: '/products-1688/1688-851825626253-1.webp',
     gallery: [
-      '/products-1688/1688-851825626253-4.webp',
       '/products-1688/1688-851825626253-1.webp',
-      '/products-1688/1688-851825626253-2.webp',
-      '/products-1688/1688-851825626253-3.webp',
-      '/products-1688/1688-851825626253-5.webp',
+      '/products-1688/1688-851825626253-4.webp',
     ],
     imageAlt: '316 Handled Coffee Cup II product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/851825626253.html',
   },
   {
     slug: '1688-1079729776645',
@@ -248,17 +227,13 @@ export const products: Product[] = [
     category: 'bottles',
     categoryLabel: 'Bottle',
     capacity: '500 ml',
-    image: '/products-1688/1688-1079729776645-5.webp',
+    image: '/products-1688/1688-1079729776645-1.webp',
     gallery: [
-      '/products-1688/1688-1079729776645-5.webp',
       '/products-1688/1688-1079729776645-1.webp',
-      '/products-1688/1688-1079729776645-2.webp',
-      '/products-1688/1688-1079729776645-3.webp',
-      '/products-1688/1688-1079729776645-4.webp',
+      '/products-1688/1688-1079729776645-5.webp',
     ],
     imageAlt: 'Sport Bottle 500 product image',
     stage: '#DCE3D8',
-    sourceUrl: 'https://detail.1688.com/offer/1079729776645.html',
   },
   {
     slug: '1688-1078067502639',
@@ -278,7 +253,6 @@ export const products: Product[] = [
     ],
     imageAlt: '40 oz Handled Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/1078067502639.html',
     featured: true,
   },
   {
@@ -299,7 +273,6 @@ export const products: Product[] = [
     ],
     imageAlt: '40 oz Car Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/930100025238.html',
   },
   {
     slug: '1688-1080294990208',
@@ -312,14 +285,11 @@ export const products: Product[] = [
     image: '/products-1688/1688-1080294990208-1.webp',
     gallery: [
       '/products-1688/1688-1080294990208-1.webp',
-      '/products-1688/1688-1080294990208-2.webp',
-      '/products-1688/1688-1080294990208-3.webp',
       '/products-1688/1688-1080294990208-4.webp',
       '/products-1688/1688-1080294990208-5.webp',
     ],
     imageAlt: '316 Octagonal Coffee Cup product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/1080294990208.html',
   },
   {
     slug: '1688-790219051220',
@@ -339,7 +309,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Large-Belly Jug product image',
     stage: '#D9DFD8',
-    sourceUrl: 'https://detail.1688.com/offer/790219051220.html',
     featured: true,
   },
   {
@@ -360,7 +329,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Large Car Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/1076397526442.html',
   },
   {
     slug: '1688-790204503582',
@@ -380,7 +348,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Diamond-Paint Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/790204503582.html',
   },
   {
     slug: '1688-1079232876527',
@@ -400,7 +367,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Straight Insulated Bottle product image',
     stage: '#DCE3D8',
-    sourceUrl: 'https://detail.1688.com/offer/1079232876527.html',
   },
   {
     slug: '1688-943601127136',
@@ -420,7 +386,6 @@ export const products: Product[] = [
     ],
     imageAlt: '34 oz Silicone Sport Bottle product image',
     stage: '#DCE3D8',
-    sourceUrl: 'https://detail.1688.com/offer/943601127136.html',
   },
   {
     slug: '1688-1075538063688',
@@ -440,7 +405,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Double-Drink Tumbler product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/1075538063688.html',
   },
   {
     slug: '1688-1079954683027',
@@ -460,7 +424,6 @@ export const products: Product[] = [
     ],
     imageAlt: '30 oz Car Tumbler III product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/1079954683027.html',
   },
   {
     slug: '1688-996829135363',
@@ -480,7 +443,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Titanium Cup 260 product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/996829135363.html',
     featured: true,
   },
   {
@@ -501,7 +463,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Wide-Mouth Sport Bottle product image',
     stage: '#DCE3D8',
-    sourceUrl: 'https://detail.1688.com/offer/856861841021.html',
   },
   {
     slug: '1688-1078491650182',
@@ -520,7 +481,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Egg-Shaped Bottle product image',
     stage: '#DCE3D8',
-    sourceUrl: 'https://detail.1688.com/offer/1078491650182.html',
   },
   {
     slug: '1688-1077434657763',
@@ -540,7 +500,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Coffee & Milk Tumbler product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/1077434657763.html',
   },
   {
     slug: '1688-795012017777',
@@ -550,17 +509,12 @@ export const products: Product[] = [
     category: 'kettles',
     categoryLabel: 'Kettle',
     capacity: 'Large capacity',
-    image: '/products-1688/1688-795012017777-5.webp',
+    image: '/products-1688/1688-795012017777-4.webp',
     gallery: [
-      '/products-1688/1688-795012017777-5.webp',
-      '/products-1688/1688-795012017777-1.webp',
-      '/products-1688/1688-795012017777-2.webp',
-      '/products-1688/1688-795012017777-3.webp',
       '/products-1688/1688-795012017777-4.webp',
     ],
     imageAlt: '316 Tea Pot product image',
     stage: '#E9DFC7',
-    sourceUrl: 'https://detail.1688.com/offer/795012017777.html',
     featured: true,
   },
   {
@@ -571,17 +525,13 @@ export const products: Product[] = [
     category: 'bottles',
     categoryLabel: 'Bottle',
     capacity: '500 ml',
-    image: '/products-1688/1688-794460487434-5.webp',
+    image: '/products-1688/1688-794460487434-4.webp',
     gallery: [
-      '/products-1688/1688-794460487434-5.webp',
-      '/products-1688/1688-794460487434-1.webp',
-      '/products-1688/1688-794460487434-2.webp',
-      '/products-1688/1688-794460487434-3.webp',
       '/products-1688/1688-794460487434-4.webp',
+      '/products-1688/1688-794460487434-5.webp',
     ],
     imageAlt: 'Sport Bottle 500 II product image',
     stage: '#DCE3D8',
-    sourceUrl: 'https://detail.1688.com/offer/794460487434.html',
   },
   {
     slug: '1688-801780517247',
@@ -595,13 +545,10 @@ export const products: Product[] = [
     gallery: [
       '/products-1688/1688-801780517247-1.webp',
       '/products-1688/1688-801780517247-2.webp',
-      '/products-1688/1688-801780517247-3.webp',
-      '/products-1688/1688-801780517247-4.webp',
       '/products-1688/1688-801780517247-5.webp',
     ],
     imageAlt: 'Iced Coffee Cup product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/801780517247.html',
   },
   {
     slug: '1688-790194947940',
@@ -621,7 +568,6 @@ export const products: Product[] = [
     ],
     imageAlt: '40 oz Handled Tumbler II product image',
     stage: '#E7DFD0',
-    sourceUrl: 'https://detail.1688.com/offer/790194947940.html',
   },
   {
     slug: '1688-1080358581874',
@@ -641,7 +587,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Iced Coffee Cup II product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/1080358581874.html',
   },
   {
     slug: '1688-857783845444',
@@ -654,14 +599,9 @@ export const products: Product[] = [
     image: '/products-1688/1688-857783845444-5.webp',
     gallery: [
       '/products-1688/1688-857783845444-5.webp',
-      '/products-1688/1688-857783845444-1.webp',
-      '/products-1688/1688-857783845444-2.webp',
-      '/products-1688/1688-857783845444-3.webp',
-      '/products-1688/1688-857783845444-4.webp',
     ],
     imageAlt: 'Handled Mug product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/857783845444.html',
   },
   {
     slug: '1688-858050360701',
@@ -681,7 +621,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Sport Space Kettle product image',
     stage: '#E9DFC7',
-    sourceUrl: 'https://detail.1688.com/offer/858050360701.html',
   },
   {
     slug: '1688-843218158734',
@@ -701,7 +640,6 @@ export const products: Product[] = [
     ],
     imageAlt: 'Mini Coffee Cup product image',
     stage: '#EAD8CE',
-    sourceUrl: 'https://detail.1688.com/offer/843218158734.html',
   },
 ];
 

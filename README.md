@@ -2,7 +2,7 @@
 
 A static, company-focused website demo for **Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. (ZCZR)**.
 
-The site is intentionally focused on **one product category: insulated stainless-steel drinkware** — tumblers, bottles, jugs, kettles and coffee cups. The current demo imports **34 product references** from the ZCZR 1688 factory catalogue. Ceramics, machinery, electronics and other products from the supplied folder are deliberately excluded.
+The site is intentionally focused on **one product category: insulated stainless-steel drinkware** — tumblers, bottles, jugs, kettles and coffee cups. The current demo imports **34 product references** from the ZCZR supplier factory catalogue. Ceramics, machinery, electronics and other products from the supplied folder are deliberately excluded.
 
 The homepage leads with the company profile, factory access and OEM/ODM capabilities, then presents the drinkware range. The buying flow is quote-based rather than retail checkout.
 
@@ -75,13 +75,12 @@ Translation files:
 - Contact form: `src/pages/contact.astro`
 - Global design tokens and layout: `src/styles/global.css`
 
-## Product catalogue imported from 1688
+## Product catalogue
 
-- Source page: `https://sale.1688.com/factory/l6rr893d.html?memberId=b2b-221778387970743cb7`
 - Current site: 34 products across five categories
-- Images: downloaded from each 1688 product gallery to `public/products-1688/` as WebP (up to 5 clean product views per item)
-- Each product detail page links back to its original 1688 listing
-- Each detail page has a multi-image gallery with previous/next controls, thumbnails, keyboard arrows and mobile swipe
+- Images: downloaded from supplier product galleries to `public/products-1688/` as WebP (one to five clean product views per item)
+- Product detail pages do not link out to supplier listings
+- Each detail page has a multi-image gallery with previous/next controls, thumbnails, keyboard arrows and mobile swipe (single-image products hide the controls)
 - Product images are used as visual references; specifications, MOQ and customization are confirmed on inquiry
 
 ## Product image gallery
@@ -95,7 +94,7 @@ The product detail template uses `product.gallery`, a list of image paths render
 - left/right keyboard navigation
 - mobile swipe
 
-The current gallery uses up to five clean images per product from the 1688 product detail gallery. File naming:
+The current gallery uses one to five clean images per product from the supplier product gallery. File naming:
 
 ```text
 1688-<offerId>-1.webp     # main
@@ -122,7 +121,7 @@ The following facts come from the supplied company text/FAQ and are used in the 
 - Packing: shock-resistant packing and cartons; wooden crates or pallets for larger programs
 - Quality: inspections at every stage of the supply chain
 
-Product images and model names are taken from the current 1688 factory listing. They are visual references and must be confirmed on the approved sample. The demo imports 34 products from the listing.
+Product images and model names are taken from the current supplier factory listing. They are visual references and must be confirmed on the approved sample. The demo imports 34 products from the listing.
 
 ## Company contacts
 
