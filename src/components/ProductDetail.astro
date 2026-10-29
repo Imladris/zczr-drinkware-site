@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { products, type Product } from '../data/products';
-import { localizeProduct, localizeSpecLabel, localizeSpecValue } from '../i18n/products.es';
-import { localePath, ui, type Lang } from '../i18n/ui';
+import { localizeProduct } from '../i18n/products.es';
+import { localePath, type Lang } from '../i18n/ui';
 
 interface Props {
   product: Product;
@@ -13,15 +13,60 @@ interface Props {
 
 const { product: source, lang = 'en' } = Astro.props as Props;
 const product = localizeProduct(source, lang);
-const t = ui[lang].product;
 const related = products.filter((item) => item.slug !== source.slug).slice(0, 3);
-const materialSpec = source.specs.find((spec) => spec.label === 'Material')?.value ?? '';
+const es = lang === 'es';
+
+const copy = es
+  ? {
+      crumbHome: 'Inicio',
+      crumbRange: 'Menaje',
+      imageNote: 'Imagen de referencia del catálogo del proveedor. El color, los accesorios y el embalaje se confirman con la muestra.',
+      intro: 'Imagen de referencia del catálogo de productos ZCZR en 1688. Contacta con nuestro equipo para confirmar especificaciones, MOQ, acabados y embalaje.',
+      reference: 'Referencia',
+      category: 'Categoría',
+      capacity: 'Capacidad',
+      customization: 'Personalización',
+      source: 'Publicación original',
+      sourceLink: 'Ver en 1688',
+      quote: 'Solicitar cotización',
+      sample: 'Solicitar muestra',
+      aboutTitle: 'Sobre esta imagen',
+      aboutBody: 'La imagen se ha tomado de la publicación del producto en 1688 y se utiliza como referencia visual. No sustituye a la muestra física ni a la especificación acordada.',
+      orderTitle: 'Pedidos y muestras',
+      orderBody: 'El MOQ, el precio, el plazo y la personalización se confirman por proyecto. Comparte el modelo, la cantidad y el mercado de destino para recibir una cotización.',
+      relatedEyebrow: 'Modelos relacionados',
+      relatedTitleA: 'Más',
+      relatedTitleB: 'referencias.',
+      all: 'Todo el menaje',
+    }
+  : {
+      crumbHome: 'Home',
+      crumbRange: 'Drinkware',
+      imageNote: 'Reference image from the supplier catalogue. Color, accessories and packing are confirmed on the approved sample.',
+      intro: 'Reference image from the ZCZR product catalogue on 1688. Contact our team to confirm specifications, MOQ, finishes and packing.',
+      reference: 'Reference',
+      category: 'Category',
+      capacity: 'Capacity',
+      customization: 'Customization',
+      source: 'Original listing',
+      sourceLink: 'View on 1688',
+      quote: 'Request a quote',
+      sample: 'Request a sample',
+      aboutTitle: 'About this image',
+      aboutBody: 'The image is taken from the product listing on 1688 and used as a visual reference. It does not replace the physical sample or the agreed specification.',
+      orderTitle: 'Orders & samples',
+      orderBody: 'MOQ, price, lead time and customization are confirmed per project. Share the model, quantity and destination market to receive a quotation.',
+      relatedEyebrow: 'Related models',
+      relatedTitleA: 'More',
+      relatedTitleB: 'references.',
+      all: 'All drinkware',
+    };
 
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: product.name,
-  description: product.description,
+  description: copy.intro,
   image: [new URL(product.image, Astro.site)],
   brand: { '@type': 'Brand', name: 'ZCZR' },
   category: product.categoryLabel,
@@ -34,9 +79,7 @@ const productSchema = {
 
 <BaseLayout
   title={product.name}
-  description={lang === 'es'
-    ? `${product.description} Menaje isotérmico OEM / ODM de ZCZR en Wuxi, Jiangsu.`
-    : `${product.description} OEM / ODM insulated drinkware from ZCZR in Wuxi, Jiangsu.`}
+  description={copy.intro}
   current="shop"
   image={product.image}
   lang={lang}
@@ -47,8 +90,8 @@ const productSchema = {
 
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href={localePath(lang, '/')}>{lang === 'es' ? 'Inicio' : 'Home'}</a><span>/</span>
-      <a href={localePath(lang, '/collections/')}>{lang === 'es' ? 'Menaje' : 'Drinkware'}</a><span>/</span>
+      <a href={localePath(lang, '/')}>{copy.crumbHome}</a><span>/</span>
+      <a href={localePath(lang, '/collections/')}>{copy.crumbRange}</a><span>/</span>
       <span aria-current="page">{product.shortName}</span>
     </nav>
 
@@ -56,7 +99,6 @@ const productSchema = {
       <div class="product-gallery">
         <div class="product-stage product-stage--photo" style={`--stage:${product.stage}`}>
           <span class="product-stage__tag">{product.line} / {product.capacity}</span>
-          {product.badge && <span class="product-stage__badge">{product.badge}</span>}
           <img
             class="product-stage__photo"
             src={product.image}
@@ -66,121 +108,58 @@ const productSchema = {
             fetchpriority="high"
           />
         </div>
-        <p class="product-image-note">{t.imageNote}</p>
+        <p class="product-image-note">{copy.imageNote}</p>
       </div>
 
       <div class="product-info">
         <span class="product-info__line">{product.line} · {product.categoryLabel}</span>
         <h1>{product.name}</h1>
-        <p class="product-info__desc">{product.longDescription}</p>
-
-        <div class="option-block">
-          <div class="option-block__head">
-            <span>{t.referenceColors}</span>
-            <small>{product.colors.length} {t.colorsShown}</small>
-          </div>
-          <div class="color-options" aria-label={t.referenceColors}>
-            {product.colors.map((color) => (
-              <span class="color-option is-static" style={`--swatch:${color.hex}`} title={color.name}></span>
-            ))}
-          </div>
-          <p class="color-list">{product.colors.map((color) => color.name).join(' · ')}</p>
-        </div>
+        <p class="product-info__desc">{copy.intro}</p>
 
         <div class="company-facts" style="grid-template-columns: 1fr 1fr; margin-top: 26px;">
-          <div class="company-fact"><span>{t.referenceCapacity}</span><strong>{product.capacity}</strong></div>
-          <div class="company-fact"><span>{t.customization}</span><strong>OEM / ODM</strong></div>
-          <div class="company-fact"><span>{t.material}</span><strong>{localizeSpecValue(lang, 'Material', materialSpec)}</strong></div>
-          <div class="company-fact"><span>{t.moq}</span><strong>{t.onRequest}</strong></div>
-        </div>
-
-        <div class="option-block">
-          <div class="option-block__head">
-            <span>{t.customization}</span>
-            <small>{t.developed}</small>
-          </div>
-          <div class="custom-tags">
-            <span>{t.customBody}</span><span>{t.customLogo}</span><span>{t.customFinish}</span><span>{t.customLid}</span><span>{t.customPackaging}</span><span>{t.customManual}</span>
-          </div>
+          <div class="company-fact"><span>{copy.category}</span><strong>{product.categoryLabel}</strong></div>
+          <div class="company-fact"><span>{copy.capacity}</span><strong>{product.capacity}</strong></div>
+          <div class="company-fact"><span>{copy.customization}</span><strong>OEM / ODM</strong></div>
+          <div class="company-fact"><span>{copy.reference}</span><strong>{product.shortName}</strong></div>
         </div>
 
         <div class="product-actions">
-          <a class="btn btn--solid" href={localePath(lang, '/contact/')}>{lang === 'es' ? 'Solicitar cotización' : 'Request a quote'} <span aria-hidden="true">↗</span></a>
-          <a class="wishlist-button" href={localePath(lang, '/contact/')} aria-label={lang === 'es' ? 'Solicitar una muestra' : 'Ask for a sample'}>
+          <a class="btn btn--solid" href={localePath(lang, '/contact/')}>{copy.quote} <span aria-hidden="true">↗</span></a>
+          <a class="wishlist-button" href={localePath(lang, '/contact/')} aria-label={copy.sample}>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.3"/></svg>
           </a>
         </div>
-        <p class="product-note">{t.note}</p>
+        <p class="product-note">{copy.orderBody}</p>
 
         <div class="accordion-list">
           <details class="accordion" open>
-            <summary>{t.modelNotes}</summary>
+            <summary>{copy.aboutTitle}</summary>
             <div class="accordion__body">
-              <p>{product.story}</p>
-              <p>{t.modelNotesBody}</p>
+              <p>{copy.aboutBody}</p>
             </div>
           </details>
           <details class="accordion">
-            <summary>{t.specs}</summary>
+            <summary>{copy.orderTitle}</summary>
             <div class="accordion__body">
-              <table class="spec-table">
-                <tbody>
-                  {source.specs.map((spec) => (
-                    <tr>
-                      <th scope="row">{localizeSpecLabel(lang, spec.label)}</th>
-                      <td>{localizeSpecValue(lang, spec.label, spec.value)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p style="margin-top: 12px; font-size: 10.5px; opacity: .7;">{t.specsNote}</p>
-            </div>
-          </details>
-          <details class="accordion">
-            <summary>{t.sampling}</summary>
-            <div class="accordion__body">
-              <p>{t.samplingBody}</p>
-            </div>
-          </details>
-          <details class="accordion">
-            <summary>{t.packing}</summary>
-            <div class="accordion__body">
-              <p>{t.packingBody}</p>
+              <p>{copy.orderBody}</p>
             </div>
           </details>
         </div>
-      </div>
-    </div>
 
-    <div class="product-story">
-      <div class="product-story__media">
-        <img src="/images/company.webp" alt={lang === 'es' ? 'Recepción e imagen de marca de ZCZR' : 'ZCZR company reception and brand wall'} width="1800" height="1013" loading="lazy" />
+        <p class="product-source">
+          <span>{copy.source}</span>
+          <a href={product.sourceUrl} target="_blank" rel="noopener noreferrer">{copy.sourceLink} <span aria-hidden="true">↗</span></a>
+        </p>
       </div>
-      <div>
-        <span class="eyebrow">{t.platformEyebrow}</span>
-        <h2>{t.platformTitleA} <em>{t.platformTitleB}</em></h2>
-        <p>{t.platformBody.replace('{name}', product.shortName)}</p>
-        <a class="text-link" href={localePath(lang, '/technology/')} style="margin-top: 24px;">{t.howWeWork} <span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-
-    <div class="product-features">
-      {product.features.map((feature, index) => (
-        <div class="product-feature reveal">
-          <span>0{index + 1}</span>
-          <h3>{feature.title}</h3>
-          <p>{feature.copy}</p>
-        </div>
-      ))}
     </div>
 
     <section class="section section--tight">
       <div class="section-head">
         <div class="section-head__title">
-          <span class="eyebrow">{t.relatedEyebrow}</span>
-          <h2>{t.relatedTitleA} <em>{t.relatedTitleB}</em></h2>
+          <span class="eyebrow">{copy.relatedEyebrow}</span>
+          <h2>{copy.relatedTitleA} <em>{copy.relatedTitleB}</em></h2>
         </div>
-        <a class="text-link" href={localePath(lang, '/collections/')}>{t.allModels} <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href={localePath(lang, '/collections/')}>{copy.all} <span aria-hidden="true">↗</span></a>
       </div>
       <div class="product-grid">
         {related.map((item, index) => (
@@ -205,7 +184,7 @@ const productSchema = {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 5%;
+    padding: 4%;
     mix-blend-mode: multiply;
   }
 
@@ -221,25 +200,31 @@ const productSchema = {
     opacity: 0.65;
   }
 
-  .color-option.is-static {
-    cursor: default;
-  }
-
-  .color-option.is-static:hover {
-    transform: none;
-  }
-
-  .color-list {
-    margin-top: 10px;
+  .product-source {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
     font-size: 9px;
-    line-height: 1.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--ink-soft);
-    opacity: 0.65;
+  }
+
+  .product-source a {
+    font-weight: 800;
+    color: var(--ink);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
   }
 
   @media (max-width: 760px) {
     .product-stage__photo {
-      padding: 3%;
+      padding: 2%;
     }
   }
 </style>

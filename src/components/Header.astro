@@ -107,7 +107,7 @@ const links = [
     </label>
     <div class="search-results" data-search-results>
       {searchProducts.map((product) => (
-        <a class="search-result" href={localePath(lang, `/products/${product.slug}/`)} data-search-item data-search-text={`${product.name} ${product.categoryLabel} ${product.colors.map((c) => c.name).join(' ')}`}>
+        <a class="search-result" href={localePath(lang, `/products/${product.slug}/`)} data-search-item data-search-text={`${product.name} ${product.categoryLabel} ${product.line}`}>
           <span class="search-result__thumb">
             <img src={product.image} alt="" width="120" height="120" loading="lazy" />
           </span>

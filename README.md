@@ -2,7 +2,7 @@
 
 A static, company-focused website demo for **Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. (ZCZR)**.
 
-The site is intentionally focused on **one product category: insulated stainless-steel drinkware** — tumblers, bottles, jugs, kettles and coffee cups. The current demo imports **25 representative models** from the supplied 60-slide catalogue; the remaining models can be added with the same data structure. Ceramics, machinery, electronics and other products from the supplied folder are deliberately excluded.
+The site is intentionally focused on **one product category: insulated stainless-steel drinkware** — tumblers, bottles, jugs, kettles and coffee cups. The current demo imports **34 product references** from the ZCZR 1688 factory catalogue. Ceramics, machinery, electronics and other products from the supplied folder are deliberately excluded.
 
 The homepage leads with the company profile, factory access and OEM/ODM capabilities, then presents the drinkware range. The buying flow is quote-based rather than retail checkout.
 
@@ -39,7 +39,7 @@ The generated static site is in `dist/`.
 |---|---|
 | `/` | Company-first homepage: hero, credentials, company profile, drinkware range, capabilities, process, QC, core model, FAQ, quote CTA |
 | `/collections/` | Filterable reference range |
-| `/products/40oz-handled-tumbler/` | Product detail template (25 catalogue models generated) |
+| `/products/1688-1078067502639/` | Product detail template (34 catalogue models generated) |
 | `/technology/` | Construction, working process, quality control, comparison and FAQ |
 | `/about/` | Company profile, facts and operating principles |
 | `/resources/` | Three B2B buyer guides |
@@ -62,7 +62,7 @@ Translation files:
 - Spanish buyer guides: `src/i18n/resources.es.ts`
 - Spanish routes: `src/pages/es/`
 
-`hreflang` alternates and localized canonical URLs are emitted by `src/layouts/BaseLayout.astro`. The build produces 70 static pages (35 English + 35 Spanish).
+`hreflang` alternates and localized canonical URLs are emitted by `src/layouts/BaseLayout.astro`. The build produces 88 static pages (44 English + 44 Spanish).
 
 ## Content editing
 
@@ -75,13 +75,13 @@ Translation files:
 - Contact form: `src/pages/contact.astro`
 - Global design tokens and layout: `src/styles/global.css`
 
-## Product catalogue imported from the PPT
+## Product catalogue imported from 1688
 
-- Source: `产品目录esp.pptx` (60 slides)
-- Current site: 25 representative models across five categories
-- Images: exported from the PPT to `public/products/` as WebP, used as temporary product photography
-- Specifications: reference dimensions, material, weight, packing quantity and carton size from each slide
-- Color names: translated from the Spanish catalogue fields into short English labels
+- Source page: `https://sale.1688.com/factory/l6rr893d.html?memberId=b2b-221778387970743cb7`
+- Current site: 34 products across five categories
+- Images: downloaded from the 1688 listing images to `public/products-1688/` as WebP
+- Each product detail page links back to its original 1688 listing
+- Product images are used as visual references; specifications, MOQ and customization are confirmed on inquiry
 
 ## Company facts used
 
@@ -98,7 +98,7 @@ The following facts come from the supplied company text/FAQ and are used in the 
 - Packing: shock-resistant packing and cartons; wooden crates or pallets for larger programs
 - Quality: inspections at every stage of the supply chain
 
-Product images, model names, dimensions, weights and packing quantities are extracted from the supplied `产品目录esp.pptx`. They are reference values and must be confirmed on the approved sample. The demo imports 25 representative models from the 60-slide catalogue.
+Product images and model names are taken from the current 1688 factory listing. They are visual references and must be confirmed on the approved sample. The demo imports 34 products from the listing.
 
 ## Important security note
 
