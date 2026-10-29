@@ -79,9 +79,9 @@ Translation files:
 
 - Source page: `https://sale.1688.com/factory/l6rr893d.html?memberId=b2b-221778387970743cb7`
 - Current site: 34 products across five categories
-- Images: downloaded from the 1688 listing images to `public/products-1688/` as WebP
+- Images: downloaded from each 1688 product gallery to `public/products-1688/` as WebP (up to 5 clean product views per item)
 - Each product detail page links back to its original 1688 listing
-- Each detail page has a 3-image gallery with previous/next controls, thumbnails, keyboard arrows and mobile swipe
+- Each detail page has a multi-image gallery with previous/next controls, thumbnails, keyboard arrows and mobile swipe
 - Product images are used as visual references; specifications, MOQ and customization are confirmed on inquiry
 
 ## Product image gallery
@@ -95,15 +95,17 @@ The product detail template uses `product.gallery`, a list of image paths render
 - left/right keyboard navigation
 - mobile swipe
 
-The current gallery uses the original 1688 listing image plus two cropped reference views. To use real alternate product photos, replace these files in `public/products-1688/`:
+The current gallery uses up to five clean images per product from the 1688 product detail gallery. File naming:
 
 ```text
-1688-<offerId>.webp       # main
+1688-<offerId>-1.webp     # main
 1688-<offerId>-2.webp     # second view
 1688-<offerId>-3.webp     # third view
+1688-<offerId>-4.webp     # optional
+1688-<offerId>-5.webp     # optional
 ```
 
-The 1688 product-detail pages themselves require a seller login, so public alternate images were not available. The gallery is ready for real multi-angle photography when supplied.
+Images are stored as 1000 px WebP files. To add or replace views, update the `gallery` array in `src/data/products.ts`; the counter, thumbnails, arrows and swipe behaviour adapt automatically.
 
 ## Company facts used
 

@@ -2287,7 +2287,12 @@ ul {
 }
 
 .collection-grid .product-card__stage {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
+}
+
+.collection-grid .product-card__vessel {
+  width: 88%;
+  max-width: none;
 }
 
 .collection-empty {
@@ -3862,7 +3867,7 @@ ul {
   }
 
   .collection-grid .product-card__stage {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
   }
 
   .product-layout {
