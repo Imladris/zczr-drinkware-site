@@ -39,7 +39,7 @@ The generated static site is in `dist/`.
 |---|---|
 | `/` | Company-first homepage: hero, credentials, company profile, drinkware range, capabilities, process, QC, core model, FAQ, quote CTA |
 | `/collections/` | Filterable reference range |
-| `/products/1688-1078067502639/` | Product detail template (34 catalogue models generated) |
+| `/products/1688-1078067502639/` | Product detail template with image gallery (34 catalogue models generated) |
 | `/technology/` | Construction, working process, quality control, comparison and FAQ |
 | `/about/` | Company profile, facts and operating principles |
 | `/resources/` | Three B2B buyer guides |
@@ -81,7 +81,29 @@ Translation files:
 - Current site: 34 products across five categories
 - Images: downloaded from the 1688 listing images to `public/products-1688/` as WebP
 - Each product detail page links back to its original 1688 listing
+- Each detail page has a 3-image gallery with previous/next controls, thumbnails, keyboard arrows and mobile swipe
 - Product images are used as visual references; specifications, MOQ and customization are confirmed on inquiry
+
+## Product image gallery
+
+The product detail template uses `product.gallery`, a list of image paths rendered as:
+
+- main image
+- previous/next arrows
+- thumbnail strip
+- `1 / 3` counter
+- left/right keyboard navigation
+- mobile swipe
+
+The current gallery uses the original 1688 listing image plus two cropped reference views. To use real alternate product photos, replace these files in `public/products-1688/`:
+
+```text
+1688-<offerId>.webp       # main
+1688-<offerId>-2.webp     # second view
+1688-<offerId>-3.webp     # third view
+```
+
+The 1688 product-detail pages themselves require a seller login, so public alternate images were not available. The gallery is ready for real multi-angle photography when supplied.
 
 ## Company facts used
 

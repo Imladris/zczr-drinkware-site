@@ -301,3 +301,55 @@ spotlightSwatches.forEach((swatch) => {
     if (spotlightStage && swatch.dataset.stage) spotlightStage.style.background = swatch.dataset.stage;
   });
 });
+
+/* ---------------------------------------------------------
+   Product image gallery
+   --------------------------------------------------------- */
+const gallery = qs('[data-gallery]');
+if (gallery) {
+  const mainImage = qs('[data-gallery-image]', gallery);
+  const thumbs = qsa('[data-gallery-thumb]', gallery);
+  const counter = qs('[data-gallery-current]', gallery);
+  const prev = qs('[data-gallery-prev]', gallery);
+  const next = qs('[data-gallery-next]', gallery);
+  let index = 0;
+
+  const show = (nextIndex) => {
+    if (!mainImage || !thumbs.length) return;
+    index = (nextIndex + thumbs.length) % thumbs.length;
+    const thumb = thumbs[index];
+    mainImage.src = thumb.dataset.src || mainImage.src;
+    mainImage.alt = thumb.dataset.alt || mainImage.alt;
+    if (counter) counter.textContent = String(index + 1);
+    thumbs.forEach((item, itemIndex) => {
+      const active = itemIndex === index;
+      item.classList.toggle('is-active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    if (mainImage.animate) {
+      mainImage.animate([{ opacity: 0.25 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' });
+    }
+  };
+
+  prev?.addEventListener('click', () => show(index - 1));
+  next?.addEventListener('click', () => show(index + 1));
+  thumbs.forEach((thumb, thumbIndex) => thumb.addEventListener('click', () => show(thumbIndex)));
+
+  document.addEventListener('keydown', (event) => {
+    const tag = document.activeElement?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (event.key === 'ArrowLeft') show(index - 1);
+    if (event.key === 'ArrowRight') show(index + 1);
+  });
+
+  let touchStartX = 0;
+  gallery.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+  gallery.addEventListener('touchend', (event) => {
+    const delta = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) < 40) return;
+    if (delta > 0) show(index - 1);
+    else show(index + 1);
+  }, { passive: true });
+}
