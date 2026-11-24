@@ -10,6 +10,22 @@
 }
 
 @font-face {
+  font-family: 'LXGW WenKai';
+  src: url('/fonts/lxgw-wenkai-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LXGW WenKai';
+  src: url('/fonts/lxgw-wenkai-medium.woff2') format('woff2');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Manrope';
   src: url('/fonts/manrope-latin.woff2') format('woff2');
   font-weight: 300 800;
@@ -5272,13 +5288,47 @@ ul {
 
 /* Chinese typography fallback: the Latin display fonts do not contain CJK glyphs. */
 html[lang="zh"] body {
-  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+  font-family: "LXGW WenKai", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
 }
 
 html[lang="zh"] h1,
 html[lang="zh"] h2,
 html[lang="zh"] h3,
 html[lang="zh"] .display {
-  font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  font-family: "LXGW WenKai", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
   letter-spacing: -0.015em;
+  font-weight: 400;
+}
+
+html[lang="zh"] em {
+  font-style: normal;
+}
+
+/* Chinese display sizing: LXGW WenKai is wider than the Latin serif. */
+html[lang="zh"] .hero-b2b h1 {
+  max-width: 760px;
+  font-size: clamp(2.8rem, 5.6vw, 5.8rem);
+  line-height: 1.16;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+html[lang="zh"] .page-hero h1 {
+  font-size: clamp(2.6rem, 5vw, 5rem);
+  line-height: 1.18;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+html[lang="zh"] h2,
+html[lang="zh"] h3 {
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+@media (max-width: 760px) {
+  html[lang="zh"] .hero-b2b h1 {
+    font-size: clamp(2.4rem, 10.5vw, 3.6rem);
+    line-height: 1.2;
+  }
 }

@@ -73,6 +73,16 @@ Translation files:
 
 `hreflang` alternates and localized canonical URLs are emitted by `src/layouts/BaseLayout.astro`. The build produces 176 static pages (44 per language).
 
+## Chinese font
+
+The Chinese pages use **LXGW WenKai** (霞鹜文楷), licensed under the SIL Open Font License:
+
+- Upstream: https://github.com/lxgw/LxgwWenKai
+- Local files: `public/fonts/lxgw-wenkai-regular.woff2` and `public/fonts/lxgw-wenkai-medium.woff2`
+- License: `public/fonts/LXGW-WenKai-OFL.txt`
+
+The WOFF2 files are subset to the Chinese characters currently used by the Chinese pages, so the font payload is about 370 KB instead of 25 MB per weight. If Chinese copy changes significantly, regenerate the subset with `pyftsubset` from the upstream TTF files.
+
 ## Content editing
 
 - Products, capacities and image galleries: `src/data/products.ts`
