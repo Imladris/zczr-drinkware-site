@@ -46,7 +46,19 @@ $SUDO chown -R "$WEB_USER:$WEB_USER" "$WEB_ROOT"
 
 echo "→ Restarting contact API"
 $SUDO systemctl restart "$SERVICE_NAME"
-curl -fsS --max-time 5 http://127.0.0.1:8787/api/health >/dev/null
+ready=0
+for _ in $(seq 1 20); do
+  if curl -fsS --max-time 2 http://127.0.0.1:8787/api/health >/dev/null; then
+    ready=1
+    break
+  fi
+  sleep 0.5
+done
+if [ "$ready" -ne 1 ]; then
+  echo "Contact API did not become healthy" >&2
+  $SUDO journalctl -u "$SERVICE_NAME" -n 30 --no-pager >&2 || true
+  exit 1
+fi
 
 echo "→ Reloading Nginx"
 $SUDO nginx -t
