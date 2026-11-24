@@ -23,7 +23,7 @@ export const products: Product[] = [
     line: 'Coffee series',
     category: 'coffee',
     categoryLabel: 'Coffee cup',
-    capacity: '316 steel',
+    capacity: '316 liner',
     image: '/products-1688/1688-795858462577-1.webp',
     gallery: [
       '/products-1688/1688-795858462577-1.webp',
@@ -279,7 +279,7 @@ export const products: Product[] = [
     line: 'Coffee series',
     category: 'coffee',
     categoryLabel: 'Coffee cup',
-    capacity: '316 steel',
+    capacity: '316 liner',
     image: '/products-1688/1688-1080294990208-1.webp',
     gallery: [
       '/products-1688/1688-1080294990208-1.webp',

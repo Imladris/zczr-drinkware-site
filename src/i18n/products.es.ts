@@ -116,9 +116,9 @@ const namesZh: Record<string, Copy> = {
 
 const capacities: Record<Lang, Record<string, string>> = {
   en: {},
-  es: { 'Large capacity': 'Gran capacidad', Small: 'Pequeña', Mini: 'Mini', '316 steel': 'Acero 316' },
-  fr: { 'Large capacity': 'Grande capacité', Small: 'Petite', Mini: 'Mini', '316 steel': 'Acier 316' },
-  zh: { 'Large capacity': '大容量', Small: '小号', Mini: '迷你', '316 steel': '316 不锈钢' },
+  es: { 'Large capacity': 'Gran capacidad', Small: 'Pequeña', Mini: 'Mini', '316 liner': 'Acero 316 interior' },
+  fr: { 'Large capacity': 'Grande capacité', Small: 'Petite', Mini: 'Mini', '316 liner': 'Acier 316 intérieur' },
+  zh: { 'Large capacity': '大容量', Small: '小号', Mini: '迷你', '316 liner': '316 内胆' },
 };
 
 const altPrefix: Record<Lang, string> = {

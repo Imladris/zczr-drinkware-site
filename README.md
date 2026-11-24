@@ -134,6 +134,7 @@ The following facts come from the supplied company text/FAQ and are used in the 
 - Head office: Yixing, Wuxi, Jiangsu, China
 - Factory: Yongkang, Zhejiang
 - Business model: manufacturing and trading company integrating production, sales and export
+- Material: 316 stainless steel inner liner / 304 stainless steel outer shell
 - Customization: OEM accepted
 - Samples: available; sample cost and freight confirmed
 - Payments: T/T, Alibaba Trade Assurance
