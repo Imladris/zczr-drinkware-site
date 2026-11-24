@@ -5,11 +5,11 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
-WorkingDirectory=/var/www/zczr
+User=nginx
+Group=nginx
+WorkingDirectory=/opt/zczr-drinkware-site
 EnvironmentFile=/etc/zczr/contact-api.env
-ExecStart=/usr/bin/env node /var/www/zczr/server/contact-api.mjs
+ExecStart=/usr/local/bin/node /opt/zczr-drinkware-site/server/contact-api.mjs
 Restart=always
 RestartSec=5
 NoNewPrivileges=true

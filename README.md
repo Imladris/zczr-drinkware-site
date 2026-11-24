@@ -184,7 +184,7 @@ Then install Nginx and issue TLS:
 
 ```bash
 sudo apt update
-sudo apt install -y nginx certbot python3-certbot-nginx rsync
+sudo apt install -y nginx certbot python3-certbot-nginx
 sudo cp deploy/nginx.conf /etc/nginx/sites-available/zczr
 sudo ln -s /etc/nginx/sites-available/zczr /etc/nginx/sites-enabled/zczr
 sudo nginx -t
@@ -192,7 +192,7 @@ sudo systemctl reload nginx
 sudo certbot --nginx -d zczr.com.cn -d www.zczr.com.cn
 ```
 
-The repository is expected at `/var/www/zczr`; Nginx serves `/var/www/zczr/current`. If your existing Nginx site already works, do not replace the whole server block blindly — keep your current `root` and TLS settings, and add only the `/api/` proxy block from `deploy/nginx.conf` (plus the `limit_req_zone` line).
+The repository is expected at `/opt/zczr-drinkware-site`; Nginx serves `/var/www/zczr/current`. If your existing Nginx site already works, do not replace the whole server block blindly — keep your current `root` and TLS settings, and add only the `/api/` proxy block from `deploy/nginx.conf` (plus the `limit_req_zone` line).
 
 ### 2. Install Node 22 and build on the VPS
 
@@ -201,14 +201,15 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 node -v   # should print v22.x
 
-sudo mkdir -p /var/www/zczr
-sudo chown -R "$USER":www-data /var/www/zczr
-git clone https://github.com/Imladris/zczr-drinkware-site.git /var/www/zczr
-cd /var/www/zczr
+sudo mkdir -p /opt /var/www/zczr/current
+git clone https://github.com/Imladris/zczr-drinkware-site.git /opt/zczr-drinkware-site
+cd /opt/zczr-drinkware-site
 npm ci
 npm run build
-sudo mkdir -p /var/www/zczr/current
-sudo rsync -a --delete --chown=www-data:www-data dist/ /var/www/zczr/current/
+sudo install -d -o nginx -g nginx /var/www/zczr/current
+sudo find /var/www/zczr/current -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+sudo cp -a dist/. /var/www/zczr/current/
+sudo chown -R nginx:nginx /var/www/zczr/current
 ```
 
 If the repository is elsewhere, adjust the paths in `deploy/nginx.conf`, `deploy/zczr-contact-api.service`, and `deploy/server-update.sh`.
@@ -229,7 +230,7 @@ Do not put the API key in front-end code or Git.
 sudo mkdir -p /etc/zczr
 sudo cp deploy/contact-api.env.example /etc/zczr/contact-api.env
 sudo nano /etc/zczr/contact-api.env
-sudo chown root:www-data /etc/zczr/contact-api.env
+sudo chown root:nginx /etc/zczr/contact-api.env
 sudo chmod 640 /etc/zczr/contact-api.env
 
 sudo cp deploy/zczr-contact-api.service /etc/systemd/system/
@@ -258,23 +259,23 @@ RATE_LIMIT_WINDOW_MS=3600000
 
 `CONTACT_TO` order is intentional: the first address is the primary contact.
 
-The service uses `www-data` in the supplied systemd unit. If `node` was installed with nvm, run `which node` and use that absolute path in `ExecStart`, because systemd does not load the shell PATH.
+The supplied systemd unit uses the `nginx` user on this server. If your distribution uses `www-data`, change `User`/`Group` in the unit. If `node` was installed with nvm, run `which node` and use that absolute path in `ExecStart`, because systemd does not load the shell PATH.
 
 ### 5. Git-based updates on the server
 
 After the first installation, update production with:
 
 ```bash
-cd /var/www/zczr
+cd /opt/zczr-drinkware-site
 ./deploy/server-update.sh
 ```
 
-The script pulls the repository, runs `npm ci`, builds `dist/`, syncs it to `/var/www/zczr/current`, restarts the contact API, and reloads Nginx.
+The script pulls the repository, runs `npm ci`, builds `dist/`, replaces `/var/www/zczr/current`, restarts the contact API, and reloads Nginx. It does not require rsync.
 
 If the paths differ:
 
 ```bash
-APP_DIR=/var/www/zczr WEB_ROOT=/var/www/zczr/current ./deploy/server-update.sh
+APP_DIR=/opt/zczr-drinkware-site WEB_ROOT=/var/www/zczr/current ./deploy/server-update.sh
 ```
 
 ### 6. Verify
@@ -299,7 +300,7 @@ Then submit the form once from the live site and confirm:
 - SSH key login only, root login disabled
 - firewall allows only 22, 80, 443
 - `certbot renew --dry-run` succeeds
-- `/etc/zczr/contact-api.env` is `640 root:www-data`
+- `/etc/zczr/contact-api.env` is `640 root:nginx`
 - regular backups of `/var/www/zczr/current` and `/etc/zczr`
 - monitor `zczr-contact-api` and Nginx
 

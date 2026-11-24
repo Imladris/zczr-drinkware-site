@@ -1,21 +1,31 @@
 #!/usr/bin/env bash
-# Run this on the VPS after the first installation.
+# Update the ZCZR site on the VPS from the Git checkout.
 #
-# It pulls the Git repository, installs dependencies, builds the Astro site,
-# copies dist/ to the Nginx web root, restarts the contact API, and reloads Nginx.
-#
-# Defaults assume:
-#   repository: /var/www/zczr
+# Defaults match the current production server:
+#   repository: /opt/zczr-drinkware-site
 #   web root:   /var/www/zczr/current
+#   web user:   nginx
 #
-# Override with:
-#   APP_DIR=/var/www/zczr WEB_ROOT=/var/www/zczr/current ./deploy/server-update.sh
+# Override if needed:
+#   APP_DIR=/opt/zczr-drinkware-site WEB_ROOT=/var/www/zczr/current ./deploy/server-update.sh
 
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-/var/www/zczr}"
+APP_DIR="${APP_DIR:-/opt/zczr-drinkware-site}"
 WEB_ROOT="${WEB_ROOT:-/var/www/zczr/current}"
+WEB_USER="${WEB_USER:-nginx}"
 SERVICE_NAME="${SERVICE_NAME:-zczr-contact-api}"
+SUDO=""
+if [ "$(id -u)" -ne 0 ]; then
+  SUDO="sudo"
+fi
+
+case "$WEB_ROOT" in
+  /|/var|/var/www|/var/www/zczr)
+    echo "Refusing to publish into ${WEB_ROOT}" >&2
+    exit 1
+    ;;
+esac
 
 cd "$APP_DIR"
 
@@ -29,15 +39,17 @@ echo "→ Building static site"
 npm run build
 
 echo "→ Publishing dist/ to ${WEB_ROOT}"
-sudo install -d -o www-data -g www-data "$WEB_ROOT"
-sudo rsync -a --delete --chown=www-data:www-data "$APP_DIR/dist/" "$WEB_ROOT/"
+$SUDO install -d -o "$WEB_USER" -g "$WEB_USER" "$WEB_ROOT"
+$SUDO find "$WEB_ROOT" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+$SUDO cp -a "$APP_DIR/dist/." "$WEB_ROOT/"
+$SUDO chown -R "$WEB_USER:$WEB_USER" "$WEB_ROOT"
 
 echo "→ Restarting contact API"
-sudo systemctl restart "$SERVICE_NAME"
+$SUDO systemctl restart "$SERVICE_NAME"
 curl -fsS --max-time 5 http://127.0.0.1:8787/api/health >/dev/null
 
 echo "→ Reloading Nginx"
-sudo nginx -t
-sudo systemctl reload nginx
+$SUDO nginx -t
+$SUDO systemctl reload nginx
 
-echo "✓ Deployed. Test https://zczr.com.cn/ and /api/health"
+echo "✓ Deployed. Test https://zczr.com.cn/ and https://zczr.com.cn/api/health"
