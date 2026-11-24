@@ -51,8 +51,14 @@ import { companyContacts } from '../data/contacts';
         </div>
       </div>
 
-      <form class="contact-form" data-contact-form>
+      <form class="contact-form" data-contact-form action="/api/contact" method="post" data-fallback-email={companyContacts[0].email}>
         <span class="eyebrow">Send a brief</span>
+        <input type="hidden" name="locale" value="en" />
+        <input type="hidden" name="page" value="/contact/" />
+        <div class="hp-field" aria-hidden="true">
+          <label for="website-en">Website</label>
+          <input id="website-en" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
         <div class="form-row" style="margin-top: 22px;">
           <div class="field">
             <label for="name">Name</label>
@@ -103,7 +109,7 @@ import { companyContacts } from '../data/contacts';
         </div>
         <label class="form-check">
           <input type="checkbox" name="consent" required />
-          <span>I agree to the privacy policy and to being contacted about this request.</span>
+          <span>I agree to be contacted about this request and to the processing of my details for this inquiry.</span>
         </label>
         <button class="btn btn--solid" type="submit">Send inquiry <span aria-hidden="true">↗</span></button>
         <p class="form-note" data-contact-note aria-live="polite"></p>

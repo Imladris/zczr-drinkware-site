@@ -1,0 +1,21 @@
+[Unit]
+Description=ZCZR contact form API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/zczr
+EnvironmentFile=/etc/zczr/contact-api.env
+ExecStart=/usr/bin/env node /var/www/zczr/server/contact-api.mjs
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

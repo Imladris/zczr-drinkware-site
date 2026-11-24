@@ -139,7 +139,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 /* ---------------------------------------------------------
-   Newsletter (demo)
+   Newsletter
    --------------------------------------------------------- */
 qsa('[data-newsletter-form]').forEach((form) => {
   form.addEventListener('submit', (event) => {
@@ -157,19 +157,82 @@ qsa('[data-newsletter-form]').forEach((form) => {
 });
 
 /* ---------------------------------------------------------
-   Contact (demo)
+   Contact form
    --------------------------------------------------------- */
 const contactForm = qs('[data-contact-form]');
 if (contactForm) {
-  contactForm.addEventListener('submit', (event) => {
+  const contactNote = qs('[data-contact-note]', contactForm);
+  const successMessage = tr(
+    'Thanks — your inquiry has been sent. We will reply within 2 business days.',
+    'Gracias: tu consulta se ha enviado. Responderemos en un plazo de 2 días laborables.'
+  );
+  const params = new URLSearchParams(window.location.search);
+
+  if (contactNote && params.get('sent') === '1') {
+    contactNote.textContent = successMessage;
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+  if (contactNote && params.get('error') === '1') {
+    contactNote.textContent = tr(
+      'Sorry, the form could not be sent. Please try again or email us directly.',
+      'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.'
+    );
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const note = qs('[data-contact-note]', contactForm);
+    const submit = qs('button[type="submit"]', contactForm);
+    const fallbackEmail = contactForm.dataset.fallbackEmail || '';
+
     if (!contactForm.checkValidity()) {
       contactForm.reportValidity();
       return;
     }
-    if (note) note.textContent = tr('Thanks — this demo form is not connected to an inbox yet.', 'Gracias: este formulario de demo aún no está conectado a un buzón.');
-    contactForm.reset();
+
+    const originalLabel = submit?.innerHTML;
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = tr('Sending…', 'Enviando…');
+    }
+    contactForm.setAttribute('aria-busy', 'true');
+    if (contactNote) contactNote.textContent = '';
+
+    const payload = Object.fromEntries(new FormData(contactForm).entries());
+    payload.locale = isEs ? 'es' : 'en';
+    payload.page = window.location.pathname;
+
+    try {
+      const response = await fetch(contactForm.getAttribute('action') || '/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) throw new Error(result.error || `HTTP ${response.status}`);
+
+      if (contactNote) contactNote.textContent = successMessage;
+      contactForm.reset();
+    } catch (error) {
+      if (contactNote) {
+        contactNote.textContent = fallbackEmail
+          ? tr(
+              `Sorry, the form could not be sent. Please email us at ${fallbackEmail}.`,
+              `Lo sentimos, no se pudo enviar el formulario. Escríbenos a ${fallbackEmail}.`
+            )
+          : tr(
+              'Sorry, the form could not be sent. Please try again or email us directly.',
+              'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.'
+            );
+      }
+      console.error('[contact-form]', error);
+    } finally {
+      if (submit) {
+        submit.disabled = false;
+        if (originalLabel !== undefined) submit.innerHTML = originalLabel;
+      }
+      contactForm.removeAttribute('aria-busy');
+    }
   });
 }
 

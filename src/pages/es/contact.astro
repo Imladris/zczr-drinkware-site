@@ -55,8 +55,14 @@ const localizedProducts = products.map((product) => localizeProduct(product, 'es
         </div>
       </div>
 
-      <form class="contact-form" data-contact-form>
+      <form class="contact-form" data-contact-form action="/api/contact" method="post" data-fallback-email={companyContacts[0].email}>
         <span class="eyebrow">Enviar un brief</span>
+        <input type="hidden" name="locale" value="es" />
+        <input type="hidden" name="page" value="/es/contact/" />
+        <div class="hp-field" aria-hidden="true">
+          <label for="website-es">Sitio web</label>
+          <input id="website-es" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
         <div class="form-row" style="margin-top: 22px;">
           <div class="field">
             <label for="name">Nombre</label>
@@ -107,7 +113,7 @@ const localizedProducts = products.map((product) => localizeProduct(product, 'es
         </div>
         <label class="form-check">
           <input type="checkbox" name="consent" required />
-          <span>Acepto la política de privacidad y ser contactado sobre esta consulta.</span>
+          <span>Acepto ser contactado sobre esta consulta y el tratamiento de mis datos para responderla.</span>
         </label>
         <button class="btn btn--solid" type="submit">Enviar consulta <span aria-hidden="true">↗</span></button>
         <p class="form-note" data-contact-note aria-live="polite"></p>

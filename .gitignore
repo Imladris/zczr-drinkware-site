@@ -15,3 +15,7 @@ dist/
 # Cloudflare local state
 .wrangler/
 .dev.vars
+
+# Local contact API secrets
+deploy/contact-api.env
+server/.env

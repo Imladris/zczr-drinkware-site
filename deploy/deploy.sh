@@ -39,4 +39,4 @@ rsync -az --delete --human-readable \
 echo "→ Reloading Nginx"
 ssh "${VPS_USER}@${VPS_HOST}" "sudo nginx -t && sudo systemctl reload nginx"
 
-echo "✓ Deployed. Open https://zczr.example.com/"
+echo "✓ Deployed. Open https://zczr.com.cn/"

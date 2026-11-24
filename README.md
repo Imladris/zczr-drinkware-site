@@ -1,18 +1,19 @@
-# ZCZR — insulated drinkware B2B demo
+# ZCZR — insulated drinkware B2B website
 
-A static, company-focused website demo for **Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. (ZCZR)**.
+A company-focused website for **Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. (ZCZR)**.
 
-The site is intentionally focused on **one product category: insulated stainless-steel drinkware** — tumblers, bottles, jugs, kettles and coffee cups. The current demo imports **34 product references** from the ZCZR supplier factory catalogue. Ceramics, machinery, electronics and other products from the supplied folder are deliberately excluded.
+The site is intentionally focused on **one product category: insulated stainless-steel drinkware** — tumblers, bottles, jugs, kettles and coffee cups. The website includes **34 product references** from the ZCZR supplier factory catalogue. Ceramics, machinery, electronics and other products from the supplied folder are deliberately excluded.
 
 The homepage leads with the company profile, factory access and OEM/ODM capabilities, then presents the drinkware range. The buying flow is quote-based rather than retail checkout.
 
 ## Stack
 
-- **Astro 7** — static HTML output, no runtime server
+- **Astro 7** — static HTML output
+- **Node 22 contact API** — sends form submissions through Resend
+- **Nginx** — serves the static build and proxies `/api/`
 - **Custom CSS** with design tokens and local WOFF2 fonts
-- **Inline SVG product renders** — replace with real product photography when available
-- **Vanilla JS** for filters, product image gallery, search, menu and demo forms
-- **Nginx** config and an rsync deploy script in `deploy/`
+- **Vanilla JS** for filters, product image gallery, search, menu and contact form submission
+- **Nginx + systemd** deployment files in `deploy/`
 - No database. No CMS. No video storage on the server.
 
 ## Run locally
@@ -90,7 +91,7 @@ The product detail template uses `product.gallery`, a list of image paths render
 - main image
 - previous/next arrows
 - thumbnail strip
-- `1 / 3` counter
+- `1 / N` counter
 - left/right keyboard navigation
 - mobile swipe
 
@@ -121,7 +122,7 @@ The following facts come from the supplied company text/FAQ and are used in the 
 - Packing: shock-resistant packing and cartons; wooden crates or pallets for larger programs
 - Quality: inspections at every stage of the supply chain
 
-Product images and model names are taken from the current supplier factory listing. They are visual references and must be confirmed on the approved sample. The demo imports 34 products from the listing.
+Product images and model names are taken from the current supplier factory listing. They are visual references and must be confirmed on the approved sample. The website includes 34 products from the listing.
 
 ## Company contacts
 
@@ -136,87 +137,164 @@ The supplied `详情页素材/（必填）公司资料.docx` contains an Alibaba
 
 A `.gitignore` entry excludes the entire `公司资料/` folder from Git. Check any backup or file-sharing tool as well.
 
-## Free hosting: Cloudflare Pages
+## Production deployment (VPS + Nginx + Resend)
 
-This repository is configured for **Cloudflare Pages** at the site root. No `base` path changes are needed.
-
-### Option A — Git integration (recommended)
-
-1. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git.
-2. Select `Imladris/zczr-drinkware-site`.
-3. Build settings:
-   - Framework preset: **Astro**
-   - Build command: **`npm run build`**
-   - Build output directory: **`dist`**
-   - Node version: **22** (also pinned in `.nvmrc`)
-4. Deploy. The project name in `wrangler.toml` is `zczr-drinkware-site`.
-
-The expected URL is:
+Production domain: **https://zczr.com.cn**  
+The site is built locally or on the VPS, served by Nginx, and the contact form is handled by a small Node service that sends email through Resend.
 
 ```text
-https://zczr-drinkware-site.pages.dev
+Browser
+  → Nginx (zczr.com.cn, HTTPS)
+  → Astro static files in /var/www/zczr/current
+  → POST /api/contact
+  → zczr-contact-api.service (127.0.0.1:8787)
+  → Resend
+  → primary + secondary contacts
 ```
 
-### Option B — Direct upload from this machine
+### 1. DNS and HTTPS
 
-```bash
-npx wrangler login
-npm run deploy:cloudflare
+Point these records at the VPS:
+
+```text
+zczr.com.cn      A      <VPS IPv4>
+www.zczr.com.cn  A      <VPS IPv4>
 ```
 
-`public/_headers` is copied into `dist/_headers` at build time and controls caching and baseline security headers on Cloudflare Pages.
-
-### Custom domain
-
-In Cloudflare Pages → project → Custom domains, add your domain and follow the DNS instructions. HTTPS is issued automatically.
-
----
-
-## Deployment (Plan B: VPS + Nginx)
-
-### 1. Server baseline
-
-A 2 vCPU / 2 GB RAM / 40 GB NVMe VPS with Debian 12 or Ubuntu 24.04 is plenty. A 1 vCPU / 1 GB server can also serve the static site.
+Then install Nginx and issue TLS:
 
 ```bash
 sudo apt update
 sudo apt install -y nginx certbot python3-certbot-nginx rsync
-sudo mkdir -p /var/www/zczr/current
-sudo chown -R "$USER":www-data /var/www/zczr
-```
-
-### 2. Nginx
-
-Copy `deploy/nginx.conf` to `/etc/nginx/sites-available/zczr`, replace `zczr.example.com`, enable it, and test:
-
-```bash
+sudo cp deploy/nginx.conf /etc/nginx/sites-available/zczr
 sudo ln -s /etc/nginx/sites-available/zczr /etc/nginx/sites-enabled/zczr
 sudo nginx -t
 sudo systemctl reload nginx
+sudo certbot --nginx -d zczr.com.cn -d www.zczr.com.cn
 ```
 
-Point your DNS `A`/`AAAA` records at the VPS, then issue TLS:
+The repository is expected at `/var/www/zczr`; Nginx serves `/var/www/zczr/current`. If your existing Nginx site already works, do not replace the whole server block blindly — keep your current `root` and TLS settings, and add only the `/api/` proxy block from `deploy/nginx.conf` (plus the `limit_req_zone` line).
+
+### 2. Install Node 22 and build on the VPS
 
 ```bash
-sudo certbot --nginx -d zczr.example.com -d www.zczr.example.com
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
+node -v   # should print v22.x
+
+sudo mkdir -p /var/www/zczr
+sudo chown -R "$USER":www-data /var/www/zczr
+git clone https://github.com/Imladris/zczr-drinkware-site.git /var/www/zczr
+cd /var/www/zczr
+npm ci
+npm run build
+sudo mkdir -p /var/www/zczr/current
+sudo rsync -a --delete --chown=www-data:www-data dist/ /var/www/zczr/current/
 ```
 
-### 3. Deploy
+If the repository is elsewhere, adjust the paths in `deploy/nginx.conf`, `deploy/zczr-contact-api.service`, and `deploy/server-update.sh`.
+
+### 3. Create the Resend API key and verify the domain
+
+1. Create a Resend account.
+2. Add `zczr.com.cn` as a sending domain.
+3. Add the SPF, DKIM and DMARC DNS records Resend gives you.
+4. Wait for domain verification.
+5. Create an API key with sending permission.
+
+Do not put the API key in front-end code or Git.
+
+### 4. Install the contact API
 
 ```bash
-VPS_HOST=203.0.113.42 VPS_USER=deploy ./deploy/deploy.sh
+sudo mkdir -p /etc/zczr
+sudo cp deploy/contact-api.env.example /etc/zczr/contact-api.env
+sudo nano /etc/zczr/contact-api.env
+sudo chown root:www-data /etc/zczr/contact-api.env
+sudo chmod 640 /etc/zczr/contact-api.env
+
+sudo cp deploy/zczr-contact-api.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now zczr-contact-api
+curl http://127.0.0.1:8787/api/health
 ```
 
-The script runs `npm ci`, `npm run build`, rsyncs `dist/` to `/var/www/zczr/current`, and reloads Nginx. The `--delete` flag is intentional: point `VPS_PATH` at a dedicated site directory, never at `/var/www` itself.
+Expected health response:
+
+```json
+{"ok":true,"configured":true,"recipients":2}
+```
+
+Environment variables:
+
+```dotenv
+RESEND_API_KEY=re_...
+RESEND_FROM="ZCZR Website <website@zczr.com.cn>"
+CONTACT_TO=chaozhengzong7@gmail.com,zongsuyun@gmail.com
+HOST=127.0.0.1
+PORT=8787
+RATE_LIMIT_MAX=5
+RATE_LIMIT_WINDOW_MS=3600000
+```
+
+`CONTACT_TO` order is intentional: the first address is the primary contact.
+
+The service uses `www-data` in the supplied systemd unit. If `node` was installed with nvm, run `which node` and use that absolute path in `ExecStart`, because systemd does not load the shell PATH.
+
+### 5. Git-based updates on the server
+
+After the first installation, update production with:
+
+```bash
+cd /var/www/zczr
+./deploy/server-update.sh
+```
+
+The script pulls the repository, runs `npm ci`, builds `dist/`, syncs it to `/var/www/zczr/current`, restarts the contact API, and reloads Nginx.
+
+If the paths differ:
+
+```bash
+APP_DIR=/var/www/zczr WEB_ROOT=/var/www/zczr/current ./deploy/server-update.sh
+```
+
+### 6. Verify
+
+```bash
+curl -s https://zczr.com.cn/api/health
+curl -sI https://zczr.com.cn/contact/
+sudo journalctl -u zczr-contact-api -n 50 --no-pager
+sudo tail -n 50 /var/log/nginx/error.log
+```
+
+Then submit the form once from the live site and confirm:
+
+- both contact addresses receive the inquiry
+- the customer address is used as Reply-To
+- the primary contact is listed first
+- English and Spanish submissions both work
+- the page shows a localized success message
+
+### 7. Server hardening
+
+- SSH key login only, root login disabled
+- firewall allows only 22, 80, 443
+- `certbot renew --dry-run` succeeds
+- `/etc/zczr/contact-api.env` is `640 root:www-data`
+- regular backups of `/var/www/zczr/current` and `/etc/zczr`
+- monitor `zczr-contact-api` and Nginx
+
+## Legacy: Cloudflare Pages
+
+The earlier Cloudflare Pages configuration remains in the repository (`wrangler.toml`, `npm run deploy:cloudflare`), but **zczr.com.cn production is the VPS + Nginx setup above**. Do not run both as production targets.
 
 ## Before a real launch
 
 - Confirm inquiry routing with the primary contact in `src/data/contacts.ts`.
-- Replace the demo SVG product renders with real product photography.
 - Confirm every specification and performance claim against an approved sample.
 - Add real privacy, terms, accessibility, warranty and shipping pages as required.
 - Add a factory tour or product film through the existing YouTube facade pattern if you want video on the site. The current build does not use unrelated stock footage as a stand-in for a factory video.
 - Replace Unsplash photography with owned/licensed assets if required.
-- Connect the contact/newsletter forms to a real endpoint (Formspree, Cloudflare Worker + Resend, or your CRM). The current forms only show a success message.
-- Update `astro.config.mjs` and `public/robots.txt` with the real domain.
+- Add a real privacy policy page and newsletter unsubscribe flow.
+- Configure Resend domain DNS records and verify a live test inquiry.
 - Add analytics and a consent banner if required for your market.

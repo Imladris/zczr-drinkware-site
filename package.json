@@ -9,7 +9,8 @@
     "check": "astro check",
     "preview": "astro preview --host 0.0.0.0",
     "serve": "python3 -m http.server 8080 --directory dist",
-    "deploy:cloudflare": "npm run build && wrangler pages deploy dist --project-name zczr-drinkware-site"
+    "deploy:cloudflare": "npm run build && wrangler pages deploy dist --project-name zczr-drinkware-site",
+    "api": "node server/contact-api.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
