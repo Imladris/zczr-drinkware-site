@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import { companyContacts, primaryContact } from '../data/contacts';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import { localePath, stripLocale, type Lang } from '../i18n/ui';
+import { languages, localePath, stripLocale, type Lang } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -20,16 +20,31 @@ const {
   current = '',
   image = '/images/company.webp',
   noIndex = false,
-  lang = 'en',
-} = Astro.props;
+  lang: langProp = 'en',
+} = Astro.props as Props;
+const lang = langProp as Lang;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const enPath = stripLocale(Astro.url.pathname);
-const esPath = localePath('es', enPath);
-const enUrl = new URL(enPath, Astro.site);
-const esUrl = new URL(esPath, Astro.site);
+const cleanPath = stripLocale(Astro.url.pathname);
+const alternateUrls = languages.map((code) => ({
+  code,
+  url: new URL(localePath(code, cleanPath === '/404/' ? '/404/' : cleanPath), Astro.site),
+}));
 const ogImage = new URL(image, Astro.site);
-const siteName = lang === 'es' ? 'ZCZR Menaje Isotérmico' : 'ZCZR Insulated Drinkware';
+const siteNames: Record<Lang, string> = {
+  en: 'ZCZR Insulated Drinkware',
+  es: 'ZCZR Menaje Isotérmico',
+  fr: 'ZCZR Gobelets Isothermes',
+  zh: 'ZCZR 不锈钢保温饮具',
+};
+const ogLocales: Record<Lang, string> = { en: 'en_US', es: 'es_ES', fr: 'fr_FR', zh: 'zh_CN' };
+const skipLabels: Record<Lang, string> = {
+  en: 'Skip to content',
+  es: 'Saltar al contenido',
+  fr: 'Aller au contenu',
+  zh: '跳到主要内容',
+};
+const siteName = siteNames[lang];
 const legalName = 'Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.';
 
 const organizationSchema = {
@@ -54,7 +69,7 @@ const organizationSchema = {
     email: contact.email,
     telephone: contact.tel,
     areaServed: contact.regionEn,
-    availableLanguage: ['English', 'Spanish', 'Chinese'],
+    availableLanguage: ['English', 'Spanish', 'French', 'Chinese'],
   })),
   sameAs: [],
 };
@@ -68,15 +83,31 @@ const organizationSchema = {
     <title>{title} — {siteName}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="es" href={esUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    {alternateUrls.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.code} href={alternate.url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={alternateUrls[0].url} />
     {noIndex && <meta name="robots" content="noindex" />}
+    <script is:inline>
+      (() => {
+        const supported = ['es', 'fr', 'zh'];
+        const path = window.location.pathname;
+        if (path !== '/' && path !== '') return;
+        const browser = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
+        const detected = browser.startsWith('fr') ? 'fr' : browser.startsWith('zh') ? 'zh' : browser.startsWith('es') ? 'es' : 'en';
+        let stored = null;
+        try { stored = localStorage.getItem('zczr-language'); } catch {}
+        const target = stored && ['en', ...supported].includes(stored) ? stored : detected;
+        if (target !== 'en' && supported.includes(target)) {
+          window.location.replace(`/${target}/${window.location.search}`);
+        }
+      })();
+    </script>
     <meta name="theme-color" content="#F3EFE6" />
     <meta name="color-scheme" content="light" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale" content={ogLocales[lang]} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={`${title} — ${siteName}`} />
     <meta property="og:description" content={description} />
@@ -94,7 +125,7 @@ const organizationSchema = {
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#main">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main">{skipLabels[lang]}</a>
     <Header current={current} lang={lang} />
     <main id="main">
       <slot />

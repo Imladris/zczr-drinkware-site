@@ -118,7 +118,7 @@ const validate = (payload) => {
     product: cleanLine(payload.product, 160),
     quantity: cleanLine(payload.quantity, 120),
     message: clean(payload.message, 5000),
-    locale: payload.locale === 'es' ? 'es' : 'en',
+    locale: ['es', 'fr', 'zh'].includes(payload.locale) ? payload.locale : 'en',
     page: cleanLine(payload.page, 500),
     consent: ['on', 'true', '1', 'yes'].includes(String(payload.consent || '').toLowerCase()),
   };
@@ -158,7 +158,7 @@ const buildEmail = (data, ip) => {
     ['Topic', data.topic],
     ['Reference model', data.product || '—'],
     ['Target quantity', data.quantity || '—'],
-    ['Language', data.locale === 'es' ? 'Spanish' : 'English'],
+    ['Language', { es: 'Spanish', fr: 'French', zh: 'Chinese', en: 'English' }[data.locale] || 'English'],
     ['Source page', data.page || '—'],
     ['Submitted', submittedAt],
     ['Client IP', ip],

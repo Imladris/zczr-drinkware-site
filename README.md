@@ -45,29 +45,37 @@ The generated static site is in `dist/`.
 | `/about/` | Company profile, facts and operating principles |
 | `/resources/` | Three B2B buyer guides |
 | `/contact/` | B2B inquiry form, company details and FAQ |
+| `/fr/` | French homepage and localized routes |
+| `/zh/` | Chinese homepage and localized routes |
 | `/404.html` | Not-found page |
 
-## Spanish version
+## Languages
 
-The site is bilingual:
+The site has four complete language versions:
 
 - English: `/`
 - Spanish: `/es/`
+- French: `/fr/`
+- Chinese: `/zh/`
 
-A language switch in the header links to the equivalent page in the other language. Product pages, category filters, buyer resources, contact form labels, FAQ, navigation, footer and meta tags are localized.
+The header language control is a dropdown. It links to the equivalent page in each language, preserves the current path, and remembers the visitor's choice in `localStorage` (`zczr-language`).
+
+On the first visit to `/`, the site detects `navigator.language` and redirects French, Spanish and Chinese browsers to the matching language version. A manual language choice overrides automatic detection.
 
 Translation files:
 
-- UI and navigation strings: `src/i18n/ui.ts`
-- Spanish product names and descriptions: `src/i18n/products.es.ts`
+- UI, navigation, footer and newsletter strings: `src/i18n/ui.ts`
+- Product names and capacity labels: `src/i18n/products.es.ts` (`localizeProduct` supports all four languages)
 - Spanish buyer guides: `src/i18n/resources.es.ts`
-- Spanish routes: `src/pages/es/`
+- French buyer guides: `src/i18n/resources.fr.ts`
+- Chinese buyer guides: `src/i18n/resources.zh.ts`
+- Language routes: `src/pages/es/`, `src/pages/fr/`, `src/pages/zh/`
 
-`hreflang` alternates and localized canonical URLs are emitted by `src/layouts/BaseLayout.astro`. The build produces 88 static pages (44 English + 44 Spanish).
+`hreflang` alternates and localized canonical URLs are emitted by `src/layouts/BaseLayout.astro`. The build produces 176 static pages (44 per language).
 
 ## Content editing
 
-- Products, capacities, colors and specifications: `src/data/products.ts`
+- Products, capacities and image galleries: `src/data/products.ts`
 - Buyer guides: `src/data/resources.ts`
 - Navigation: `src/components/Header.astro`
 - Footer and company contact placeholders: `src/components/Footer.astro`

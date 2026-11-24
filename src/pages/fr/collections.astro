@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { products } from '../../data/products';
+import { ui } from '../../i18n/ui';
+
+const modelCount = String(products.length).padStart(2, '0');
+const categoryCount = String(Object.keys(ui.fr.categories).length).padStart(2, '0');
+const filters = [
+  { value: 'all', label: 'Tous les modèles' },
+  { value: 'tumblers', label: ui.fr.categories.tumblers },
+  { value: 'bottles', label: ui.fr.categories.bottles },
+  { value: 'jugs', label: ui.fr.categories.jugs },
+  { value: 'kettles', label: ui.fr.categories.kettles },
+  { value: 'coffee', label: ui.fr.categories.coffee },
+];
+---
+
+<BaseLayout
+  title="Gamme de gobelets isothermes"
+  description="Découvrez les modèles de référence ZCZR pour les gobelets isothermes OEM et ODM : gobelets, bouteilles, cruches, bouilloires et tasses à café en acier inoxydable."
+  current="shop"
+  lang="fr"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Gobelets / Gamme de référence 2026</span>
+        <span class="page-hero__meta">OEM / ODM · Wuxi, Jiangsu</span>
+      </div>
+      <h1>Une gamme <em>ciblée.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Trente-quatre modèles de référence de gobelets, bouteilles, cruches, bouilloires et tasses à café. Utilisez-les comme point de départ ; couleurs, logos, finitions, capacités et emballage sont développés pour votre programme.</p>
+        <div class="page-hero__meta">
+          <span>{modelCount} modèles</span>
+          <span>{categoryCount} catégories</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="collection-toolbar">
+    <div class="collection-toolbar__inner">
+      <div class="filter-group" role="group" aria-label="Filtrer par catégorie">
+        {filters.map((category) => (
+          <button
+            class:list={['filter-button', { 'is-active': category.value === 'all' }]}
+            type="button"
+            data-filter={category.value}
+            aria-pressed={category.value === 'all' ? 'true' : 'false'}
+          >
+            {category.label}
+          </button>
+        ))}
+      </div>
+      <span class="collection-count" data-collection-count>{modelCount} modèles</span>
+    </div>
+  </div>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="collection-grid">
+        {products.map((product, index) => (
+          <ProductCard product={product} index={index} lang="fr" />
+        ))}
+        <div class="collection-empty" data-collection-empty hidden>
+          <h3>Aucun modèle dans cette catégorie.</h3>
+          <p>Essayez une autre catégorie ou consultez toute la gamme de référence.</p>
+        </div>
+      </div>
+
+      <div class="collection-feature reveal">
+        <div class="collection-feature__media">
+          <img src="/images/company.webp" alt="Réception et image de marque de ZCZR" width="1800" height="1013" loading="lazy" />
+        </div>
+        <div class="collection-feature__copy">
+          <span class="eyebrow eyebrow--light">Besoin d'un point de départ ?</span>
+          <h2>Envoyez le brief. Nous donnerons forme à la gamme.</h2>
+          <p>Indiquez-nous la capacité, la finition, le logo, la quantité cible et le marché. Nous vous recommanderons un modèle de référence et confirmerons le processus d'échantillonnage.</p>
+          <a class="btn btn--outline-light" href="/fr/contact/">Parler à l'équipe <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang="fr" />
+</BaseLayout>

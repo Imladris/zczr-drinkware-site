@@ -1,7 +1,7 @@
 const qs = (selector, scope = document) => scope.querySelector(selector);
 const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-const isEs = document.documentElement.lang === 'es';
-const tr = (en, es) => (isEs ? es : en);
+const pageLang = document.documentElement.lang;
+const tr = (en, es, fr, zh) => ({ en, es, fr, zh }[pageLang] || en);
 
 /* ---------------------------------------------------------
    Header + reveal
@@ -32,6 +32,33 @@ if ('IntersectionObserver' in window && revealItems.length) {
   revealItems.forEach((item) => item.classList.add('is-visible'));
 }
 
+
+/* ---------------------------------------------------------
+   Language menu
+   --------------------------------------------------------- */
+qsa('[data-lang-link]').forEach((link) => {
+  link.addEventListener('click', () => {
+    try {
+      localStorage.setItem('zczr-language', link.dataset.langLink || 'en');
+    } catch {}
+  });
+});
+
+const languageDropdown = qs('[data-language-dropdown]');
+if (languageDropdown) {
+  document.addEventListener('click', (event) => {
+    if (languageDropdown.open && !languageDropdown.contains(event.target)) {
+      languageDropdown.open = false;
+    }
+  });
+  languageDropdown.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      languageDropdown.open = false;
+      languageDropdown.querySelector('summary')?.focus();
+    }
+  });
+}
+
 /* ---------------------------------------------------------
    Mobile menu
    --------------------------------------------------------- */
@@ -44,7 +71,7 @@ const setMenu = (open) => {
   menu.classList.toggle('is-open', open);
   menu.setAttribute('aria-hidden', String(!open));
   menuToggle.setAttribute('aria-expanded', String(open));
-  menuToggle.setAttribute('aria-label', open ? tr('Close menu', 'Cerrar menú') : tr('Open menu', 'Abrir menú'));
+  menuToggle.setAttribute('aria-label', open ? tr('Close menu', 'Cerrar menú', 'Fermer le menu', '关闭菜单') : tr('Open menu', 'Abrir menú', 'Ouvrir le menu', '打开菜单'));
   document.body.classList.toggle('is-locked', open);
   if (open) menuClose?.focus();
 };
@@ -110,7 +137,7 @@ const closeVideo = () => {
 const openVideo = (trigger) => {
   if (!videoModal || !videoFrame) return;
   const id = trigger.dataset.videoId;
-  const title = trigger.dataset.videoTitle || tr('Field film', 'Película de campo');
+  const title = trigger.dataset.videoTitle || tr('Field film', 'Película de campo', 'Film terrain', '现场影片');
   if (!id) return;
   videoTrigger = trigger;
   videoLabel.textContent = title;
@@ -135,6 +162,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape') return;
   if (videoModal?.classList.contains('is-open')) return closeVideo();
   if (searchPanel?.classList.contains('is-open')) return setSearch(false);
+  if (languageDropdown?.open) languageDropdown.open = false;
   if (menu?.classList.contains('is-open')) return setMenu(false);
 });
 
@@ -147,11 +175,11 @@ qsa('[data-newsletter-form]').forEach((form) => {
     const input = qs('input[type="email"]', form);
     const note = form.parentElement?.querySelector('[data-newsletter-note]');
     if (!input?.value || !input.checkValidity()) {
-      if (note) note.textContent = tr('Please enter a valid email address.', 'Introduce un correo electrónico válido.');
+      if (note) note.textContent = tr('Please enter a valid email address.', 'Introduce un correo electrónico válido.', 'Saisissez une adresse e-mail valide.', '请输入有效的电子邮箱地址。');
       input?.focus();
       return;
     }
-    if (note) note.textContent = tr('You are on the list. (Demo — no email was sent.)', 'Estás en la lista. (Demo: no se ha enviado ningún correo.)');
+    if (note) note.textContent = tr('You are on the list. (Demo — no email was sent.)', 'Estás en la lista. (Demo: no se ha enviado ningún correo.)', 'Vous êtes inscrit. (Démo — aucun e-mail envoyé.)', '已加入列表。（演示：未发送邮件。）');
     form.reset();
   });
 });
@@ -164,7 +192,9 @@ if (contactForm) {
   const contactNote = qs('[data-contact-note]', contactForm);
   const successMessage = tr(
     'Thanks — your inquiry has been sent. We will reply within 2 business days.',
-    'Gracias: tu consulta se ha enviado. Responderemos en un plazo de 2 días laborables.'
+    'Gracias: tu consulta se ha enviado. Responderemos en un plazo de 2 días laborables.',
+    'Merci — votre demande a été envoyée. Nous répondrons sous 2 jours ouvrés.',
+    '谢谢，您的询盘已发送。我们将在 2 个工作日内回复。'
   );
   const params = new URLSearchParams(window.location.search);
 
@@ -175,7 +205,9 @@ if (contactForm) {
   if (contactNote && params.get('error') === '1') {
     contactNote.textContent = tr(
       'Sorry, the form could not be sent. Please try again or email us directly.',
-      'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.'
+      'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.',
+      'Désolé, le formulaire n’a pas pu être envoyé. Réessayez ou écrivez-nous directement.',
+      '抱歉，表单未能发送。请重试或直接给我们发邮件。'
     );
     window.history.replaceState({}, '', window.location.pathname);
   }
@@ -193,13 +225,13 @@ if (contactForm) {
     const originalLabel = submit?.innerHTML;
     if (submit) {
       submit.disabled = true;
-      submit.textContent = tr('Sending…', 'Enviando…');
+      submit.textContent = tr('Sending…', 'Enviando…', 'Envoi…', '发送中…');
     }
     contactForm.setAttribute('aria-busy', 'true');
     if (contactNote) contactNote.textContent = '';
 
     const payload = Object.fromEntries(new FormData(contactForm).entries());
-    payload.locale = isEs ? 'es' : 'en';
+    payload.locale = ['es', 'fr', 'zh'].includes(pageLang) ? pageLang : 'en';
     payload.page = window.location.pathname;
 
     try {
@@ -218,11 +250,15 @@ if (contactForm) {
         contactNote.textContent = fallbackEmail
           ? tr(
               `Sorry, the form could not be sent. Please email us at ${fallbackEmail}.`,
-              `Lo sentimos, no se pudo enviar el formulario. Escríbenos a ${fallbackEmail}.`
+              `Lo sentimos, no se pudo enviar el formulario. Escríbenos a ${fallbackEmail}.`,
+              `Désolé, le formulaire n’a pas pu être envoyé. Écrivez-nous à ${fallbackEmail}.`,
+              `抱歉，表单未能发送。请发送邮件至 ${fallbackEmail}。`
             )
           : tr(
               'Sorry, the form could not be sent. Please try again or email us directly.',
-              'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.'
+              'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.',
+              'Désolé, le formulaire n’a pas pu être envoyé. Réessayez ou écrivez-nous directement.',
+              '抱歉，表单未能发送。请重试或直接给我们发邮件。'
             );
       }
       console.error('[contact-form]', error);
@@ -257,7 +293,7 @@ const applyFilter = (filter) => {
     button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
   });
   if (collectionCount) {
-    collectionCount.textContent = `${String(visible).padStart(2, '0')} ${tr('models', 'modelos')}`;
+    collectionCount.textContent = `${String(visible).padStart(2, '0')} ${tr('models', 'modelos', 'modèles', '款')}`;
   }
   if (collectionEmpty) collectionEmpty.hidden = visible > 0;
 };

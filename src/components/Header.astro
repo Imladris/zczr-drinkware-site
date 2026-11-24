@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import { products } from '../data/products';
 import { localizeProduct } from '../i18n/products.es';
-import { localePath, otherLocalePath, ui, type Lang } from '../i18n/ui';
+import { languageCodes, languageNames, languageSummary, languages, localePath, stripLocale, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   current?: string;
@@ -11,20 +11,21 @@ interface Props {
 
 const { current = '', lang = 'en' } = Astro.props as Props;
 const t = ui[lang];
-const switchHref = otherLocalePath(lang, Astro.url.pathname);
-const switchLang = lang === 'en' ? 'es' : 'en';
+const cleanPath = stripLocale(Astro.url.pathname);
+const languageLinks = languages.map((code) => ({
+  code,
+  name: languageNames[code],
+  short: languageCodes[code],
+  href: localePath(code, cleanPath),
+}));
 const searchProducts = products.map((product) => localizeProduct(product, lang));
 
-const navLabels = lang === 'es'
-  ? { drinkware: 'Productos', capabilities: 'Capacidades', company: 'Empresa', resources: 'Recursos', contact: 'Contacto' }
-  : { drinkware: 'Drinkware', capabilities: 'Capabilities', company: 'Company', resources: 'Resources', contact: 'Contact' };
-
 const links = [
-  { href: localePath(lang, '/collections/'), label: navLabels.drinkware, key: 'shop' },
-  { href: localePath(lang, '/technology/'), label: navLabels.capabilities, key: 'technology' },
-  { href: localePath(lang, '/about/'), label: navLabels.company, key: 'about' },
-  { href: localePath(lang, '/resources/'), label: navLabels.resources, key: 'resources' },
-  { href: localePath(lang, '/contact/'), label: navLabels.contact, key: 'contact' },
+  { href: localePath(lang, '/collections/'), label: t.header.nav.drinkware, key: 'shop' },
+  { href: localePath(lang, '/technology/'), label: t.header.nav.capabilities, key: 'technology' },
+  { href: localePath(lang, '/about/'), label: t.header.nav.company, key: 'about' },
+  { href: localePath(lang, '/resources/'), label: t.header.nav.resources, key: 'resources' },
+  { href: localePath(lang, '/contact/'), label: t.header.nav.contact, key: 'contact' },
 ];
 ---
 
@@ -60,9 +61,27 @@ const links = [
           <path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.4" />
         </svg>
       </button>
-      <a class="lang-switch" href={switchHref} hreflang={switchLang} aria-label={lang === 'en' ? 'Cambiar a español' : 'Switch to English'}>
-        {t.langLabel}
-      </a>
+      <details class="language-dropdown" data-language-dropdown>
+        <summary aria-label={t.header.language}>
+          <span>{languageSummary[lang]}</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.5"/></svg>
+        </summary>
+        <div class="language-menu">
+          {languageLinks.map((item) => (
+            <a
+              class:list={{ 'is-active': item.code === lang }}
+              href={item.href}
+              hreflang={item.code}
+              lang={item.code}
+              data-lang-link={item.code}
+              aria-current={item.code === lang ? 'page' : undefined}
+            >
+              <span>{item.name}</span>
+              <span aria-hidden="true">{item.short}</span>
+            </a>
+          ))}
+        </div>
+      </details>
       <a class="header-cta" href={localePath(lang, '/contact/')}>{t.header.quote}</a>
       <button class="menu-toggle" type="button" data-menu-toggle aria-label={t.header.menu} aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span>
@@ -74,11 +93,11 @@ const links = [
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
   <div class="mobile-menu__head">
     <Logo light />
-    <button class="icon-button icon-button--light" type="button" data-menu-close aria-label={lang === 'es' ? 'Cerrar menú' : 'Close menu'}>
+    <button class="icon-button icon-button--light" type="button" data-menu-close aria-label={t.header.closeMenu}>
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.4"/></svg>
     </button>
   </div>
-  <nav class="mobile-menu__nav" aria-label={lang === 'es' ? 'Navegación móvil' : 'Mobile navigation'}>
+  <nav class="mobile-menu__nav" aria-label={t.header.mobileNav}>
     {links.map((link, index) => (
       <a href={link.href}><span>{String(index + 1).padStart(2, '0')}</span>{link.label}</a>
     ))}
@@ -93,7 +112,7 @@ const links = [
   <div class="search-panel__inner">
     <div class="search-panel__head">
       <span class="eyebrow">{t.header.searchTitle}</span>
-      <button class="icon-button" type="button" data-search-close aria-label={lang === 'es' ? 'Cerrar búsqueda' : 'Close search'}>
+      <button class="icon-button" type="button" data-search-close aria-label={t.header.closeSearch}>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.4"/></svg>
       </button>
     </div>

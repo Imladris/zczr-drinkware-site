@@ -9,6 +9,7 @@ interface Props {
 
 const { lang = 'en' } = Astro.props as Props;
 const t = ui[lang].footer;
+const newsletter = ui[lang].newsletter;
 const year = new Date().getFullYear();
 ---
 
@@ -22,10 +23,10 @@ const year = new Date().getFullYear();
       <div class="site-footer__locations">
         {t.locations.map((location) => <span>{location}</span>)}
       </div>
-      <div class="site-footer__socials" aria-label={lang === 'es' ? 'Enlaces de empresa' : 'Company links'}>
+      <div class="site-footer__socials" aria-label={t.companyLinks}>
         <a href={localePath(lang, '/about/')} aria-label={t.about}>CO</a>
         <a href={localePath(lang, '/technology/')} aria-label={t.capabilities}>CA</a>
-        <a href={localePath(lang, '/contact/')} aria-label={lang === 'es' ? 'Contacto' : 'Contact'}>CT</a>
+        <a href={localePath(lang, '/contact/')} aria-label={t.contact}>CT</a>
       </div>
     </div>
 
@@ -59,7 +60,7 @@ const year = new Date().getFullYear();
         <form class="newsletter-form" data-newsletter-form>
           <label class="sr-only" for="footer-email">{t.workEmail}</label>
           <input id="footer-email" type="email" name="email" placeholder={t.workEmail} required />
-          <button type="submit" aria-label={lang === 'es' ? 'Suscribirse' : 'Subscribe'}>
+          <button type="submit" aria-label={newsletter.subscribe}>
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.4"/></svg>
           </button>
         </form>

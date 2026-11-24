@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { products } from '../../data/products';
+import { ui } from '../../i18n/ui';
+
+const modelCount = String(products.length).padStart(2, '0');
+const categoryCount = String(Object.keys(ui.zh.categories).length).padStart(2, '0');
+const filters = [
+  { value: 'all', label: '全部型号' },
+  { value: 'tumblers', label: ui.zh.categories.tumblers },
+  { value: 'bottles', label: ui.zh.categories.bottles },
+  { value: 'jugs', label: ui.zh.categories.jugs },
+  { value: 'kettles', label: ui.zh.categories.kettles },
+  { value: 'coffee', label: ui.zh.categories.coffee },
+];
+---
+
+<BaseLayout
+  title="保温饮具系列"
+  description="探索 ZCZR 的 OEM 与 ODM 保温饮具参考型号：不锈钢保温杯、水瓶、壶、茶壶和咖啡杯。"
+  current="shop"
+  lang="zh"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">饮具 / 2026 参考系列</span>
+        <span class="page-hero__meta">OEM / ODM · 江苏无锡</span>
+      </div>
+      <h1>一个<em>专注的</em>系列。</h1>
+      <div class="page-hero__bottom">
+        <p>三十四款参考型号，涵盖保温杯、水瓶、壶、茶壶和咖啡杯。可将它们作为起点；颜色、标志、表面工艺、容量和包装都会围绕你的项目开发。</p>
+        <div class="page-hero__meta">
+          <span>{modelCount} 个型号</span>
+          <span>{categoryCount} 个品类</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="collection-toolbar">
+    <div class="collection-toolbar__inner">
+      <div class="filter-group" role="group" aria-label="按品类筛选">
+        {filters.map((category) => (
+          <button
+            class:list={['filter-button', { 'is-active': category.value === 'all' }]}
+            type="button"
+            data-filter={category.value}
+            aria-pressed={category.value === 'all' ? 'true' : 'false'}
+          >
+            {category.label}
+          </button>
+        ))}
+      </div>
+      <span class="collection-count" data-collection-count>{modelCount} 个型号</span>
+    </div>
+  </div>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="collection-grid">
+        {products.map((product, index) => (
+          <ProductCard product={product} index={index} lang="zh" />
+        ))}
+        <div class="collection-empty" data-collection-empty hidden>
+          <h3>该品类下暂无型号。</h3>
+          <p>试试其他品类，或浏览全部参考系列。</p>
+        </div>
+      </div>
+
+      <div class="collection-feature reveal">
+        <div class="collection-feature__media">
+          <img src="/images/company.webp" alt="ZCZR 前台与品牌形象" width="1800" height="1013" loading="lazy" />
+        </div>
+        <div class="collection-feature__copy">
+          <span class="eyebrow eyebrow--light">需要一个起点？</span>
+          <h2>把需求发给我们，我们来梳理系列。</h2>
+          <p>告诉我们容量、表面工艺、标志、目标数量和市场。我们会推荐参考型号，并确认打样流程。</p>
+          <a class="btn btn--outline-light" href="/zh/contact/">联系团队 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang="zh" />
+</BaseLayout>

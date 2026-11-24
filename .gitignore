@@ -19,3 +19,6 @@ dist/
 # Local contact API secrets
 deploy/contact-api.env
 server/.env
+
+# Local SSH key
+arch.pem

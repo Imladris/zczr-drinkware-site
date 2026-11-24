@@ -1,7 +1,9 @@
 import type { Product } from '../data/products';
 import type { Lang } from './ui';
 
-const names: Record<string, { name: string; short: string; line: string; label: string }> = {
+type Copy = { name: string; short: string; line: string; label: string };
+
+const namesEs: Record<string, Copy> = {
   '1688-795858462577': { name: 'Taza de café 316', short: 'Taza 316', line: 'Serie café', label: 'Taza de café' },
   '1688-799990229526': { name: 'Vaso para auto de 30 oz', short: 'Vaso 30 oz auto', line: 'Vaso para auto', label: 'Vaso' },
   '1688-794653748654': { name: 'Vaso con pajita de 20 oz', short: 'Vaso 20 oz pajita', line: 'Vaso con pajita', label: 'Vaso' },
@@ -38,15 +40,105 @@ const names: Record<string, { name: string; short: string; line: string; label: 
   '1688-843218158734': { name: 'Mini taza de café', short: 'Mini taza', line: 'Serie café', label: 'Taza de café' },
 };
 
-const capacityNames: Record<string, string> = {
-  'Large capacity': 'Gran capacidad',
-  Small: 'Pequeña',
-  Mini: 'Mini',
-  '316 steel': 'Acero 316',
+const namesFr: Record<string, Copy> = {
+  '1688-795858462577': { name: 'Tasse à café 316', short: 'Tasse 316', line: 'Série café', label: 'Tasse à café' },
+  '1688-799990229526': { name: 'Gobelet auto 30 oz', short: 'Gobelet 30 oz auto', line: 'Gobelet auto', label: 'Gobelet' },
+  '1688-794653748654': { name: 'Gobelet à paille 20 oz', short: 'Gobelet 20 oz paille', line: 'Gobelet à paille', label: 'Gobelet' },
+  '1688-872583398991': { name: 'Gobelet auto 30 oz II', short: 'Gobelet 30 oz auto II', line: 'Gobelet auto', label: 'Gobelet' },
+  '1688-943081557361': { name: 'Grande bouilloire space', short: 'Bouilloire space', line: 'Bouilloire space', label: 'Bouilloire' },
+  '1688-796185191193': { name: 'Chope à bière avec ouvre-bouteille', short: 'Chope à bière', line: 'Chope à bière', label: 'Gobelet' },
+  '1688-854829570591': { name: 'Tasse à café 12 oz', short: 'Tasse 12 oz', line: 'Série café', label: 'Tasse à café' },
+  '1688-797152773942': { name: 'Gobelet sublimable 20 oz', short: 'Gobelet sublimable', line: 'Sublimation', label: 'Gobelet' },
+  '1688-794630617489': { name: 'Gobelet dégradé 30 oz', short: 'Gobelet 30 oz dégradé', line: 'Série dégradée', label: 'Gobelet' },
+  '1688-1081888425500': { name: 'Tasse à café 316 avec anse', short: 'Tasse 316 avec anse', line: 'Série café', label: 'Tasse à café' },
+  '1688-851825626253': { name: 'Tasse à café 316 avec anse II', short: 'Tasse 316 avec anse II', line: 'Série café', label: 'Tasse à café' },
+  '1688-1079729776645': { name: 'Bouteille sport 500', short: 'Bouteille Sport 500', line: 'Bouteille sport', label: 'Bouteille' },
+  '1688-1078067502639': { name: 'Gobelet avec anse 40 oz', short: 'Gobelet 40 oz avec anse', line: 'Gobelet avec anse', label: 'Gobelet' },
+  '1688-930100025238': { name: 'Gobelet auto 40 oz', short: 'Gobelet 40 oz auto', line: 'Gobelet auto', label: 'Gobelet' },
+  '1688-1080294990208': { name: 'Tasse à café octogonale 316', short: 'Tasse octogonale', line: 'Série café', label: 'Tasse à café' },
+  '1688-790219051220': { name: 'Cruche grande capacité', short: 'Cruche grande capacité', line: 'Grand format', label: 'Cruche' },
+  '1688-1076397526442': { name: 'Grand gobelet auto', short: 'Gobelet auto grand', line: 'Gobelet auto', label: 'Gobelet' },
+  '1688-790204503582': { name: 'Gobelet peinture diamant', short: 'Gobelet diamant', line: 'Série diamant', label: 'Gobelet' },
+  '1688-1079232876527': { name: 'Bouteille isotherme droite', short: 'Bouteille droite', line: 'Bouteille quotidienne', label: 'Bouteille' },
+  '1688-943601127136': { name: 'Bouteille sport silicone 34 oz', short: 'Bouteille 34 oz', line: 'Bouteille sport', label: 'Bouteille' },
+  '1688-1075538063688': { name: 'Gobelet double boisson', short: 'Gobelet double boisson', line: 'Double boisson', label: 'Gobelet' },
+  '1688-1079954683027': { name: 'Gobelet auto 30 oz III', short: 'Gobelet 30 oz auto III', line: 'Gobelet auto', label: 'Gobelet' },
+  '1688-996829135363': { name: 'Tasse titane 260', short: 'Tasse titane 260', line: 'Série titane', label: 'Tasse à café' },
+  '1688-856861841021': { name: 'Bouteille sport large embouchure', short: 'Bouteille large embouchure', line: 'Bouteille sport', label: 'Bouteille' },
+  '1688-1078491650182': { name: 'Bouteille forme œuf', short: 'Bouteille œuf', line: 'Bouteille quotidienne', label: 'Bouteille' },
+  '1688-1077434657763': { name: 'Gobelet café et lait', short: 'Gobelet café et lait', line: 'Série café', label: 'Tasse à café' },
+  '1688-795012017777': { name: 'Théière 316', short: 'Théière 316', line: 'Série thé', label: 'Bouilloire' },
+  '1688-794460487434': { name: 'Bouteille sport 500 II', short: 'Bouteille Sport 500 II', line: 'Bouteille sport', label: 'Bouteille' },
+  '1688-801780517247': { name: 'Tasse café glacé', short: 'Tasse café glacé', line: 'Série café', label: 'Tasse à café' },
+  '1688-790194947940': { name: 'Gobelet avec anse 40 oz II', short: 'Gobelet 40 oz avec anse II', line: 'Gobelet avec anse', label: 'Gobelet' },
+  '1688-1080358581874': { name: 'Tasse café glacé II', short: 'Tasse café glacé II', line: 'Série café', label: 'Tasse à café' },
+  '1688-857783845444': { name: 'Tasse avec anse', short: 'Tasse avec anse', line: 'Série tasses', label: 'Tasse à café' },
+  '1688-858050360701': { name: 'Bouilloire sport space', short: 'Bouilloire sport', line: 'Bouilloire space', label: 'Bouilloire' },
+  '1688-843218158734': { name: 'Mini tasse à café', short: 'Mini tasse', line: 'Série café', label: 'Tasse à café' },
+};
+
+const namesZh: Record<string, Copy> = {
+  '1688-795858462577': { name: '316 咖啡杯', short: '316 咖啡杯', line: '咖啡系列', label: '咖啡杯' },
+  '1688-799990229526': { name: '30 oz 车载杯', short: '30 oz 车载杯', line: '车载杯', label: '保温杯' },
+  '1688-794653748654': { name: '20 oz 吸管杯', short: '20 oz 吸管杯', line: '吸管杯', label: '保温杯' },
+  '1688-872583398991': { name: '30 oz 车载杯 II', short: '30 oz 车载杯 II', line: '车载杯', label: '保温杯' },
+  '1688-943081557361': { name: '大容量太空壶', short: '太空壶', line: '太空壶', label: '茶壶' },
+  '1688-796185191193': { name: '带开瓶器啤酒杯', short: '啤酒杯', line: '啤酒杯', label: '保温杯' },
+  '1688-854829570591': { name: '12 oz 咖啡杯', short: '12 oz 咖啡杯', line: '咖啡系列', label: '咖啡杯' },
+  '1688-797152773942': { name: '20 oz 升华杯', short: '20 oz 升华杯', line: '升华系列', label: '保温杯' },
+  '1688-794630617489': { name: '30 oz 渐变杯', short: '30 oz 渐变杯', line: '渐变系列', label: '保温杯' },
+  '1688-1081888425500': { name: '316 带手柄咖啡杯', short: '316 带手柄杯', line: '咖啡系列', label: '咖啡杯' },
+  '1688-851825626253': { name: '316 带手柄咖啡杯 II', short: '316 带手柄杯 II', line: '咖啡系列', label: '咖啡杯' },
+  '1688-1079729776645': { name: '运动水壶 500', short: '运动水壶 500', line: '运动水壶', label: '水瓶' },
+  '1688-1078067502639': { name: '40 oz 带手柄杯', short: '40 oz 带手柄杯', line: '带手柄杯', label: '保温杯' },
+  '1688-930100025238': { name: '40 oz 车载杯', short: '40 oz 车载杯', line: '车载杯', label: '保温杯' },
+  '1688-1080294990208': { name: '316 八角咖啡杯', short: '316 八角杯', line: '咖啡系列', label: '咖啡杯' },
+  '1688-790219051220': { name: '大容量大肚壶', short: '大肚壶', line: '大容量', label: '壶' },
+  '1688-1076397526442': { name: '大容量车载杯', short: '大容量车载杯', line: '车载杯', label: '保温杯' },
+  '1688-790204503582': { name: '钻石纹杯', short: '钻石纹杯', line: '钻石系列', label: '保温杯' },
+  '1688-1079232876527': { name: '直身保温瓶', short: '直身保温瓶', line: '日常水瓶', label: '水瓶' },
+  '1688-943601127136': { name: '34 oz 硅胶运动瓶', short: '34 oz 运动瓶', line: '运动水壶', label: '水瓶' },
+  '1688-1075538063688': { name: '双饮杯', short: '双饮杯', line: '双饮系列', label: '保温杯' },
+  '1688-1079954683027': { name: '30 oz 车载杯 III', short: '30 oz 车载杯 III', line: '车载杯', label: '保温杯' },
+  '1688-996829135363': { name: '260 钛杯', short: '260 钛杯', line: '钛系列', label: '咖啡杯' },
+  '1688-856861841021': { name: '宽口运动瓶', short: '宽口运动瓶', line: '运动水壶', label: '水瓶' },
+  '1688-1078491650182': { name: '蛋形瓶', short: '蛋形瓶', line: '日常水瓶', label: '水瓶' },
+  '1688-1077434657763': { name: '咖啡奶杯', short: '咖啡奶杯', line: '咖啡系列', label: '咖啡杯' },
+  '1688-795012017777': { name: '316 茶壶', short: '316 茶壶', line: '茶系列', label: '茶壶' },
+  '1688-794460487434': { name: '运动水壶 500 II', short: '运动水壶 500 II', line: '运动水壶', label: '水瓶' },
+  '1688-801780517247': { name: '冰咖啡杯', short: '冰咖啡杯', line: '咖啡系列', label: '咖啡杯' },
+  '1688-790194947940': { name: '40 oz 带手柄杯 II', short: '40 oz 带手柄杯 II', line: '带手柄杯', label: '保温杯' },
+  '1688-1080358581874': { name: '冰咖啡杯 II', short: '冰咖啡杯 II', line: '咖啡系列', label: '咖啡杯' },
+  '1688-857783845444': { name: '带手柄马克杯', short: '带手柄马克杯', line: '马克杯系列', label: '咖啡杯' },
+  '1688-858050360701': { name: '运动太空壶', short: '运动太空壶', line: '太空壶', label: '茶壶' },
+  '1688-843218158734': { name: '迷你咖啡杯', short: '迷你咖啡杯', line: '咖啡系列', label: '咖啡杯' },
+};
+
+const capacities: Record<Lang, Record<string, string>> = {
+  en: {},
+  es: { 'Large capacity': 'Gran capacidad', Small: 'Pequeña', Mini: 'Mini', '316 steel': 'Acero 316' },
+  fr: { 'Large capacity': 'Grande capacité', Small: 'Petite', Mini: 'Mini', '316 steel': 'Acier 316' },
+  zh: { 'Large capacity': '大容量', Small: '小号', Mini: '迷你', '316 steel': '316 不锈钢' },
+};
+
+const altPrefix: Record<Lang, string> = {
+  en: '',
+  es: 'Imagen de producto ZCZR: ',
+  fr: 'Photo produit ZCZR : ',
+  zh: 'ZCZR 产品图片：',
 };
 
 export const localizeProduct = (product: Product, lang: Lang): Product => {
   if (lang === 'en') return product;
-  const copy = names[product.slug] ?? { name: product.name, short: product.shortName, line: product.line, label: product.categoryLabel };
-  return { ...product, name: copy.name, shortName: copy.short, line: copy.line, categoryLabel: copy.label, capacity: capacityNames[product.capacity] ?? product.capacity, imageAlt: `Imagen de producto ZCZR: ${copy.name}` };
+  const copy = (lang === 'es' ? namesEs : lang === 'fr' ? namesFr : namesZh)[product.slug];
+  if (!copy) return product;
+  return {
+    ...product,
+    name: copy.name,
+    shortName: copy.short,
+    line: copy.line,
+    categoryLabel: copy.label,
+    capacity: capacities[lang][product.capacity] ?? product.capacity,
+    imageAlt: `${altPrefix[lang]}${copy.name}`,
+  };
 };

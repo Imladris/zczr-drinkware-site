@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { products } from '../../data/products';
+import { localizeProduct } from '../../i18n/products.es';
+import { companyContacts } from '../../data/contacts';
+
+const localizedProducts = products.map((product) => localizeProduct(product, 'fr'));
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contactez ZCZR pour vos gobelets isothermes OEM et ODM, vos échantillons, spécifications, emballages ou une commande existante. Wuxi, Jiangsu, Chine."
+  current="contact"
+  lang="fr"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">Contact / Démarrer une conversation</span>
+        <span class="page-hero__meta">Wuxi, Jiangsu · Chine</span>
+      </div>
+      <h1>Parlez-nous de <em>votre programme.</em></h1>
+      <div class="page-hero__bottom">
+        <p>Partagez le modèle, la capacité, la finition, le logo, la quantité cible et le marché. Nous confirmerons la spécification, le processus d'échantillonnage et les prochaines étapes. Notre équipe commerciale lit chaque demande.</p>
+        <div class="page-hero__meta"><span>OEM / ODM</span><span>Réponse sous 2 jours ouvrés</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container contact-grid">
+      <div class="contact-intro">
+        <span class="eyebrow">Contact</span>
+        <h2>Une ligne directe <em>avec l'équipe.</em></h2>
+        <p>Pas de système de tickets compliqué. Dites-nous ce que vous recherchez et nous vous orienterons vers le modèle de référence, le plan d'échantillonnage ou l'option d'emballage adaptés.</p>
+
+        <div class="contact-details">
+          {companyContacts.map((contact, index) => (
+            <Fragment>
+              <div class="contact-detail">
+                <span>{index === 0 ? 'E-mail principal' : 'E-mail secondaire'}</span>
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              </div>
+              <div class="contact-detail">
+                <span>{index === 0 ? 'Téléphone principal' : 'Téléphone secondaire'}</span>
+                <a href={`tel:${contact.tel}`}>{contact.phone}</a>
+              </div>
+            </Fragment>
+          ))}
+          <div class="contact-detail"><span>Siège social</span><span>Wuxi, Jiangsu, Chine</span></div>
+          <div class="contact-detail"><span>Production</span><span>Usine de Yixing, Jiangsu</span></div>
+          <div class="contact-detail"><span>Conditions</span><span>T/T · Alibaba Trade Assurance</span></div>
+          <div class="contact-detail"><span>Échantillons</span><span>Disponibles ; coût et transport à confirmer</span></div>
+          <div class="contact-detail"><span>Horaires</span><span>Du lundi au vendredi, 9 h – 17 h (heure de Chine)</span></div>
+        </div>
+      </div>
+
+      <form class="contact-form" data-contact-form action="/api/contact" method="post" data-fallback-email={companyContacts[0].email}>
+        <span class="eyebrow">Envoyer un brief</span>
+        <input type="hidden" name="locale" value="fr" />
+        <input type="hidden" name="page" value="/fr/contact/" />
+        <div class="hp-field" aria-hidden="true">
+          <label for="website-fr">Site web</label>
+          <input id="website-fr" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="form-row" style="margin-top: 22px;">
+          <div class="field">
+            <label for="name">Nom</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Votre nom" required />
+          </div>
+          <div class="field">
+            <label for="email">E-mail professionnel</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="vous@entreprise.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="company">Entreprise</label>
+            <input id="company" name="company" type="text" autocomplete="organization" placeholder="Nom de l'entreprise" required />
+          </div>
+          <div class="field">
+            <label for="country">Pays</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" placeholder="France" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="topic">Sujet</label>
+            <select id="topic" name="topic">
+              <option>Projet OEM / ODM</option>
+              <option>Demande d'échantillon</option>
+              <option>Question sur une spécification</option>
+              <option>Emballage</option>
+              <option>Commande existante</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="product">Modèle de référence</label>
+            <select id="product" name="product">
+              <option>Je ne sais pas encore</option>
+              {localizedProducts.map((product) => <option>{product.name}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="quantity">Quantité cible</label>
+          <input id="quantity" name="quantity" type="text" placeholder="p. ex. 1 000 unités" />
+        </div>
+        <div class="field">
+          <label for="message">Brief</label>
+          <textarea id="message" name="message" placeholder="Modèle ou référence, capacité, finition, logo, emballage, marché cible et délai." required></textarea>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" name="consent" required />
+          <span>J'accepte d'être contacté au sujet de cette demande et du traitement de mes données pour y répondre.</span>
+        </label>
+        <button class="btn btn--solid" type="submit">Envoyer la demande <span aria-hidden="true">↗</span></button>
+        <p class="form-note" data-contact-note aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Questions fréquentes</span>
+          <h2>Avant de <em>nous écrire.</em></h2>
+        </div>
+        <p>Quelques réponses courantes. Si votre question n'y figure pas, le formulaire est le moyen le plus rapide de nous contacter.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Êtes-vous une usine ou une société de négoce ?</summary>
+          <p>Nous sommes une entreprise de fabrication et de négoce qui intègre production, ventes et export. Notre bureau commercial se trouve à Wuxi et notre usine à Yixing, Jiangsu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Pouvez-vous envoyer des échantillons avant une commande ?</summary>
+          <p>Oui. Les échantillons servent à vérifier la matière et la qualité. Les frais d'échantillon et de transport sont confirmés avant l'envoi.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Pouvez-vous fabriquer notre propre design ?</summary>
+          <p>Oui. Nous acceptons la personnalisation OEM. Partagez votre design, logo, échantillon de référence ou idée et nous confirmerons ce qui peut être développé et échantillonné.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quels moyens de paiement acceptez-vous ?</summary>
+          <p>T/T et Alibaba Trade Assurance. Les conditions de paiement, les documents et les responsabilités d'expédition sont confirmés dans le devis.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Comment les produits sont-ils emballés pour l'export ?</summary>
+          <p>Les petits articles utilisent une protection intérieure résistante aux chocs et des cartons. Les programmes importants ou lourds peuvent utiliser des caisses en bois ou des palettes. L'emballage est confirmé selon les exigences de votre programme.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quel est le MOQ et le délai de livraison ?</summary>
+          <p>Le MOQ et le délai dépendent du modèle, de la personnalisation et de la quantité. Les deux sont confirmés dans le devis après accord sur la spécification.</p>
+        </details>
+        <details class="faq-item">
+          <summary>En quel matériau sont fabriqués les gobelets ?</summary>
+          <p>Notre gamme de gobelets isothermes utilise des parois intérieures en acier inoxydable 304 et des coques extérieures en acier 201 sur de nombreux modèles. Le matériau, la nuance et la finition exacts sont confirmés par modèle.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

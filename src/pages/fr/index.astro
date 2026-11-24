@@ -1,0 +1,359 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products } from '../../data/products';
+import { localizeProduct } from '../../i18n/products.es';
+import { primaryContact } from '../../data/contacts';
+
+const featured = products.filter((product) => product.featured);
+const tumbler = localizeProduct(products.find((product) => product.slug === '1688-1078067502639')!, 'fr');
+const bottle = localizeProduct(products.find((product) => product.slug === '1688-1079729776645')!, 'fr');
+const jug = localizeProduct(products.find((product) => product.slug === '1688-790219051220')!, 'fr');
+const spotlight = tumbler;
+---
+
+<BaseLayout
+  title="Gobelets isothermes OEM et ODM"
+  description="ZCZR est une entreprise de fabrication et de négoce de Wuxi, Jiangsu, spécialisée dans les gobelets isothermes en acier inoxydable OEM et ODM : gobelets, bouteilles, cruches, bouilloires et tasses à café."
+  current="home"
+  lang="fr"
+>
+  <section class="hero-b2b">
+    <div class="hero-b2b__inner">
+      <div class="hero-b2b__copy">
+        <div class="hero-b2b__kicker">
+          <i></i>
+          <span>OEM / ODM · Gobelets isothermes</span>
+        </div>
+        <h1>Gobelets isothermes, <em>conçus pour votre marque.</em></h1>
+        <p class="hero-b2b__lead">
+          Un partenaire de fabrication et de négoce pour vos gobelets, bouteilles, cruches, bouilloires et tasses à café. Nous accompagnons les acheteurs internationaux de l'échantillon de référence à la production, au contrôle qualité et à l'emballage d'exportation.
+        </p>
+        <div class="hero-b2b__company">
+          <span>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</span>
+          <i></i>
+          <span>Siège à Wuxi · Usine à Yixing</span>
+        </div>
+        <div class="hero-b2b__actions">
+          <a class="btn btn--solid" href="/fr/contact/">Demander un devis <span aria-hidden="true">↗</span></a>
+          <a class="btn btn--outline" href="/fr/collections/">Voir les produits</a>
+        </div>
+        <div class="hero-b2b__facts">
+          <div class="hero-b2b__fact"><strong>OEM / ODM</strong><span>Programmes personnalisés</span></div>
+          <div class="hero-b2b__fact"><strong>Échantillons</strong><span>Disponibles pour examen</span></div>
+          <div class="hero-b2b__fact"><strong>T/T</strong><span>Trade Assurance</span></div>
+        </div>
+      </div>
+
+      <div class="hero-b2b__visual">
+        <div class="hero-b2b__visual-top">
+          <span>Gamme de référence / 2026</span>
+          <span>Wuxi · Jiangsu · Chine</span>
+        </div>
+        <div class="hero-b2b__products" aria-label="Modèles de gobelets de référence">
+          <div class="hero-b2b__product hero-b2b__product--tumbler">
+            <img class="hero-b2b__photo" src={tumbler.image} alt={tumbler.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{tumbler.shortName}</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--bottle">
+            <img class="hero-b2b__photo" src={bottle.image} alt={bottle.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{bottle.shortName}</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--jug">
+            <img class="hero-b2b__photo" src={jug.image} alt={jug.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{jug.shortName}</span>
+          </div>
+        </div>
+        <div class="hero-b2b__visual-foot">
+          <span>Acier inoxydable 304 / 201</span>
+          <span>Finitions personnalisées</span>
+          <span>Prêt à l'export</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="credential-bar">
+    <div class="credential-bar__inner">
+      <div class="credential">
+        <span class="credential__index">01</span>
+        <div><strong>Fabrication et négoce</strong><p>Production, ventes et export au sein d'une seule équipe.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">02</span>
+        <div><strong>Usine à Yixing</strong><p>Accès direct à l'usine, avec un bureau commercial à Wuxi.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">03</span>
+        <div><strong>Personnalisation OEM</strong><p>Votre design, logo, finition et emballage.</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">04</span>
+        <div><strong>Accompagnement à l'export</strong><p>T/T, Trade Assurance et documents d'expédition.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="company-intro">
+        <div class="company-intro__media reveal">
+          <img src="/images/company.webp" alt="Réception et mur de marque de ZCZR à Wuxi" width="1800" height="1013" loading="lazy" />
+          <div class="company-intro__badge"><img src="/images/zczr-logo.png" alt="ZCZR" width="848" height="220" /></div>
+          <span class="company-intro__caption">Image d'entreprise fournie par ZCZR</span>
+        </div>
+        <div class="company-intro__copy reveal reveal-delay-1">
+          <span class="eyebrow">Profil de l'entreprise</span>
+          <h2>Un partenaire des gobelets isothermes, <em>aux racines d'usine.</em></h2>
+          <div class="company-intro__body">
+            <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. est une entreprise de fabrication et de négoce dont le siège se trouve à Wuxi, Jiangsu, et la production à Yixing. Nous nous concentrons sur une seule catégorie : les gobelets isothermes en acier inoxydable pour les marques, distributeurs et programmes promotionnels.</p>
+            <p>Notre équipe associe une expérience du commerce international à un accès direct à l'usine, afin que vous puissiez passer d'un échantillon de référence à un programme prêt à produire avec un seul interlocuteur. Nous travaillons selon les principes d'intégrité, d'innovation et de coopération mutuellement bénéfique.</p>
+          </div>
+          <div class="company-facts">
+            <div class="company-fact"><span>Siège social</span><strong>Wuxi, Jiangsu</strong></div>
+            <div class="company-fact"><span>Production</span><strong>Usine de Yixing</strong></div>
+            <div class="company-fact"><span>Spécialité</span><strong>Gobelets isothermes</strong></div>
+            <div class="company-fact"><span>Conditions commerciales</span><strong>T/T · Trade Assurance</strong></div>
+          </div>
+          <a class="text-link" href="/fr/about/">Découvrir ZCZR <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">La gamme de gobelets</span>
+          <h2>Une catégorie.<br /><em>Conçue pour la personnalisation.</em></h2>
+          <p>Gobelets, bouteilles, cruches, bouilloires et tasses à café. Utilisez ces modèles de référence comme point de départ ; couleurs, logos, finitions et emballage sont développés pour votre programme.</p>
+        </div>
+        <a class="text-link" href="/fr/collections/">Voir tous les modèles <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="product-grid">
+        {featured.map((product, index) => (
+          <ProductCard product={product} index={index} lang="fr" />
+        ))}
+      </div>
+      <p class="range-note">Modèles de référence. Les spécifications, le MOQ, les délais et la personnalisation sont confirmés par projet.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Ce que nous proposons</span>
+          <h2>De votre brief à un programme <em>prêt à produire.</em></h2>
+        </div>
+        <p>Une catégorie spécialisée, appuyée par le travail réel d'une commande de marque propre : échantillons, personnalisation, contrôle qualité et emballage d'exportation.</p>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">01</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="1.2"/><path d="m16 15 4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Développement OEM et ODM</h3>
+          <p>Partagez un plan, un échantillon de référence ou un brief marché. Nous accompagnons le développement de la couleur, du logo, de la finition et de l'emballage de votre programme.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">02</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8 7.5 9.5 4.3-1.5 7.5-4.9 7.5-9.5V6L12 3Z" stroke="currentColor" stroke-width="1.2"/><path d="m9 11.5 2 2 4-4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>La qualité à chaque étape</h3>
+          <p>Contrôles des matières entrantes, inspection en cours de fabrication et contrôle final avant expédition par rapport à l'échantillon approuvé.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">03</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21c4-3.5 7-7 7-11a7 7 0 1 0-14 0c0 4 3 7.5 7 11Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 10.5 11 13l4-5" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Évaluation des échantillons</h3>
+          <p>Échantillons de préproduction pour vérifier la matière, la couleur et la qualité. Les frais d'échantillon et de transport sont confirmés avant l'envoi.</p>
+        </article>
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">04</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16v12H4zM4 8l4-4h8l4 4M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Emballage d'exportation</h3>
+          <p>Protection intérieure résistante aux chocs et cartons, avec caisses en bois ou palettes pour les programmes importants ou lourds.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">05</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14v10H5zM8 7V5h8v2M8 17v2h8v-2" stroke="currentColor" stroke-width="1.2"/><path d="M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>Conditions commerciales</h3>
+          <p>T/T et Alibaba Trade Assurance. Nous confirmons les conditions de paiement, les documents et les responsabilités d'expédition dans le devis.</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">06</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18 9.5 6l4 8 2.5-4L20 18H4Z" stroke="currentColor" stroke-width="1.2"/><circle cx="18.5" cy="5.5" r="1.4" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <h3>Un interlocuteur unique</h3>
+          <p>Une seule équipe commerciale pour la spécification, les échantillons, le suivi de commande et l'expédition, sans coordonner plusieurs fournisseurs.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Notre méthode</span>
+          <h2>Cinq étapes. <em>Un interlocuteur unique.</em></h2>
+        </div>
+        <p>Chaque programme commence par la spécification. Nous confirmons les détails avant l'échantillonnage et maintenons la qualité et l'emballage alignés sur l'échantillon approuvé.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="process-step__num">01</span>
+          <h3>Partagez votre brief</h3>
+          <p>Modèle, capacité, finition, logo, emballage, quantité cible et marché.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">02</span>
+          <h3>Examinez un échantillon</h3>
+          <p>Échantillon et transport confirmés ; la matière et la qualité sont vérifiées selon votre brief.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step__num">03</span>
+          <h3>Passez commande</h3>
+          <p>Spécification, conditions de paiement et calendrier de production confirmés par écrit.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">04</span>
+          <h3>Production et inspection</h3>
+          <p>Contrôles en cours de fabrication et inspection finale avant expédition par rapport à l'échantillon approuvé.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">05</span>
+          <h3>Emballage et expédition</h3>
+          <p>Emballage d'exportation, documents d'expédition et livraison à votre transitaire ou au nôtre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quality-band" id="quality">
+    <div class="container quality-band__grid">
+      <div>
+        <span class="eyebrow eyebrow--light">Contrôle qualité</span>
+        <h2>La qualité se contrôle <em>à chaque étape.</em></h2>
+        <p class="quality-band__lead">Notre équipe réalise des inspections qualité à chaque étape de la chaîne d'approvisionnement, afin que seul le produit conforme à la spécification convenue progresse. Plus un problème est détecté tôt, moins sa correction est coûteuse.</p>
+        <a class="btn btn--outline-light" href="/fr/contact/" style="margin-top: 28px;">Découvrir notre processus qualité <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="quality-list">
+        <div class="quality-item">
+          <span>01</span>
+          <div><h3>Matières entrantes</h3><p>Acier, couvercles, joints et revêtements contrôlés avant production.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>02</span>
+          <div><h3>Inspection en cours de fabrication</h3><p>Dimensions, finition et assemblage vérifiés pendant la production.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>03</span>
+          <div><h3>Contrôle avant expédition</h3><p>Inspection finale par rapport à l'échantillon approuvé, à la spécification et à la liste d'emballage.</p></div>
+        </div>
+        <div class="quality-item">
+          <span>04</span>
+          <div><h3>Emballage d'exportation</h3><p>Emballage et cartons résistants aux chocs ; caisses en bois ou palettes lorsque le programme l'exige.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spotlight">
+    <div class="spotlight__visual">
+      <span class="spotlight__number">Modèle de référence / 01</span>
+      <img class="spotlight__photo" src={spotlight.image} alt={spotlight.imageAlt} width="1200" height="1200" loading="lazy" />
+    </div>
+    <div class="spotlight__copy">
+      <span class="eyebrow eyebrow--light">Modèle phare</span>
+      <h2>{spotlight.shortName}.<br /><em>Commencez ici.</em></h2>
+      <p>Un gobelet de 40 oz avec anse de la gamme de référence actuelle. Un point de départ pratique pour les programmes de gobelets en marque propre ; la taille, la couleur, le logo et l'emballage s'adaptent à votre brief.</p>
+      <div class="company-facts" style="border-color: rgba(251,248,241,.22); background: rgba(251,248,241,.18); margin-top: 26px;">
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Capacité</span><strong style="color: var(--paper);">{spotlight.capacity}</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Corps</span><strong style="color: var(--paper);">Acier inoxydable 304 à l'intérieur</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">Personnalisation</span><strong style="color: var(--paper);">OEM / ODM</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">MOQ</span><strong style="color: var(--paper);">Sur consultation</strong></div>
+      </div>
+      <div class="quote-band__actions" style="padding-top: 26px;">
+        <a class="btn btn--light" href="/fr/contact/">Demander un échantillon <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href={`/fr/products/${spotlight.slug}/`}>Voir le modèle</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">Questions d'acheteurs</span>
+          <h2>Les détails que <em>les acheteurs demandent.</em></h2>
+        </div>
+        <a class="text-link" href="/fr/contact/#faq">Toutes les questions <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Êtes-vous une usine ou une société de négoce ?</summary>
+          <p>Nous sommes une entreprise de fabrication et de négoce qui intègre production, ventes et export. Notre bureau commercial se trouve à Wuxi et notre usine à Yixing, Jiangsu.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Pouvez-vous envoyer des échantillons avant une commande ?</summary>
+          <p>Oui. Les échantillons servent à vérifier la matière et la qualité. Les frais d'échantillon et de transport sont confirmés avant l'envoi.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Pouvez-vous fabriquer notre propre design ?</summary>
+          <p>Oui. Nous acceptons la personnalisation OEM. Partagez votre design, logo, échantillon de référence ou idée et nous confirmerons ce qui peut être développé et échantillonné.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Quels moyens de paiement acceptez-vous ?</summary>
+          <p>T/T et Alibaba Trade Assurance. Les conditions de paiement, les documents et les responsabilités d'expédition sont confirmés dans le devis.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Comment les produits sont-ils emballés pour l'export ?</summary>
+          <p>Les petits articles utilisent une protection intérieure résistante aux chocs et des cartons. Les programmes importants ou lourds peuvent utiliser des caisses en bois ou des palettes. L'emballage est confirmé selon les exigences de votre programme.</p>
+        </details>
+        <details class="faq-item">
+          <summary>En quel matériau sont fabriqués les gobelets ?</summary>
+          <p>Notre gamme de gobelets isothermes utilise des parois intérieures en acier inoxydable 304 et des coques extérieures en acier 201 sur de nombreux modèles. Le matériau, la nuance et la finition exacts sont confirmés par modèle.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-band">
+    <div class="container quote-band__inner">
+      <div>
+        <span class="eyebrow eyebrow--light">Lancer un projet</span>
+        <h2>Vous avez un modèle en tête ? <em>Créons-le ensemble.</em></h2>
+        <p>Envoyez-nous votre référence, votre quantité cible et votre marché. Nous vous répondrons avec la spécification, le plan d'échantillonnage et les prochaines étapes.</p>
+      </div>
+      <div class="quote-band__actions">
+        <a class="btn btn--light" href="/fr/contact/">Demander un devis <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href={`mailto:${primaryContact.email}`}>Écrire à l'équipe</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+---
+
+<BaseLayout
+  title="公司"
+  description="Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. 是一家位于江苏无锡的工贸企业，专注于 OEM 与 ODM 不锈钢保温饮具。"
+  current="about"
+  lang="zh"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">公司 / Wuxi Zhenchuang Zhuorui</span>
+        <span class="page-hero__meta">总部位于无锡 · 工厂位于宜兴</span>
+      </div>
+      <h1>专注于饮具。<em>与工厂紧密相连。</em></h1>
+      <div class="page-hero__bottom">
+        <p>一家围绕单一品类打造的工贸企业：为品牌、经销商和促销项目提供不锈钢保温饮具。</p>
+        <div class="page-hero__meta"><span>工贸一体</span><span>OEM / ODM</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="about-image reveal" style="margin-top: 0; margin-bottom: clamp(40px, 6vw, 72px);">
+        <img src="/images/company.webp" alt="ZCZR 前台与品牌形象" width="1800" height="1013" fetchpriority="high" />
+      </div>
+      <div class="about-intro">
+        <div class="reveal">
+          <span class="eyebrow">我们是谁</span>
+          <h2>一个品类。<em>一支负责任的团队。</em></h2>
+        </div>
+        <div class="about-intro__body reveal reveal-delay-1">
+          <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. 是一家总部位于江苏无锡、生产基地位于宜兴的工贸企业。我们整合保温饮具的生产、销售与出口。</p>
+          <p>我们的方向刻意保持聚焦：保温杯、水瓶、壶、茶壶和咖啡杯。这种专注让我们有时间打磨采购商真正在意的细节：结构、表面工艺、标志、样品、包装和运输。</p>
+          <p>我们的团队兼具国际贸易经验与直接对接工厂的能力。从第一份需求到出货，由同一位对接人陪伴采购商完成规格、样品、订单跟进和出口单据。</p>
+          <a class="text-link" href="/zh/collections/">查看参考系列 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">我们的工作方式</span>
+          <h2>为<em>采购商的日常</em>而设计。</h2>
+        </div>
+        <p>我们让流程保持务实：确认规格、确认样品、守住质量、让出货可预期。</p>
+      </div>
+      <div class="values-grid">
+        <article class="value-card reveal">
+          <span>01</span>
+          <h3>专注而非分散</h3>
+          <p>只做一个品类，意味着我们的团队、样品和质量控制都集中在保温饮具上，而不是不相关的产品。</p>
+        </article>
+        <article class="value-card reveal reveal-delay-1">
+          <span>02</span>
+          <h3>直接对接工厂</h3>
+          <p>无锡商务办公室与宜兴生产端协同，让采购商在商务需求和工厂之间拥有直达通道。</p>
+        </article>
+        <article class="value-card reveal reveal-delay-2">
+          <span>03</span>
+          <h3>每个环节的质量</h3>
+          <p>来料、制程生产和出货前检查都是订单的一部分，而不是事后补充。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">公司信息</span>
+          <h2>所有细节，<em>一目了然。</em></h2>
+        </div>
+      </div>
+      <div class="company-facts" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="company-fact"><span>公司名称</span><strong>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</strong></div>
+        <div class="company-fact"><span>中文名称</span><strong>无锡臻创卓锐国际贸易有限公司</strong></div>
+        <div class="company-fact"><span>总部</span><strong>中国江苏无锡</strong></div>
+        <div class="company-fact"><span>生产</span><strong>江苏宜兴工厂</strong></div>
+        <div class="company-fact"><span>经营模式</span><strong>工贸一体</strong></div>
+        <div class="company-fact"><span>主营产品</span><strong>保温饮具</strong></div>
+        <div class="company-fact"><span>定制</span><strong>OEM / ODM</strong></div>
+        <div class="company-fact"><span>付款</span><strong>T/T · Alibaba Trade Assurance</strong></div>
+        <div class="company-fact"><span>样品</span><strong>可提供；运费待确认</strong></div>
+        <div class="company-fact"><span>包装</span><strong>纸箱；木箱或托盘</strong></div>
+      </div>
+
+      <div class="quote-block reveal">
+        <blockquote>“诚信、创新与<em>合作共赢。</em>”</blockquote>
+        <cite>ZCZR 的经营理念</cite>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter lang="zh" />
+</BaseLayout>

@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { products } from '../../data/products';
+import { localizeProduct } from '../../i18n/products.es';
+import { companyContacts } from '../../data/contacts';
+
+const localizedProducts = products.map((product) => localizeProduct(product, 'zh'));
+---
+
+<BaseLayout
+  title="联系我们"
+  description="联系 ZCZR，咨询 OEM 与 ODM 保温饮具、样品、规格、包装或现有订单。中国江苏无锡。"
+  current="contact"
+  lang="zh"
+>
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__top">
+        <span class="eyebrow">联系 / 开启对话</span>
+        <span class="page-hero__meta">中国 · 江苏 · 无锡</span>
+      </div>
+      <h1>说说你的<em>项目。</em></h1>
+      <div class="page-hero__bottom">
+        <p>请提供型号、容量、表面工艺、标志、目标数量和市场。我们会确认规格、打样流程和后续步骤。我们的商务团队会阅读每一封询盘。</p>
+        <div class="page-hero__meta"><span>OEM / ODM</span><span>2 个工作日内回复</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container contact-grid">
+      <div class="contact-intro">
+        <span class="eyebrow">联系方式</span>
+        <h2>与团队<em>直接沟通。</em></h2>
+        <p>无需在工单系统里绕来绕去。告诉我们你在找什么，我们会为你推荐合适的参考型号、打样计划或包装方案。</p>
+
+        <div class="contact-details">
+          {companyContacts.map((contact, index) => (
+            <Fragment>
+              <div class="contact-detail">
+                <span>{index === 0 ? '主要邮箱' : '次要邮箱'}</span>
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              </div>
+              <div class="contact-detail">
+                <span>{index === 0 ? '主要电话' : '次要电话'}</span>
+                <a href={`tel:${contact.tel}`}>{contact.phone}</a>
+              </div>
+            </Fragment>
+          ))}
+          <div class="contact-detail"><span>总部</span><span>中国江苏无锡</span></div>
+          <div class="contact-detail"><span>生产</span><span>江苏宜兴工厂</span></div>
+          <div class="contact-detail"><span>条款</span><span>T/T · Alibaba Trade Assurance</span></div>
+          <div class="contact-detail"><span>样品</span><span>可提供；费用和运费待确认</span></div>
+          <div class="contact-detail"><span>工作时间</span><span>周一至周五 9:00–17:00（中国时间）</span></div>
+        </div>
+      </div>
+
+      <form class="contact-form" data-contact-form action="/api/contact" method="post" data-fallback-email={companyContacts[0].email}>
+        <span class="eyebrow">提交需求简报</span>
+        <input type="hidden" name="locale" value="zh" />
+        <input type="hidden" name="page" value="/zh/contact/" />
+        <div class="hp-field" aria-hidden="true">
+          <label for="website-zh">网站</label>
+          <input id="website-zh" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="form-row" style="margin-top: 22px;">
+          <div class="field">
+            <label for="name">姓名</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="你的姓名" required />
+          </div>
+          <div class="field">
+            <label for="email">企业邮箱</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="company">公司</label>
+            <input id="company" name="company" type="text" autocomplete="organization" placeholder="公司名称" required />
+          </div>
+          <div class="field">
+            <label for="country">国家</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" placeholder="中国" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="topic">主题</label>
+            <select id="topic" name="topic">
+              <option>OEM / ODM 项目</option>
+              <option>样品申请</option>
+              <option>规格咨询</option>
+              <option>包装</option>
+              <option>现有订单</option>
+              <option>其他</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="product">参考型号</label>
+            <select id="product" name="product">
+              <option>暂不确定</option>
+              {localizedProducts.map((product) => <option>{product.name}</option>)}
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="quantity">目标数量</label>
+          <input id="quantity" name="quantity" type="text" placeholder="例如 1,000 件" />
+        </div>
+        <div class="field">
+          <label for="message">需求简报</label>
+          <textarea id="message" name="message" placeholder="型号或参考、容量、表面工艺、标志、包装、目标市场和交期。" required></textarea>
+        </div>
+        <label class="form-check">
+          <input type="checkbox" name="consent" required />
+          <span>我同意就本次询盘与我联系，并同意为回复询盘而处理我的数据。</span>
+        </label>
+        <button class="btn btn--solid" type="submit">发送询盘 <span aria-hidden="true">↗</span></button>
+        <p class="form-note" data-contact-note aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">常见问题</span>
+          <h2>写信<em>之前。</em></h2>
+        </div>
+        <p>一些常见问题的解答。如果没有你想要的答案，填写表单是联系我们最快的方式。</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>你们是工厂还是贸易公司？</summary>
+          <p>我们是集生产、销售和出口于一体的工贸企业。商务办公室位于无锡，工厂位于江苏宜兴。</p>
+        </details>
+        <details class="faq-item">
+          <summary>下单前可以先寄样品吗？</summary>
+          <p>可以。样品用于检查材料和质量。样品费和运费在寄出前确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>可以生产我们自己的设计吗？</summary>
+          <p>可以。我们接受 OEM 定制。请提供你的设计、标志、参考样品或想法，我们会确认哪些内容可以开发和打样。</p>
+        </details>
+        <details class="faq-item">
+          <summary>你们接受哪些付款方式？</summary>
+          <p>T/T 和 Alibaba Trade Assurance。付款条件、单据和运输责任在报价中确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>出口产品如何包装？</summary>
+          <p>小件商品使用抗冲击内包装和纸箱。大型或重型项目可使用木箱或托盘。包装会根据你的项目要求确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>MOQ 和交期是多少？</summary>
+          <p>MOQ 和交期取决于型号、定制内容和数量。双方确认规格后，会在报价中一并确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>饮具使用什么材料？</summary>
+          <p>我们的保温饮具系列在许多型号上采用 304 不锈钢内胆和 201 不锈钢外壳。具体材料、牌号和表面工艺按型号确认。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

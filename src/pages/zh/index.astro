@@ -1,0 +1,359 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products } from '../../data/products';
+import { localizeProduct } from '../../i18n/products.es';
+import { primaryContact } from '../../data/contacts';
+
+const featured = products.filter((product) => product.featured);
+const tumbler = localizeProduct(products.find((product) => product.slug === '1688-1078067502639')!, 'zh');
+const bottle = localizeProduct(products.find((product) => product.slug === '1688-1079729776645')!, 'zh');
+const jug = localizeProduct(products.find((product) => product.slug === '1688-790219051220')!, 'zh');
+const spotlight = tumbler;
+---
+
+<BaseLayout
+  title="OEM 与 ODM 保温饮具"
+  description="ZCZR 是一家位于江苏无锡的工贸企业，专注于 OEM 与 ODM 不锈钢保温饮具：保温杯、水瓶、壶、茶壶和咖啡杯。"
+  current="home"
+  lang="zh"
+>
+  <section class="hero-b2b">
+    <div class="hero-b2b__inner">
+      <div class="hero-b2b__copy">
+        <div class="hero-b2b__kicker">
+          <i></i>
+          <span>OEM 与 ODM · 保温饮具</span>
+        </div>
+        <h1>保温饮具，<em>为你的品牌而造。</em></h1>
+        <p class="hero-b2b__lead">
+          为保温杯、水瓶、壶、茶壶和咖啡杯提供制造与贸易一体化服务。我们陪伴国际采购商，从参考样品一直到生产、质量检验和出口包装。
+        </p>
+        <div class="hero-b2b__company">
+          <span>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.</span>
+          <i></i>
+          <span>总部位于无锡 · 工厂位于宜兴</span>
+        </div>
+        <div class="hero-b2b__actions">
+          <a class="btn btn--solid" href="/zh/contact/">获取报价 <span aria-hidden="true">↗</span></a>
+          <a class="btn btn--outline" href="/zh/collections/">查看产品</a>
+        </div>
+        <div class="hero-b2b__facts">
+          <div class="hero-b2b__fact"><strong>OEM / ODM</strong><span>定制方案</span></div>
+          <div class="hero-b2b__fact"><strong>样品</strong><span>可提供样品评估</span></div>
+          <div class="hero-b2b__fact"><strong>T/T</strong><span>Trade Assurance</span></div>
+        </div>
+      </div>
+
+      <div class="hero-b2b__visual">
+        <div class="hero-b2b__visual-top">
+          <span>参考系列 / 2026</span>
+          <span>中国 · 江苏 · 无锡</span>
+        </div>
+        <div class="hero-b2b__products" aria-label="参考饮具型号">
+          <div class="hero-b2b__product hero-b2b__product--tumbler">
+            <img class="hero-b2b__photo" src={tumbler.image} alt={tumbler.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{tumbler.shortName}</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--bottle">
+            <img class="hero-b2b__photo" src={bottle.image} alt={bottle.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{bottle.shortName}</span>
+          </div>
+          <div class="hero-b2b__product hero-b2b__product--jug">
+            <img class="hero-b2b__photo" src={jug.image} alt={jug.imageAlt} width="1200" height="1200" fetchpriority="high" />
+            <span class="hero-b2b__product-label">{jug.shortName}</span>
+          </div>
+        </div>
+        <div class="hero-b2b__visual-foot">
+          <span>304 / 201 不锈钢</span>
+          <span>定制表面工艺</span>
+          <span>出口就绪</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="credential-bar">
+    <div class="credential-bar__inner">
+      <div class="credential">
+        <span class="credential__index">01</span>
+        <div><strong>工贸一体</strong><p>生产、销售与出口由同一支团队负责。</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">02</span>
+        <div><strong>宜兴工厂</strong><p>可直接对接工厂，商务办公室位于无锡。</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">03</span>
+        <div><strong>OEM 定制</strong><p>你的设计、标志、表面工艺和包装。</p></div>
+      </div>
+      <div class="credential">
+        <span class="credential__index">04</span>
+        <div><strong>出口支持</strong><p>T/T、Trade Assurance 和货运单据。</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="company-intro">
+        <div class="company-intro__media reveal">
+          <img src="/images/company.webp" alt="ZCZR 位于无锡的公司前台与品牌墙" width="1800" height="1013" loading="lazy" />
+          <div class="company-intro__badge"><img src="/images/zczr-logo.png" alt="ZCZR" width="848" height="220" /></div>
+          <span class="company-intro__caption">ZCZR 提供的公司实景图</span>
+        </div>
+        <div class="company-intro__copy reveal reveal-delay-1">
+          <span class="eyebrow">公司简介</span>
+          <h2>一家<em>扎根工厂</em>的饮具合作伙伴。</h2>
+          <div class="company-intro__body">
+            <p>Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. 是一家总部位于江苏无锡、生产基地位于宜兴的工贸企业。我们专注于一个品类：为品牌、经销商和促销项目提供不锈钢保温饮具。</p>
+            <p>我们的团队兼具国际贸易经验与直接对接工厂的能力，让你只需一个对接人，就能从参考样品推进到可量产的项目。我们秉持诚信、创新与合作共赢的原则。</p>
+          </div>
+          <div class="company-facts">
+            <div class="company-fact"><span>总部</span><strong>江苏无锡</strong></div>
+            <div class="company-fact"><span>生产</span><strong>宜兴工厂</strong></div>
+            <div class="company-fact"><span>专注</span><strong>保温饮具</strong></div>
+            <div class="company-fact"><span>贸易条件</span><strong>T/T · Trade Assurance</strong></div>
+          </div>
+          <a class="text-link" href="/zh/about/">了解 ZCZR <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">饮具系列</span>
+          <h2>一个品类。<br /><em>为定制而生。</em></h2>
+          <p>保温杯、水瓶、壶、茶壶和咖啡杯。可将这些参考型号作为起点；颜色、标志、表面工艺和包装都会围绕你的项目开发。</p>
+        </div>
+        <a class="text-link" href="/zh/collections/">查看全部型号 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="product-grid">
+        {featured.map((product, index) => (
+          <ProductCard product={product} index={index} lang="zh" />
+        ))}
+      </div>
+      <p class="range-note">参考型号。规格、MOQ、交期和定制内容均按项目确认。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">我们能提供什么</span>
+          <h2>从你的需求到<em>可量产的项目。</em></h2>
+        </div>
+        <p>一个专注的品类，背后是真实的自有品牌订单经验：样品、定制、质量控制和出口包装。</p>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">01</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="1.2"/><path d="m16 15 4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>OEM 与 ODM 开发</h3>
+          <p>提供图纸、参考样品或市场简报。我们支持你的项目在颜色、标志、表面工艺和包装方面的开发。</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">02</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8 7.5 9.5 4.3-1.5 7.5-4.9 7.5-9.5V6L12 3Z" stroke="currentColor" stroke-width="1.2"/><path d="m9 11.5 2 2 4-4" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>每个环节的质量控制</h3>
+          <p>来料检验、制程检验，以及对照已确认样品的出货前最终检验。</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">03</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21c4-3.5 7-7 7-11a7 7 0 1 0-14 0c0 4 3 7.5 7 11Z" stroke="currentColor" stroke-width="1.2"/><path d="M9 10.5 11 13l4-5" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>样品评估</h3>
+          <p>产前样品用于检查材料、颜色和质量。样品费和运费在寄出前确认。</p>
+        </article>
+        <article class="capability-card reveal">
+          <div class="capability-card__top">
+            <span class="capability-card__num">04</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16v12H4zM4 8l4-4h8l4 4M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>出口包装</h3>
+          <p>抗冲击内包装与纸箱；大型或重型项目可提供木箱或托盘。</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-1">
+          <div class="capability-card__top">
+            <span class="capability-card__num">05</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14v10H5zM8 7V5h8v2M8 17v2h8v-2" stroke="currentColor" stroke-width="1.2"/><path d="M9 12h6" stroke="currentColor" stroke-width="1.2"/></svg>
+            </span>
+          </div>
+          <h3>贸易条件</h3>
+          <p>T/T 和 Alibaba Trade Assurance。付款条件、单据和运输责任在报价中确认。</p>
+        </article>
+        <article class="capability-card reveal reveal-delay-2">
+          <div class="capability-card__top">
+            <span class="capability-card__num">06</span>
+            <span class="capability-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 18 9.5 6l4 8 2.5-4L20 18H4Z" stroke="currentColor" stroke-width="1.2"/><circle cx="18.5" cy="5.5" r="1.4" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <h3>单一对接人</h3>
+          <p>一个商务团队负责规格、样品、订单跟进和出货，无需协调多个供应商。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">我们的工作方式</span>
+          <h2>五个步骤。<em>一个对接人。</em></h2>
+        </div>
+        <p>每个项目都从规格开始。打样前确认细节，并让质量和包装始终与已确认样品保持一致。</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="process-step__num">01</span>
+          <h3>分享你的需求</h3>
+          <p>型号、容量、表面工艺、标志、包装、目标数量和市场。</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">02</span>
+          <h3>确认样品</h3>
+          <p>确认样品和运费；按你的需求检查材料和质量。</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step__num">03</span>
+          <h3>下单</h3>
+          <p>规格、付款条件和生产排期以书面形式确认。</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">04</span>
+          <h3>生产与检验</h3>
+          <p>制程管控，以及对照已确认样品的出货前最终检验。</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step__num">05</span>
+          <h3>包装与发货</h3>
+          <p>出口包装、货运单据，并交付给你的货代或我们的货代。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quality-band" id="quality">
+    <div class="container quality-band__grid">
+      <div>
+        <span class="eyebrow eyebrow--light">质量控制</span>
+        <h2>质量把控在<em>每个环节。</em></h2>
+        <p class="quality-band__lead">我们的团队在供应链的每个环节进行质量检验，只有符合约定规格的产品才能进入下一环节。问题发现得越早，纠正成本越低。</p>
+        <a class="btn btn--outline-light" href="/zh/contact/" style="margin-top: 28px;">咨询我们的质量控制流程 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="quality-list">
+        <div class="quality-item">
+          <span>01</span>
+          <div><h3>来料</h3><p>钢材、杯盖、密封圈和涂层在生产前完成检验。</p></div>
+        </div>
+        <div class="quality-item">
+          <span>02</span>
+          <div><h3>制程检验</h3><p>生产过程中检查尺寸、表面工艺和装配。</p></div>
+        </div>
+        <div class="quality-item">
+          <span>03</span>
+          <div><h3>出货前检验</h3><p>对照已确认样品、规格和装箱单进行最终检验。</p></div>
+        </div>
+        <div class="quality-item">
+          <span>04</span>
+          <div><h3>出口包装</h3><p>抗冲击内包装和纸箱；项目需要时使用木箱或托盘。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spotlight">
+    <div class="spotlight__visual">
+      <span class="spotlight__number">参考型号 / 01</span>
+      <img class="spotlight__photo" src={spotlight.image} alt={spotlight.imageAlt} width="1200" height="1200" loading="lazy" />
+    </div>
+    <div class="spotlight__copy">
+      <span class="eyebrow eyebrow--light">主打型号</span>
+      <h2>{spotlight.shortName}.<br /><em>从这里开始。</em></h2>
+      <p>当前参考系列中的 40 oz 带手柄保温杯。它是自有品牌饮具项目的实用起点；尺寸、颜色、标志和包装都可按你的需求调整。</p>
+      <div class="company-facts" style="border-color: rgba(251,248,241,.22); background: rgba(251,248,241,.18); margin-top: 26px;">
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">容量</span><strong style="color: var(--paper);">{spotlight.capacity}</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">杯体</span><strong style="color: var(--paper);">内胆 304 不锈钢</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">定制</span><strong style="color: var(--paper);">OEM / ODM</strong></div>
+        <div class="company-fact" style="background: transparent; color: var(--paper);"><span style="color: rgba(251,248,241,.55);">MOQ</span><strong style="color: var(--paper);">面议</strong></div>
+      </div>
+      <div class="quote-band__actions" style="padding-top: 26px;">
+        <a class="btn btn--light" href="/zh/contact/">申请样品 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href={`/zh/products/${spotlight.slug}/`}>查看型号</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__title">
+          <span class="eyebrow">采购商常见问题</span>
+          <h2>采购商最关心的<em>细节。</em></h2>
+        </div>
+        <a class="text-link" href="/zh/contact/#faq">全部问题 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>你们是工厂还是贸易公司？</summary>
+          <p>我们是集生产、销售和出口于一体的工贸企业。商务办公室位于无锡，工厂位于江苏宜兴。</p>
+        </details>
+        <details class="faq-item">
+          <summary>下单前可以先寄样品吗？</summary>
+          <p>可以。样品用于检查材料和质量。样品费和运费在寄出前确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>可以生产我们自己的设计吗？</summary>
+          <p>可以。我们接受 OEM 定制。请提供你的设计、标志、参考样品或想法，我们会确认哪些内容可以开发和打样。</p>
+        </details>
+        <details class="faq-item">
+          <summary>你们接受哪些付款方式？</summary>
+          <p>T/T 和 Alibaba Trade Assurance。付款条件、单据和运输责任在报价中确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>出口产品如何包装？</summary>
+          <p>小件商品使用抗冲击内包装和纸箱。大型或重型项目可使用木箱或托盘。包装会根据你的项目要求确认。</p>
+        </details>
+        <details class="faq-item">
+          <summary>饮具使用什么材料？</summary>
+          <p>我们的保温饮具系列在许多型号上采用 304 不锈钢内胆和 201 不锈钢外壳。具体材料、牌号和表面工艺按型号确认。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-band">
+    <div class="container quote-band__inner">
+      <div>
+        <span class="eyebrow eyebrow--light">启动项目</span>
+        <h2>心中有型号？<em>我们一起把它做出来。</em></h2>
+        <p>请发送你的参考、目标数量和目标市场。我们会回复规格、打样计划和后续步骤。</p>
+      </div>
+      <div class="quote-band__actions">
+        <a class="btn btn--light" href="/zh/contact/">获取报价 <span aria-hidden="true">↗</span></a>
+        <a class="btn btn--outline-light" href={`mailto:${primaryContact.email}`}>联系团队</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
