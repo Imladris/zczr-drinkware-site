@@ -5361,3 +5361,108 @@ html[lang="zh"] .quote-band h2 {
     line-height: 1.16;
   }
 }
+
+/* Contact form feedback */
+.form-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+}
+
+.form-feedback[hidden] {
+  display: none;
+}
+
+.form-feedback:focus {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+}
+
+.form-feedback__icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 50%;
+}
+
+.form-feedback__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.form-feedback__content {
+  min-width: 0;
+  flex: 1;
+}
+
+.form-feedback__content strong {
+  display: block;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.form-feedback__content p {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.form-feedback__content a {
+  display: inline-block;
+  margin-top: 8px;
+  border-bottom: 1px solid currentColor;
+  font-size: 11px;
+  font-weight: 800;
+  color: currentColor;
+}
+
+.form-feedback--success {
+  border-color: #b8c9ad;
+  border-left-color: #4f7045;
+  background: #eef4e9;
+  color: #2c4a2b;
+}
+
+.form-feedback--success .form-feedback__icon {
+  background: #d6e6cd;
+  color: #3d6234;
+}
+
+.form-feedback--success .form-feedback__content p {
+  color: #496448;
+}
+
+.form-feedback--error {
+  border-color: #e2b9aa;
+  border-left-color: var(--clay);
+  background: #fbede7;
+  color: #7e3524;
+}
+
+.form-feedback--error .form-feedback__icon {
+  background: #f2d4c9;
+  color: #a4422b;
+}
+
+.form-feedback--error .form-feedback__content p {
+  color: #844936;
+}
+
+html[lang="zh"] .form-feedback__content strong {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}

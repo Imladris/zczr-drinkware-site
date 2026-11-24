@@ -116,7 +116,7 @@ const localizedProducts = products.map((product) => localizeProduct(product, 'fr
           <span>J'accepte d'être contacté au sujet de cette demande et du traitement de mes données pour y répondre.</span>
         </label>
         <button class="btn btn--solid" type="submit">Envoyer la demande <span aria-hidden="true">↗</span></button>
-        <p class="form-note" data-contact-note aria-live="polite"></p>
+        <div class="form-feedback" data-contact-note role="status" aria-live="polite" tabindex="-1" hidden></div>
       </form>
     </div>
   </section>

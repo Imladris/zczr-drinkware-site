@@ -190,35 +190,142 @@ qsa('[data-newsletter-form]').forEach((form) => {
 const contactForm = qs('[data-contact-form]');
 if (contactForm) {
   const contactNote = qs('[data-contact-note]', contactForm);
-  const successMessage = tr(
-    'Thanks — your inquiry has been sent. We will reply within 2 business days.',
-    'Gracias: tu consulta se ha enviado. Responderemos en un plazo de 2 días laborables.',
-    'Merci — votre demande a été envoyée. Nous répondrons sous 2 jours ouvrés.',
-    '谢谢，您的询盘已发送。我们将在 2 个工作日内回复。'
-  );
   const params = new URLSearchParams(window.location.search);
+  const fallbackEmail = contactForm.dataset.fallbackEmail || '';
+
+  const feedbackCopy = {
+    en: {
+      successTitle: 'Inquiry sent successfully',
+      successBody: 'Our trade team has received your inquiry and will reply within 2 business days.',
+      errorTitle: 'Your message was not sent',
+      emailAction: 'Email us directly',
+      errors: {
+        required_fields: 'Please complete all required fields.',
+        invalid_email: 'Please enter a valid email address.',
+        consent_required: 'Please accept the contact consent.',
+        message_too_short: 'Please add a little more detail to your message.',
+        rate_limited: 'Too many attempts. Please wait a few minutes and try again.',
+        payload_too_large: 'Your message is too long. Please shorten it and try again.',
+        send_failed: 'The email service could not send your message. Please try again or contact us directly.',
+        network: 'Network error. Please check your connection and try again.',
+        default: 'The form could not be sent. Please try again or contact us directly.',
+      },
+    },
+    es: {
+      successTitle: 'Consulta enviada correctamente',
+      successBody: 'Nuestro equipo comercial ha recibido tu consulta y responderá en un plazo de 2 días laborables.',
+      errorTitle: 'Tu mensaje no se ha enviado',
+      emailAction: 'Escríbenos directamente',
+      errors: {
+        required_fields: 'Completa todos los campos obligatorios.',
+        invalid_email: 'Introduce una dirección de correo electrónico válida.',
+        consent_required: 'Acepta el consentimiento para ser contactado.',
+        message_too_short: 'Añade un poco más de detalle a tu mensaje.',
+        rate_limited: 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo.',
+        payload_too_large: 'El mensaje es demasiado largo. Acórtalo e inténtalo de nuevo.',
+        send_failed: 'El servicio de correo no pudo enviar tu mensaje. Inténtalo de nuevo o contáctanos directamente.',
+        network: 'Error de red. Comprueba tu conexión e inténtalo de nuevo.',
+        default: 'No se pudo enviar el formulario. Inténtalo de nuevo o contáctanos directamente.',
+      },
+    },
+    fr: {
+      successTitle: 'Demande envoyée avec succès',
+      successBody: 'Notre équipe commerciale a bien reçu votre demande et vous répondra sous 2 jours ouvrés.',
+      errorTitle: "Votre message n'a pas été envoyé",
+      emailAction: 'Écrivez-nous directement',
+      errors: {
+        required_fields: 'Veuillez remplir tous les champs obligatoires.',
+        invalid_email: 'Veuillez saisir une adresse e-mail valide.',
+        consent_required: 'Veuillez accepter le consentement de contact.',
+        message_too_short: 'Veuillez ajouter un peu plus de détail à votre message.',
+        rate_limited: 'Trop de tentatives. Patientez quelques minutes puis réessayez.',
+        payload_too_large: 'Votre message est trop long. Raccourcissez-le puis réessayez.',
+        send_failed: "Le service d'e-mail n'a pas pu envoyer votre message. Réessayez ou contactez-nous directement.",
+        network: 'Erreur réseau. Vérifiez votre connexion puis réessayez.',
+        default: "Le formulaire n'a pas pu être envoyé. Réessayez ou contactez-nous directement.",
+      },
+    },
+    zh: {
+      successTitle: '询盘已成功发送',
+      successBody: '我们的商务团队已收到您的询盘，将在 2 个工作日内回复。',
+      errorTitle: '信息未发送',
+      emailAction: '直接给我们发邮件',
+      errors: {
+        required_fields: '请填写所有必填项。',
+        invalid_email: '请输入有效的电子邮箱地址。',
+        consent_required: '请勾选同意联系选项。',
+        message_too_short: '请补充更多需求细节。',
+        rate_limited: '尝试次数过多，请等待几分钟后重试。',
+        payload_too_large: '信息过长，请缩短后重试。',
+        send_failed: '邮件服务暂时无法发送，请重试或直接联系我们。',
+        network: '网络错误，请检查网络连接后重试。',
+        default: '表单未能发送，请重试或直接联系我们。',
+      },
+    },
+  };
+
+  const feedback = feedbackCopy[pageLang] || feedbackCopy.en;
+
+  const showFeedback = (type, title, body, focus = false) => {
+    if (!contactNote) return;
+    contactNote.replaceChildren();
+    contactNote.className = `form-feedback form-feedback--${type}`;
+    contactNote.hidden = false;
+    contactNote.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    contactNote.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+
+    const icon = document.createElement('span');
+    icon.className = 'form-feedback__icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.innerHTML =
+      type === 'success'
+        ? '<svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4.5 4.5L19 7" stroke="currentColor" stroke-width="1.8"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none"><path d="M12 7v6M12 17h.01" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/></svg>';
+
+    const content = document.createElement('div');
+    content.className = 'form-feedback__content';
+    const heading = document.createElement('strong');
+    heading.textContent = title;
+    const message = document.createElement('p');
+    message.textContent = body;
+    content.append(heading, message);
+
+    if (type === 'error' && fallbackEmail) {
+      const link = document.createElement('a');
+      link.href = `mailto:${fallbackEmail}`;
+      link.textContent = feedback.emailAction;
+      content.append(link);
+    }
+
+    contactNote.append(icon, content);
+    if (focus) {
+      contactNote.focus({ preventScroll: true });
+      contactNote.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  const clearFeedback = () => {
+    if (!contactNote) return;
+    contactNote.hidden = true;
+    contactNote.replaceChildren();
+  };
 
   if (contactNote && params.get('sent') === '1') {
-    contactNote.textContent = successMessage;
+    showFeedback('success', feedback.successTitle, feedback.successBody);
     window.history.replaceState({}, '', window.location.pathname);
   }
   if (contactNote && params.get('error') === '1') {
-    contactNote.textContent = tr(
-      'Sorry, the form could not be sent. Please try again or email us directly.',
-      'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.',
-      'Désolé, le formulaire n’a pas pu être envoyé. Réessayez ou écrivez-nous directement.',
-      '抱歉，表单未能发送。请重试或直接给我们发邮件。'
-    );
+    showFeedback('error', feedback.errorTitle, feedback.errors.default);
     window.history.replaceState({}, '', window.location.pathname);
   }
 
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const submit = qs('button[type="submit"]', contactForm);
-    const fallbackEmail = contactForm.dataset.fallbackEmail || '';
 
     if (!contactForm.checkValidity()) {
       contactForm.reportValidity();
+      showFeedback('error', feedback.errorTitle, feedback.errors.required_fields, true);
       return;
     }
 
@@ -228,7 +335,7 @@ if (contactForm) {
       submit.textContent = tr('Sending…', 'Enviando…', 'Envoi…', '发送中…');
     }
     contactForm.setAttribute('aria-busy', 'true');
-    if (contactNote) contactNote.textContent = '';
+    clearFeedback();
 
     const payload = Object.fromEntries(new FormData(contactForm).entries());
     payload.locale = ['es', 'fr', 'zh'].includes(pageLang) ? pageLang : 'en';
@@ -241,26 +348,18 @@ if (contactForm) {
         body: JSON.stringify(payload),
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) throw new Error(result.error || `HTTP ${response.status}`);
+      if (!response.ok || !result.ok) {
+        const error = new Error(result.error || `HTTP ${response.status}`);
+        error.code = result.error || 'default';
+        throw error;
+      }
 
-      if (contactNote) contactNote.textContent = successMessage;
+      showFeedback('success', feedback.successTitle, feedback.successBody, true);
       contactForm.reset();
     } catch (error) {
-      if (contactNote) {
-        contactNote.textContent = fallbackEmail
-          ? tr(
-              `Sorry, the form could not be sent. Please email us at ${fallbackEmail}.`,
-              `Lo sentimos, no se pudo enviar el formulario. Escríbenos a ${fallbackEmail}.`,
-              `Désolé, le formulaire n’a pas pu être envoyé. Écrivez-nous à ${fallbackEmail}.`,
-              `抱歉，表单未能发送。请发送邮件至 ${fallbackEmail}。`
-            )
-          : tr(
-              'Sorry, the form could not be sent. Please try again or email us directly.',
-              'Lo sentimos, no se pudo enviar el formulario. Inténtalo de nuevo o escríbenos directamente.',
-              'Désolé, le formulaire n’a pas pu être envoyé. Réessayez ou écrivez-nous directement.',
-              '抱歉，表单未能发送。请重试或直接给我们发邮件。'
-            );
-      }
+      const code = error?.code || (error instanceof TypeError ? 'network' : 'default');
+      const message = feedback.errors[code] || feedback.errors.default;
+      showFeedback('error', feedback.errorTitle, message, true);
       console.error('[contact-form]', error);
     } finally {
       if (submit) {

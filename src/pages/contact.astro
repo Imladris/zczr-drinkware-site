@@ -112,7 +112,7 @@ import { companyContacts } from '../data/contacts';
           <span>I agree to be contacted about this request and to the processing of my details for this inquiry.</span>
         </label>
         <button class="btn btn--solid" type="submit">Send inquiry <span aria-hidden="true">↗</span></button>
-        <p class="form-note" data-contact-note aria-live="polite"></p>
+        <div class="form-feedback" data-contact-note role="status" aria-live="polite" tabindex="-1" hidden></div>
       </form>
     </div>
   </section>
