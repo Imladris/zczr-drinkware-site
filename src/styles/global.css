@@ -5332,3 +5332,17 @@ html[lang="zh"] h3 {
     line-height: 1.2;
   }
 }
+
+html[lang="zh"] .quote-band h2 {
+  max-width: 900px;
+  font-size: clamp(2.2rem, 4.2vw, 4.2rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+@media (max-width: 760px) {
+  html[lang="zh"] .quote-band h2 {
+    font-size: clamp(2rem, 9.5vw, 3rem);
+    line-height: 1.16;
+  }
+}
