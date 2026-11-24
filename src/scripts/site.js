@@ -350,7 +350,9 @@ if (contactForm) {
       const result = await response.json().catch(() => ({}));
       if (!response.ok || !result.ok) {
         const error = new Error(result.error || `HTTP ${response.status}`);
-        error.code = result.error || 'default';
+        error.code =
+          result.error ||
+          (response.status === 429 ? 'rate_limited' : response.status === 413 ? 'payload_too_large' : 'default');
         throw error;
       }
 
