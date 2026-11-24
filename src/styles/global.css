@@ -5346,3 +5346,18 @@ html[lang="zh"] .quote-band h2 {
     line-height: 1.16;
   }
 }
+
+/* Keep the two-sentence CTA on two lines across languages. */
+.quote-band h2 {
+  max-width: 920px;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 760px) {
+  .quote-band h2 {
+    font-size: clamp(1.8rem, 6.5vw, 2.6rem);
+    line-height: 1.16;
+  }
+}
