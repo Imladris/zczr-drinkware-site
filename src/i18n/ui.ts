@@ -120,7 +120,7 @@ export const ui: Record<Lang, Dictionary> = {
       closeSearch: 'Close search',
       mobileNav: 'Mobile navigation',
     },
-    announcement: { one: 'OEM / ODM insulated drinkware', two: 'Samples available · Wuxi, Jiangsu, China' },
+    announcement: { one: 'OEM / ODM insulated drinkware', two: 'Samples available · Yixing, Wuxi, Jiangsu, China' },
     card: { quote: 'Quote on request', oem: 'OEM / ODM', view: 'View' },
     newsletter: {
       eyebrow: 'Buyer briefing',
@@ -133,7 +133,7 @@ export const ui: Record<Lang, Dictionary> = {
     },
     footer: {
       description: 'Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. is a manufacturing and trading company focused on insulated stainless-steel drinkware for global buyers.',
-      locations: ['Wuxi office', 'Yixing factory', 'Jiangsu, China'],
+      locations: ['Yixing headquarters', 'Yongkang factory', 'Zhejiang, China'],
       drinkware: 'Drinkware',
       allModels: 'All models',
       tumblers: 'Tumblers',
@@ -181,7 +181,7 @@ export const ui: Record<Lang, Dictionary> = {
       closeSearch: 'Cerrar búsqueda',
       mobileNav: 'Navegación móvil',
     },
-    announcement: { one: 'Menaje isotérmico OEM / ODM', two: 'Muestras disponibles · Wuxi, Jiangsu, China' },
+    announcement: { one: 'Menaje isotérmico OEM / ODM', two: 'Muestras disponibles · Yixing, Wuxi, Jiangsu, China' },
     card: { quote: 'Cotización bajo pedido', oem: 'OEM / ODM', view: 'Ver' },
     newsletter: {
       eyebrow: 'Información para compradores',
@@ -194,7 +194,7 @@ export const ui: Record<Lang, Dictionary> = {
     },
     footer: {
       description: 'Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. es una empresa manufacturera y comercial centrada en menaje isotérmico de acero inoxidable para compradores internacionales.',
-      locations: ['Oficina de Wuxi', 'Fábrica de Yixing', 'Jiangsu, China'],
+      locations: ['Sede de Yixing', 'Fábrica de Yongkang', 'Zhejiang, China'],
       drinkware: 'Menaje',
       allModels: 'Todos los modelos',
       tumblers: 'Vasos',
@@ -242,7 +242,7 @@ export const ui: Record<Lang, Dictionary> = {
       closeSearch: 'Fermer la recherche',
       mobileNav: 'Navigation mobile',
     },
-    announcement: { one: 'Gobelets isothermes OEM / ODM', two: 'Échantillons disponibles · Wuxi, Jiangsu, Chine' },
+    announcement: { one: 'Gobelets isothermes OEM / ODM', two: 'Échantillons disponibles · Yixing, Wuxi, Jiangsu, Chine' },
     card: { quote: 'Devis sur demande', oem: 'OEM / ODM', view: 'Voir' },
     newsletter: {
       eyebrow: 'Brief acheteur',
@@ -255,7 +255,7 @@ export const ui: Record<Lang, Dictionary> = {
     },
     footer: {
       description: "Wuxi Zhenchuang Zhuorui International Trade Co., Ltd. est une entreprise de fabrication et de négoce spécialisée dans les gobelets isothermes en acier inoxydable pour les acheteurs internationaux.",
-      locations: ['Bureau de Wuxi', 'Usine de Yixing', 'Jiangsu, Chine'],
+      locations: ['Siège de Yixing', 'Usine de Yongkang', 'Zhejiang, Chine'],
       drinkware: 'Gobelets',
       allModels: 'Tous les modèles',
       tumblers: 'Gobelets',
@@ -303,7 +303,7 @@ export const ui: Record<Lang, Dictionary> = {
       closeSearch: '关闭搜索',
       mobileNav: '移动端导航',
     },
-    announcement: { one: 'OEM / ODM 保温饮具', two: '可提供样品 · 中国江苏无锡' },
+    announcement: { one: 'OEM / ODM 保温饮具', two: '可提供样品 · 中国江苏无锡宜兴' },
     card: { quote: '按需报价', oem: 'OEM / ODM', view: '查看' },
     newsletter: {
       eyebrow: '采购简报',
@@ -316,7 +316,7 @@ export const ui: Record<Lang, Dictionary> = {
     },
     footer: {
       description: '无锡臻创卓锐国际贸易有限公司是一家专注于不锈钢保温饮具的工贸企业，为全球采购商提供产品与服务。',
-      locations: ['无锡办公室', '宜兴工厂', '中国江苏'],
+      locations: ['无锡宜兴总部', '浙江永康工厂', '中国浙江'],
       drinkware: '饮具',
       allModels: '全部型号',
       tumblers: '保温杯',

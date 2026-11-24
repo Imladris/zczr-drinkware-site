@@ -131,8 +131,8 @@ The following facts come from the supplied company text/FAQ and are used in the 
 
 - Legal name: Wuxi Zhenchuang Zhuorui International Trade Co., Ltd.
 - Chinese name: 无锡臻创卓锐国际贸易有限公司
-- Head office: Wuxi, Jiangsu, China
-- Factory: Yixing, Jiangsu
+- Head office: Yixing, Wuxi, Jiangsu, China
+- Factory: Yongkang, Zhejiang
 - Business model: manufacturing and trading company integrating production, sales and export
 - Customization: OEM accepted
 - Samples: available; sample cost and freight confirmed
