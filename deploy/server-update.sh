@@ -48,7 +48,7 @@ echo "→ Restarting contact API"
 $SUDO systemctl restart "$SERVICE_NAME"
 ready=0
 for _ in $(seq 1 20); do
-  if curl -fsS --max-time 2 http://127.0.0.1:8787/api/health >/dev/null; then
+  if curl -fsS --max-time 2 http://127.0.0.1:8787/api/health >/dev/null 2>&1; then
     ready=1
     break
   fi
